@@ -25,6 +25,6 @@ clean:
 
 uninstall: clean
 	rm -rf $(OBJ_DIR)
-#	rm -rf $(TARGET) 
+	rm -rf $(TARGET)
 
 reinstall: uninstall all
