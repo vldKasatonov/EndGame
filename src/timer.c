@@ -1,6 +1,4 @@
-#include "../inc/timer.h"
-#include <stdio.h>
-#include <stdlib.h>
+#include "../inc/header.h"
 
 #define MAX_LEVELS 10  
 #define BEST_TIME_FORMAT "resource/best_time_level_%d.txt"  

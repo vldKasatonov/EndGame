@@ -1,4 +1,5 @@
 #include "../inc/header.h"
+
 void DrawCenteredButton(const char* text, int fontSize, Color buttonBackground, Color fontColor, Rectangle buttonRect) {
     DrawRectangleRounded(buttonRect, 0.5f, 10, buttonBackground);
     /*int textWidth = MeasureText(text, fontSize);

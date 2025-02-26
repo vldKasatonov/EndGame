@@ -1,5 +1,4 @@
 #include "../inc/header.h"
-#include <stdio.h>
 
 void resetGameProgress(Level_stars *gameState) {
     char filename[50];
