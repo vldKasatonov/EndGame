@@ -3,7 +3,7 @@
 #include "Inventory.h"
 #include "Objects.h"
 
-void renderTimer();
+void renderTimer(void);
 
 void renderLevelMenu(GameTextures *textures, Level_stars *level_star, Player*);
 
@@ -47,4 +47,4 @@ void DrawLevelSucsses(bool *isExitPopupOpen, GameTextures *textures, int*);
 
 void updateLevelStars(Level_stars*, int, int);
 
-int calculateStarsForLevel();
+int calculateStarsForLevel(void);

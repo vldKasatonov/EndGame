@@ -29,7 +29,7 @@ static void drawCustomerCount(GameTextures *textures, int servedCounter, int max
 
 static bool timerStarted = false;
 
-int main()
+int main(void)
 {
 	InitWindow(gameConfig.screenWidth, gameConfig.screenHeight, "Funny Chef");
 	InitGameAudio();

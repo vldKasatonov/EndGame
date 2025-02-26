@@ -9,7 +9,7 @@ HotbarConfig hotbarConfig = {
     (Color) { 255, 0, 0, 200 }      // cellBorderColorActive
 };
 
-static void updateHotbar() {
+static void updateHotbar(void) {
     if (IsKeyDown(KEY_ONE)) hotbar.activeItem = 0;
     if (IsKeyDown(KEY_TWO)) hotbar.activeItem = 1;
     if (IsKeyDown(KEY_THREE)) hotbar.activeItem = 2;

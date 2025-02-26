@@ -4,13 +4,13 @@
 #include <raylib.h>
 #include <float.h>
 
-void StartGameTimer();
-void PauseGameTimer();    
-void ResumeGameTimer();   
-void ResetGameTimer();    
-double GetElapsedTime();
-void LoadBestTime();
-void SaveBestTime();
-double GetBestTime();
+void StartGameTimer(void);
+void PauseGameTimer(void);
+void ResumeGameTimer(void);
+void ResetGameTimer(void);
+double GetElapsedTime(void);
+void LoadBestTime(void);
+void SaveBestTime(void);
+double GetBestTime(void);
 
 

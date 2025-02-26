@@ -125,7 +125,7 @@ void updateLevelStars(Level_stars *gameState, int level, int stars) {
     }
 }
 
-int calculateStarsForLevel() {
+int calculateStarsForLevel(void) {
     double bestTime = GetBestTime();
     int stars = 0;
 

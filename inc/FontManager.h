@@ -2,5 +2,5 @@
 
 #include "header.h"
 
-Font GetCustomFont();
-void UnloadCustomFont();
+Font GetCustomFont(void);
+void UnloadCustomFont(void);

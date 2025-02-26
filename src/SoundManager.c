@@ -14,7 +14,7 @@ Sound levelComplete;
 
 static float effectsVolume = 0.5f;  
 
-void InitSoundEffects() {
+void InitSoundEffects(void) {
     InitAudioDevice(); 
     buttonClick = LoadSound("resource/audio/effects/button_click.wav");
     itemPickup = LoadSound("resource/audio/effects/item_pickup.wav");
@@ -62,7 +62,7 @@ void SetEffectsVolume(float volume) {
     SetSoundVolume(levelComplete, volume);
 }
 
-void UnloadSoundEffects() {
+void UnloadSoundEffects(void) {
     UnloadSound(buttonClick);
     UnloadSound(itemPickup);
     UnloadSound(completeOrder);

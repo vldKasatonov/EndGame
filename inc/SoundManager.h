@@ -2,8 +2,8 @@
 
 #include <raylib.h>
 
-void InitSoundEffects();       
-void UnloadSoundEffects();      
+void InitSoundEffects(void);
+void UnloadSoundEffects(void);
 void PlaySoundEffect(Sound sound); 
 void SetEffectsVolume(float volume); 
 

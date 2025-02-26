@@ -3,7 +3,7 @@
 static Font customFont;
 static bool fontLoaded = false;
 
-Font GetCustomFont() {
+Font GetCustomFont(void) {
     if (!fontLoaded) {
         customFont = LoadFont("resource/fonts/Gyrochrome-ExtraBold.otf");
         fontLoaded = true;
@@ -11,7 +11,7 @@ Font GetCustomFont() {
     return customFont;
 }
 
-void UnloadCustomFont() {
+void UnloadCustomFont(void) {
     if (fontLoaded) {
         UnloadFont(customFont);
         fontLoaded = false;

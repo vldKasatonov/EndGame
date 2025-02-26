@@ -40,6 +40,6 @@ Item* getDirtyItem(Ingredient);
 void updateItem(Item*, IngredientState);
 //Item* mixIngredients(Inventory*, int, int); // UNCOMENT THEN
 void deleteItem(Item** item);
-Item* getSalad();
+Item* getSalad(void);
 
 

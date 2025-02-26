@@ -1,6 +1,6 @@
 #include "../inc/header.h"
 
-void renderTimer() {
+void renderTimer(void) {
     static bool timerStarted = false;
 
     if (!timerStarted) {

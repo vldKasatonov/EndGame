@@ -1,6 +1,6 @@
 #include "../inc/header.h"
 
-Item* allocateItemMemory() {
+Item* allocateItemMemory(void) {
 	Item* item = (Item*)malloc(sizeof(Item));
 
 	if (!item)
@@ -34,7 +34,7 @@ void updateItem(Item* item, IngredientState state) {
 	}
 }
 
-Item* getSalad() {
+Item* getSalad(void) {
 	Item* item = allocateItemMemory();
 
 	if (!item)

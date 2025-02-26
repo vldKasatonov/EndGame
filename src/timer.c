@@ -12,7 +12,7 @@ static bool timerRunning = false;
 static bool timerPaused = false;
 extern int currentLevel;  
 
-void StartGameTimer() {
+void StartGameTimer(void) {
     if (currentLevel < 0 || currentLevel >= MAX_LEVELS) {
         printf("Error: Invalid level (%d) in StartGameTimer()\n", currentLevel);
         return;
@@ -22,26 +22,26 @@ void StartGameTimer() {
     timerPaused = false;
 }
 
-void PauseGameTimer() {
+void PauseGameTimer(void) {
     if (timerRunning && !timerPaused) {
         pausedTime = GetTime() - startTime;
         timerPaused = true;
     }
 }
 
-void ResumeGameTimer() {
+void ResumeGameTimer(void) {
     if (timerRunning && timerPaused) {
         startTime = GetTime() - pausedTime;
         timerPaused = false;
     }
 }
 
-double GetElapsedTime() {
+double GetElapsedTime(void) {
     if (!timerRunning) return 0.0;
     return timerPaused ? pausedTime : (GetTime() - startTime);
 }
 
-void LoadBestTime() {
+void LoadBestTime(void) {
     if (currentLevel < 0 || currentLevel >= MAX_LEVELS) {
         printf("Error: Invalid level (%d) in LoadBestTime()\n", currentLevel);
         return;
@@ -61,7 +61,7 @@ void LoadBestTime() {
     }
 }
 
-void SaveBestTime() {
+void SaveBestTime(void) {
     if (!timerRunning) return;
 
     if (currentLevel < 0 || currentLevel >= MAX_LEVELS) {
@@ -88,12 +88,12 @@ void SaveBestTime() {
     }
 }
 
-void ResetGameTimer() {
+void ResetGameTimer(void) {
     timerRunning = false;
     timerPaused = false;
 }
 
-double GetBestTime() {
+double GetBestTime(void) {
     if (currentLevel < 0 || currentLevel >= MAX_LEVELS) return -1.0;
     return bestTimes[currentLevel];
 }

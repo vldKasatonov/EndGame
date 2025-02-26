@@ -6,7 +6,7 @@ static bool musicLoaded = false;
 static bool musicPlaying = false;
 static bool gameplayMusicPlaying = false;
 
-void InitGameAudio() {
+void InitGameAudio(void) {
     InitAudioDevice();
     menuMusic = LoadMusicStream("resource/audio/music/menu_music.wav");
     gameplayMusic = LoadMusicStream("resource/audio/music/gameplay_music.mp3");  
@@ -15,14 +15,14 @@ void InitGameAudio() {
     musicLoaded = true;
 }
 
-void UpdateGameAudio() {
+void UpdateGameAudio(void) {
     if (musicLoaded) {
         if (musicPlaying) UpdateMusicStream(menuMusic);
         if (gameplayMusicPlaying) UpdateMusicStream(gameplayMusic);
     }
 }
 
-void UpdateMenuMusic() {
+void UpdateMenuMusic(void) {
     if (!musicLoaded) return;
 
     if (currentState == MAIN_MENU ||
@@ -50,7 +50,7 @@ void UpdateMenuMusic() {
     }
 }
 
-void UpdateGameplayMusic() {
+void UpdateGameplayMusic(void) {
     if (!musicLoaded) return;
 
     if (currentState == GAMEPLAY || currentState == GAMEPLAY_SETTINGS) {
@@ -76,7 +76,7 @@ void UpdateMusicVolume(float volume) {
     }
 }
 
-void UnloadGameAudio() {
+void UnloadGameAudio(void) {
     if (musicLoaded) {
         StopMusicStream(menuMusic);
         StopMusicStream(gameplayMusic);
