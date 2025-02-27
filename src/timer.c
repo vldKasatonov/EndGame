@@ -1,84 +1,84 @@
 #include "../inc/header.h"
 
-#define MAX_LEVELS 10  
-#define BEST_TIME_FORMAT "resource/best_time_level_%d.txt"  
+#define MX_MAX_LEVELS 10  
+#define MX_BEST_TIME_FORMAT "resource/best_time_level_%d.txt"  
 
-static double startTime = 0.0;
-static double pausedTime = 0.0;
-static double bestTimes[MAX_LEVELS] = { -1.0 };  
-static bool timerRunning = false;
-static bool timerPaused = false;
-extern int currentLevel;
+static double start_time = 0.0;
+static double paused_time = 0.0;
+static double best_times[MX_MAX_LEVELS] = { -1.0 };  
+static bool timer_running = false;
+static bool timer_paused = false;
+extern int current_level;
 
 void mx_start_game_timer(void) {
-    if (currentLevel < 0 || currentLevel >= MAX_LEVELS) {
-        printf("Error: Invalid level (%d) in mx_start_game_timer()\n", currentLevel);
+    if (current_level < 0 || current_level >= MX_MAX_LEVELS) {
+        printf("Error: Invalid level (%d) in mx_start_game_timer()\n", current_level);
         return;
     }
-    startTime = GetTime();
-    timerRunning = true;
-    timerPaused = false;
+    start_time = GetTime();
+    timer_running = true;
+    timer_paused = false;
 }
 
 void mx_pause_game_timer(void) {
-    if (timerRunning && !timerPaused) {
-        pausedTime = GetTime() - startTime;
-        timerPaused = true;
+    if (timer_running && !timer_paused) {
+        paused_time = GetTime() - start_time;
+        timer_paused = true;
     }
 }
 
 void mx_resume_game_timer(void) {
-    if (timerRunning && timerPaused) {
-        startTime = GetTime() - pausedTime;
-        timerPaused = false;
+    if (timer_running && timer_paused) {
+        start_time = GetTime() - paused_time;
+        timer_paused = false;
     }
 }
 
 double mx_get_elapsed_time(void) {
-    if (!timerRunning) return 0.0;
-    return timerPaused ? pausedTime : (GetTime() - startTime);
+    if (!timer_running) return 0.0;
+    return timer_paused ? paused_time : (GetTime() - start_time);
 }
 
 void mx_load_best_time(void) {
-    if (currentLevel < 0 || currentLevel >= MAX_LEVELS) {
-        printf("Error: Invalid level (%d) in mx_load_best_time()\n", currentLevel);
+    if (current_level < 0 || current_level >= MX_MAX_LEVELS) {
+        printf("Error: Invalid level (%d) in mx_load_best_time()\n", current_level);
         return;
     }
 
     char filename[50];
-    snprintf(filename, sizeof(filename), BEST_TIME_FORMAT, currentLevel);
+    snprintf(filename, sizeof(filename), MX_BEST_TIME_FORMAT, current_level);
 
     FILE *file = fopen(filename, "r");
     if (file) {
-        if (fscanf(file, "%lf", &bestTimes[currentLevel]) != 1) {
-            bestTimes[currentLevel] = -1.0;
+        if (fscanf(file, "%lf", &best_times[current_level]) != 1) {
+            best_times[current_level] = -1.0;
         }
         fclose(file);
     } else {
-        bestTimes[currentLevel] = -1.0;
+        best_times[current_level] = -1.0;
     }
 }
 
 void mx_save_best_time(void) {
-    if (!timerRunning) return;
+    if (!timer_running) return;
 
-    if (currentLevel < 0 || currentLevel >= MAX_LEVELS) {
-        printf("Error: Invalid level (%d) in mx_save_best_time()\n", currentLevel);
+    if (current_level < 0 || current_level >= MX_MAX_LEVELS) {
+        printf("Error: Invalid level (%d) in mx_save_best_time()\n", current_level);
         return;
     }
 
-    double elapsedTime = mx_get_elapsed_time();
-    timerRunning = false;
+    double elapsed_time = mx_get_elapsed_time();
+    timer_running = false;
 
-    if (bestTimes[currentLevel] < 0 || elapsedTime < bestTimes[currentLevel]) {
-        bestTimes[currentLevel] = elapsedTime;
+    if (best_times[current_level] < 0 || elapsed_time < best_times[current_level]) {
+        best_times[current_level] = elapsed_time;
 
         char filename[50];
-        snprintf(filename, sizeof(filename), BEST_TIME_FORMAT, currentLevel);
+        snprintf(filename, sizeof(filename), MX_BEST_TIME_FORMAT, current_level);
 
         FILE *file = fopen(filename, "w");
         if (file) {
-            fprintf(file, "%.2f\n", bestTimes[currentLevel]);
+            fprintf(file, "%.2f\n", best_times[current_level]);
             fclose(file);
         } else {
             printf("Error: Cannot save best time!\n");
@@ -87,13 +87,13 @@ void mx_save_best_time(void) {
 }
 
 void mx_reset_game_timer(void) {
-    timerRunning = false;
-    timerPaused = false;
+    timer_running = false;
+    timer_paused = false;
 }
 
 double mx_get_best_time(void) {
-    if (currentLevel < 0 || currentLevel >= MAX_LEVELS) return -1.0;
-    return bestTimes[currentLevel];
+    if (current_level < 0 || current_level >= MX_MAX_LEVELS) return -1.0;
+    return best_times[current_level];
 }
 
 

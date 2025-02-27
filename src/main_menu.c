@@ -1,81 +1,81 @@
 #include "../inc/header.h"
 
-void DrawCenteredButton(const char* text, int fontSize, Color buttonBackground, Color fontColor, Rectangle buttonRect) {
-    DrawRectangleRounded(buttonRect, 0.5f, 10, buttonBackground);
-    /*int textWidth = MeasureText(text, fontSize);
-    int textX = buttonRect.x + (buttonRect.width - textWidth) / 2;
-    int textY = buttonRect.y + (buttonRect.height - fontSize) / 2;
-    DrawText(text, textX, textY, fontSize, fontColor);*/
+void DrawCenteredButton(const char* text, int font_size, Color button_background, Color font_color, Rectangle button_rect) {
+    DrawRectangleRounded(button_rect, 0.5f, 10, button_background);
+    /*int text_width = MeasureText(text, font_size);
+    int textX = button_rect.x + (button_rect.width - text_width) / 2;
+    int textY = button_rect.y + (button_rect.height - font_size) / 2;
+    DrawText(text, textX, textY, font_size, font_color);*/
 
-    Vector2 textSize = MeasureTextEx(mx_get_custom_font(), text, fontSize, 2);
-    Vector2 textPos = {
-        buttonRect.x + (buttonRect.width - textSize.x) / 2,
-        buttonRect.y + (buttonRect.height - textSize.y) / 2
+    Vector2 text_size = MeasureTextEx(mx_get_custom_font(), text, font_size, 2);
+    Vector2 text_pos = {
+        button_rect.x + (button_rect.width - text_size.x) / 2,
+        button_rect.y + (button_rect.height - text_size.y) / 2
     };
-    DrawTextEx(mx_get_custom_font(), text, textPos, fontSize, 2, fontColor);
+    DrawTextEx(mx_get_custom_font(), text, text_pos, font_size, 2, font_color);
 }
 
-static void DrawExitConfirmation(bool *isExitPopupOpen) {
+static void DrawExitConfirmation(bool *is_exit_popup_open) {
     DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(BLACK, 0.4f));
-    int popupWidth = 900;
-    int popupHeight = 400;
-    Rectangle popupRect = {
-        (GetScreenWidth() - popupWidth) / 2,
-        (GetScreenHeight() - popupHeight) / 2,
-        popupWidth,
-        popupHeight
+    int popup_width = 900;
+    int popup_height = 400;
+    Rectangle popup_rect = {
+        (GetScreenWidth() - popup_width) / 2,
+        (GetScreenHeight() - popup_height) / 2,
+        popup_width,
+        popup_height
     };
 
-    DrawRectangleRounded(popupRect, 0.5f, 10, custom_colors.button_background_color);
-    DrawRectangleRoundedLinesEx(popupRect, 0.5f, 10, 5, WHITE);
+    DrawRectangleRounded(popup_rect, 0.5f, 10, custom_colors.button_background_color);
+    DrawRectangleRoundedLinesEx(popup_rect, 0.5f, 10, 5, WHITE);
 
-    Vector2 textSize = MeasureTextEx(mx_get_custom_font(), "Are you sure you want to exit?", 50, 3);
-    Vector2 textPos = {
-        popupRect.x + (popupRect.width - textSize.x) / 2,
-        popupRect.y + 100
+    Vector2 text_size = MeasureTextEx(mx_get_custom_font(), "Are you sure you want to exit?", 50, 3);
+    Vector2 text_pos = {
+        popup_rect.x + (popup_rect.width - text_size.x) / 2,
+        popup_rect.y + 100
     };
-    DrawTextEx(mx_get_custom_font(), "Are you sure you want to exit?", textPos, 50, 3, WHITE);
+    DrawTextEx(mx_get_custom_font(), "Are you sure you want to exit?", text_pos, 50, 3, WHITE);
 
-    Rectangle yesButton = { popupRect.x + 150, popupRect.y + popupHeight - 150, 150, 60 };
-    Rectangle noButton = { popupRect.x + popupWidth - 300, popupRect.y + popupHeight - 150, 150, 60 };
+    Rectangle yes_button = { popup_rect.x + 150, popup_rect.y + popup_height - 150, 150, 60 };
+    Rectangle no_button = { popup_rect.x + popup_width - 300, popup_rect.y + popup_height - 150, 150, 60 };
 
-    DrawRectangleRounded(yesButton, 0.5f, 10, GREEN);
-    DrawRectangleRounded(noButton, 0.5f, 10, RED);
+    DrawRectangleRounded(yes_button, 0.5f, 10, GREEN);
+    DrawRectangleRounded(no_button, 0.5f, 10, RED);
 
-    Vector2 yesTextSize = MeasureTextEx(mx_get_custom_font(), "YES", 40, 3);
-    Vector2 yesTextPos = {
-        yesButton.x + (yesButton.width - yesTextSize.x) / 2,
-        yesButton.y + (yesButton.height - yesTextSize.y) / 2
+    Vector2 yestext_size = MeasureTextEx(mx_get_custom_font(), "YES", 40, 3);
+    Vector2 yestext_pos = {
+        yes_button.x + (yes_button.width - yestext_size.x) / 2,
+        yes_button.y + (yes_button.height - yestext_size.y) / 2
     };
-    DrawTextEx(mx_get_custom_font(), "YES", yesTextPos, 40, 3, WHITE);
+    DrawTextEx(mx_get_custom_font(), "YES", yestext_pos, 40, 3, WHITE);
 
-    Vector2 noTextSize = MeasureTextEx(mx_get_custom_font(), "NO", 40, 3);
-    Vector2 noTextPos = {
-        noButton.x + (noButton.width - noTextSize.x) / 2,
-        noButton.y + (noButton.height - noTextSize.y) / 2
+    Vector2 notext_size = MeasureTextEx(mx_get_custom_font(), "NO", 40, 3);
+    Vector2 notext_pos = {
+        no_button.x + (no_button.width - notext_size.x) / 2,
+        no_button.y + (no_button.height - notext_size.y) / 2
     };
-    DrawTextEx(mx_get_custom_font(), "NO", noTextPos, 40, 3, WHITE);
+    DrawTextEx(mx_get_custom_font(), "NO", notext_pos, 40, 3, WHITE);
 
     Vector2 mouse = GetMousePosition();
-    bool cursorChanged = false;
-    if (CheckCollisionPointRec(mouse, yesButton)) {
+    bool cursor_changed = false;
+    if (CheckCollisionPointRec(mouse, yes_button)) {
         SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
-        cursorChanged = true;
+        cursor_changed = true;
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             mx_play_sound_effect(button_click);
             exit(0);
         }
     }
-    if (CheckCollisionPointRec(mouse, noButton)) {
+    if (CheckCollisionPointRec(mouse, no_button)) {
         SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
-        cursorChanged = true;
+        cursor_changed = true;
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             mx_play_sound_effect(button_click);
-            *isExitPopupOpen = false;
+            *is_exit_popup_open = false;
             SetMouseCursor(MOUSE_CURSOR_DEFAULT);
         }
     }
-    if (!cursorChanged) {
+    if (!cursor_changed) {
         SetMouseCursor(MOUSE_CURSOR_DEFAULT);
     }
 }
@@ -141,19 +141,19 @@ static Rectangle draw_play_button(void) {
     return button_rect;
 }
 
-void mx_render_main_menu(t_game_textures *textures, bool *isExitPopupOpen) {
+void mx_render_main_menu(t_game_textures *textures, bool *is_exit_popup_open) {
     Vector2 mouse = GetMousePosition();
-    bool cursorChanged = false;
+    bool cursor_changed = false;
     Rectangle button_rect = draw_play_button();
     Rectangle gear_rect = mx_draw_settings_icon(textures);
     Rectangle exit_button = draw_exit_button(textures->exit);
     Rectangle dev_button = draw_dev_button();
 
     draw_chef(textures->chef);
-    if (!(*isExitPopupOpen)) {
+    if (!(*is_exit_popup_open)) {
         if (CheckCollisionPointRec(mouse, button_rect)) {
             SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
-            cursorChanged = true;
+            cursor_changed = true;
             if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
                 mx_play_sound_effect(button_click);
                 current_state = SELECT_PLAYER;
@@ -162,7 +162,7 @@ void mx_render_main_menu(t_game_textures *textures, bool *isExitPopupOpen) {
         }
         if (CheckCollisionPointRec(mouse, gear_rect)) {
             SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
-            cursorChanged = true;
+            cursor_changed = true;
             if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
                 previous_state = current_state;
                 mx_play_sound_effect(button_click);
@@ -172,15 +172,15 @@ void mx_render_main_menu(t_game_textures *textures, bool *isExitPopupOpen) {
         }
         if (CheckCollisionPointRec(mouse, exit_button)) {
             SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
-            cursorChanged = true;
+            cursor_changed = true;
             if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
                 mx_play_sound_effect(button_click);
-                *isExitPopupOpen = true;
+                *is_exit_popup_open = true;
             }
         }
         if (CheckCollisionPointRec(mouse, dev_button)) {
             SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
-            cursorChanged = true;
+            cursor_changed = true;
             if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
                 mx_play_sound_effect(button_click);
                 current_state = DEVELOPERS;
@@ -188,10 +188,10 @@ void mx_render_main_menu(t_game_textures *textures, bool *isExitPopupOpen) {
             }
         }
     }
-    if (*isExitPopupOpen) {
-        DrawExitConfirmation(isExitPopupOpen);
+    if (*is_exit_popup_open) {
+        DrawExitConfirmation(is_exit_popup_open);
     }
-    if (!cursorChanged) {
+    if (!cursor_changed) {
         SetMouseCursor(MOUSE_CURSOR_DEFAULT);
     }
 

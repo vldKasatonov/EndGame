@@ -16,22 +16,22 @@ int mx_find_free_cell(t_inventory* inventory) {
 }
 
 int mx_add_item(t_inventory* inventory, t_item* item) {
-	int freeCell = mx_find_free_cell(inventory);
+	int free_cell = mx_find_free_cell(inventory);
 	
-	if (freeCell != -1) {
-		inventory->items[freeCell] = item;
-		inventory->active_item = freeCell;
-		return freeCell;
+	if (free_cell != -1) {
+		inventory->items[free_cell] = item;
+		inventory->active_item = free_cell;
+		return free_cell;
 	}
 	
 	return -1;
 }
 
 t_item* mx_remove_active_item(t_inventory* inventory) {
-	t_item* removedItem = inventory->items[inventory->active_item];
+	t_item* removed_item = inventory->items[inventory->active_item];
 
 	inventory->items[inventory->active_item] = NULL;
-	return removedItem;
+	return removed_item;
 }
 
 void mx_clear_inventory(t_inventory* inventory) {

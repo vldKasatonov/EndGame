@@ -53,7 +53,7 @@ void mx_serve_guest_at_index(t_queue* queue, int index) {
     queue->queue_size--;
 }
 
-void clearQueue(t_queue* queue) {
+void clear_queue(t_queue* queue) {
     queue->queue_size = 0;
     queue->at_register = NULL;
     queue->out_of_queue = NULL;

@@ -16,18 +16,18 @@ void draw_moving_background(t_game_textures* textures, Vector2 pos_background) {
 	}
 }
 
-static void drawCustomerCount(t_game_textures *textures, int servedCounter, int maxServed) {
-    Rectangle srcIcon = { 0, 0, textures->served_icon.width, textures->served_icon.height };
-    Vector2 servedCounterPos = { game_config.screen_width / 5 + 15, 85 };
-    Vector2 textSize = MeasureTextEx(mx_get_custom_font(), "0/5", 50, 2);
-    DrawTexturePro(textures->served_icon, srcIcon, (Rectangle){ servedCounterPos.x - textSize.x / 2 - 15,
-                   servedCounterPos.y, 50, 50 }, (Vector2){0, 0}, 0.0f, WHITE);
-    char counterText[6];
-    snprintf(counterText, sizeof(counterText), "%d/%d", servedCounter, maxServed);
-    DrawTextEx(mx_get_custom_font(), counterText, servedCounterPos, 50, 2, WHITE);
+static void drawCustomerCount(t_game_textures *textures, int served_counter, int max_served) {
+    Rectangle src_icon = { 0, 0, textures->served_icon.width, textures->served_icon.height };
+    Vector2 served_counter_pos = { game_config.screen_width / 5 + 15, 85 };
+    Vector2 text_size = MeasureTextEx(mx_get_custom_font(), "0/5", 50, 2);
+    DrawTexturePro(textures->served_icon, src_icon, (Rectangle){ served_counter_pos.x - text_size.x / 2 - 15,
+                   served_counter_pos.y, 50, 50 }, (Vector2){0, 0}, 0.0f, WHITE);
+    char counter_text[6];
+    snprintf(counter_text, sizeof(counter_text), "%d/%d", served_counter, max_served);
+    DrawTextEx(mx_get_custom_font(), counter_text, served_counter_pos, 50, 2, WHITE);
 }
 
-static bool timerStarted = false;
+static bool timer_started = false;
 
 int main(void)
 {
@@ -42,20 +42,20 @@ int main(void)
 
 	//    int levelProgress = 0;
 
-	t_player playerData;
-	playerData.position.x = 300;
-	playerData.position.y = 350;
-	float volumeMusic = 0.5f;
-	float volumeEffects = 0.5f;
+	t_player player_data;
+	player_data.position.x = 300;
+	player_data.position.y = 350;
+	float volume_music = 0.5f;
+	float volume_effects = 0.5f;
 
 	float speed_scrolling = -1.5f;
 	Vector2 pos_background = { 0.0f, 0.0f };
 
-    int servedCounter = 0;
-    int maxServed = 5;
+    int served_counter = 0;
+    int max_served = 5;
 
-    bool isExitPopupOpen = false;
-    bool isPopupOpen = false;
+    bool is_exit_popup_open = false;
+    bool is_popup_open = false;
 
 	t_level_stars game_state = { {0, 0, 0} };
 
@@ -113,7 +113,7 @@ int main(void)
 			if (mx_get_elapsed_time() == 0)
 			{
 				mx_start_game_timer();
-				timerStarted = true;
+				timer_started = true;
 			}
 			else
 			{
@@ -129,7 +129,7 @@ int main(void)
 		case MAIN_MENU:
 		{
 			draw_moving_background(&textures, pos_background);
-			mx_render_main_menu(&textures, &isExitPopupOpen);
+			mx_render_main_menu(&textures, &is_exit_popup_open);
 		} break;
 		case DEVELOPERS:
 		{
@@ -144,7 +144,7 @@ int main(void)
 		case LEVEL_MENU:
 		{
 			draw_moving_background(&textures, pos_background);
-			mx_render_level_menu(&textures, &game_state, &playerData);
+			mx_render_level_menu(&textures, &game_state, &player_data);
 		} break;
 		case LEVEL_MENU2:
 		{
@@ -154,14 +154,14 @@ int main(void)
 		case SETTINGS:
 		{
 			draw_moving_background(&textures, pos_background);
-			mx_render_settings(&textures, &volumeMusic, &volumeEffects, &game_state);
-			mx_update_music_volume(volumeMusic);
+			mx_render_settings(&textures, &volume_music, &volume_effects, &game_state);
+			mx_update_music_volume(volume_music);
 		} break;
 		case GAMEPLAY_SETTINGS:
 		{
 			draw_moving_background(&textures, pos_background);
-			mx_render_gameplay_settings(&textures, &volumeMusic, &volumeEffects, &isExitPopupOpen, &servedCounter);
-			mx_update_music_volume(volumeMusic);
+			mx_render_gameplay_settings(&textures, &volume_music, &volume_effects, &is_exit_popup_open, &served_counter);
+			mx_update_music_volume(volume_music);
 		} break;
 		case GUIDE_PAGE1:
 		{
@@ -180,15 +180,15 @@ int main(void)
 		} break;
 		case GAMEPLAY:
 		{
-			if (!timerStarted) {
+			if (!timer_started) {
 				mx_start_game_timer();
-				timerStarted = true;
+				timer_started = true;
 			}
 
-			mx_render_gameplay(&playerData, &textures, &isPopupOpen, &servedCounter, maxServed);
+			mx_render_gameplay(&player_data, &textures, &is_popup_open, &served_counter, max_served);
 			mx_render_hotbar(&textures);
 			mx_render_timer();
-			drawCustomerCount(&textures, servedCounter, maxServed);
+			drawCustomerCount(&textures, served_counter, max_served);
 
 		} break;
 		}

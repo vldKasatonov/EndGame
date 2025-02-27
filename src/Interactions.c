@@ -9,7 +9,7 @@ int mx_get_nearby_interactable(Rectangle player, t_surface* surfaces, int surfac
     return -1;
 }
 
-static void updateActiveItemState(t_inventory* inventory, t_ingredient_state state) {
+static void update_active_item_state(t_inventory* inventory, t_ingredient_state state) {
     t_item* item = mx_remove_active_item(inventory);
 
     if (item) {
@@ -24,9 +24,9 @@ void mx_interact_with_guest(t_inventory* inventory, t_queue* queue, int index, t
     case PICK_UP:
         mx_serve_guest_at_index(queue, index);
         mx_play_sound_effect(complete_order);
-        t_item* removedItem = mx_remove_active_item(inventory);
-        if (removedItem) {
-            mx_delete_item(&removedItem);
+        t_item* removed_item = mx_remove_active_item(inventory);
+        if (removed_item) {
+            mx_delete_item(&removed_item);
         }
         break;
     case CASHBOX:
@@ -58,31 +58,31 @@ void mx_interact_with_object(t_inventory* inventory, t_interactable_type type) {
     case WASHBASIN:
         if (mx_can_wash(inventory->items[inventory->active_item])) {
             mx_play_sound_effect(washing);
-            updateActiveItemState(inventory, CLEAN);
+            update_active_item_state(inventory, CLEAN);
         }
         break;
     case PEELING_TABLE:
         if (mx_can_peel(inventory->items[inventory->active_item])) {
             mx_play_sound_effect(peeling);
-            updateActiveItemState(inventory, PEELED);
+            update_active_item_state(inventory, PEELED);
         }
         break;
     case SLICING_TABLE:
         if (mx_can_slice(inventory->items[inventory->active_item])) {
             mx_play_sound_effect(cutting);
-            updateActiveItemState(inventory, SLICED);
+            update_active_item_state(inventory, SLICED);
         }
         break;
     case JUICEMAKER:
         if (mx_can_juice(inventory->items[inventory->active_item])) {
             mx_play_sound_effect(pouring);
-            updateActiveItemState(inventory, JUICED);
+            update_active_item_state(inventory, JUICED);
         }
         break;
     case STOVE:
         if (mx_can_fry(inventory->items[inventory->active_item])) {
             mx_play_sound_effect(frying);
-            updateActiveItemState(inventory, FRIED);
+            update_active_item_state(inventory, FRIED);
         }
         break;
     case GARBAGE_CAN:
@@ -94,29 +94,29 @@ void mx_interact_with_object(t_inventory* inventory, t_interactable_type type) {
         }
         break;
     case PLATE: {
-      	bool haveSlicedCucumber = false;
-        int indexSlicedCucumber = 0;
-        bool haveSlicedTomato = false;
-        int indexSlicedTomato = 0;
+      	bool have_sliced_cucumber = false;
+        int index_sliced_cucumber = 0;
+        bool have_sliced_tomato = false;
+        int index_sliced_tomato = 0;
         for (int i = 0; i < MX_INVENTORY_SIZE; i++) {
     		if (inventory->items[i]) {
       			if (inventory->items[i]->state == SLICED && inventory->items[i]->type == CUCUMBER) {
-                	haveSlicedCucumber = true;
-                	indexSlicedCucumber = i;
+                	have_sliced_cucumber = true;
+                	index_sliced_cucumber = i;
             	}
             	if (inventory->items[i]->state == SLICED && inventory->items[i]->type == TOMATO) {
-                	haveSlicedTomato = true;
-                	indexSlicedTomato = i;
+                	have_sliced_tomato = true;
+                	index_sliced_tomato = i;
             	}
     		}
 		}
-        if (haveSlicedCucumber && haveSlicedTomato) {
-            mx_set_active_item(inventory, indexSlicedCucumber);
+        if (have_sliced_cucumber && have_sliced_tomato) {
+            mx_set_active_item(inventory, index_sliced_cucumber);
             t_item* item = mx_remove_active_item(inventory);
             if (item != NULL) {
                 mx_delete_item(&item);
             }
-            mx_set_active_item(inventory, indexSlicedTomato);
+            mx_set_active_item(inventory, index_sliced_tomato);
             t_item* item2 = mx_remove_active_item(inventory);
             if (item2 != NULL) {
                 mx_delete_item(&item2);

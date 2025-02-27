@@ -6,41 +6,41 @@ t_player_config player_config = {
     20,    // height
 };
 
-static void updateGameplay(t_player* playerData, t_surface* surfaces, const int surface_count) {
-    Vector2 newPos = playerData->position;
+static void update_gameplay(t_player* player_data, t_surface* surfaces, const int surface_count) {
+    Vector2 new_pos = player_data->position;
 
-    if (IsKeyDown(KEY_W)) newPos.y -= player_config.speed;
-    if (IsKeyDown(KEY_S)) newPos.y += player_config.speed;
-    if (IsKeyDown(KEY_A)) newPos.x -= player_config.speed;
-    if (IsKeyDown(KEY_D)) newPos.x += player_config.speed;
+    if (IsKeyDown(KEY_W)) new_pos.y -= player_config.speed;
+    if (IsKeyDown(KEY_S)) new_pos.y += player_config.speed;
+    if (IsKeyDown(KEY_A)) new_pos.x -= player_config.speed;
+    if (IsKeyDown(KEY_D)) new_pos.x += player_config.speed;
 
     bool collision = false;
 
-    Rectangle playerHitbox = { newPos.x + 5, newPos.y + 8, 90, 1};
+    Rectangle player_hitbox = { new_pos.x + 5, new_pos.y + 8, 90, 1};
 //    /////////////////
-//    DrawRectangle(newPos.x + 5, newPos.y + 8, 90, 1, RED);
+//    DrawRectangle(new_pos.x + 5, new_pos.y + 8, 90, 1, RED);
 
     for (int i = 0; i < surface_count; i++) {
-        if (CheckCollisionRecs(playerHitbox, surfaces[i].rect)) {
+        if (CheckCollisionRecs(player_hitbox, surfaces[i].rect)) {
             collision = true;
             break;
         }
     }
 
     if (!collision) {
-        playerData->position = newPos;
+        player_data->position = new_pos;
     }
 }
 
-void mx_render_gameplay(t_player* playerData, t_game_textures* textures, bool* isPopupOpen, int* servedCounter, int maxServed) {
-    Rectangle player = { playerData->position.x, playerData->position.y, player_config.player_width, player_config.player_height };
+void mx_render_gameplay(t_player* player_data, t_game_textures* textures, bool* is_popup_open, int* served_counter, int max_served) {
+    Rectangle player = { player_data->position.x, player_data->position.y, player_config.player_width, player_config.player_height };
 
-    float textureDrawX = playerData->position.x - textures->chef.width + player_config.player_width;
-    float textureDrawY = playerData->position.y - textures->chef.height + player_config.player_height;
+    float texture_draw_x = player_data->position.x - textures->chef.width + player_config.player_width;
+    float texture_draw_y = player_data->position.y - textures->chef.height + player_config.player_height;
 
     // player movement and colission check
-    if (!(*isPopupOpen)) {
-        updateGameplay(playerData, surfaces, surface_count);
+    if (!(*is_popup_open)) {
+        update_gameplay(player_data, surfaces, surface_count);
     }
     
 
@@ -63,12 +63,12 @@ void mx_render_gameplay(t_player* playerData, t_game_textures* textures, bool* i
     }
 //    DrawTexture(textures->map3, 0, 0, WHITE);
     // draw player
-    DrawTexture(textures->chef, textureDrawX, textureDrawY, WHITE);
+    DrawTexture(textures->chef, texture_draw_x, texture_draw_y, WHITE);
 
 //    ////////////
 //    DrawRectangle(player.x, player.y, player.width, player.height, BLUE);
     
-    int interactableObject = mx_get_nearby_interactable(player, surfaces, surface_count);
+    int interactable_object = mx_get_nearby_interactable(player, surfaces, surface_count);
     for (int i = 0; i < surface_count; i++) {
         if (CheckCollisionRecs(player, surfaces[i].rect)) {
             if (surfaces[i].type != NONE)
@@ -81,39 +81,39 @@ void mx_render_gameplay(t_player* playerData, t_game_textures* textures, bool* i
         }
     }
     // interacting with objects
-    if (interactableObject != -1 && !(*isPopupOpen)) {
+    if (interactable_object != -1 && !(*is_popup_open)) {
         if (IsKeyPressed(KEY_F)) {
-            mx_interact_with_object(&hotbar, surfaces[interactableObject].type);
+            mx_interact_with_object(&hotbar, surfaces[interactable_object].type);
         }
     }
 
-    int pauseSize = 100;
-    Rectangle gearRect = { game_config.screen_width - pauseSize - 30, 30, pauseSize, pauseSize };
-    DrawTexturePro(textures->pause, (Rectangle){ 0, 0, textures->pause.width, textures->pause.height }, gearRect, (Vector2){0, 0}, 0.0f, WHITE);
+    int pause_size = 100;
+    Rectangle gear_rect = { game_config.screen_width - pause_size - 30, 30, pause_size, pause_size };
+    DrawTexturePro(textures->pause, (Rectangle){ 0, 0, textures->pause.width, textures->pause.height }, gear_rect, (Vector2){0, 0}, 0.0f, WHITE);
     Vector2 mouse = GetMousePosition();
-    bool cursorChanged = false;
-    if (!(*isPopupOpen)) {
-        if (CheckCollisionPointRec(mouse, gearRect)) {
+    bool cursor_changed = false;
+    if (!(*is_popup_open)) {
+        if (CheckCollisionPointRec(mouse, gear_rect)) {
             SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
-            cursorChanged = true;
+            cursor_changed = true;
             if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
                 mx_play_sound_effect(button_click);
                 current_state = GAMEPLAY_SETTINGS;
                 SetMouseCursor(MOUSE_CURSOR_DEFAULT);
             }
         }
-        if (*servedCounter == maxServed) {
+        if (*served_counter == max_served) {
             mx_play_sound_effect(level_complete);
-            *isPopupOpen = true;
+            *is_popup_open = true;
         }
     }
-    if (*isPopupOpen) {      
-        mx_draw_level_sucsses(isPopupOpen, textures, servedCounter);
+    if (*is_popup_open) {      
+        mx_draw_level_sucsses(is_popup_open, textures, served_counter);
         mx_pause_game_timer();
     }
-    if (!cursorChanged) {
+    if (!cursor_changed) {
         SetMouseCursor(MOUSE_CURSOR_DEFAULT);
     }
 
-    mx_render_queue(player, isPopupOpen, servedCounter, textures);
+    mx_render_queue(player, is_popup_open, served_counter, textures);
 }

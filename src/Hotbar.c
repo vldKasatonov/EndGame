@@ -9,7 +9,7 @@ t_hotbar_config hotbar_config = {
     (Color) { 255, 0, 0, 200 }      // cell_border_color_active
 };
 
-static void updateHotbar(void) {
+static void update_hotbar(void) {
     if (IsKeyDown(KEY_ONE)) hotbar.active_item = 0;
     if (IsKeyDown(KEY_TWO)) hotbar.active_item = 1;
     if (IsKeyDown(KEY_THREE)) hotbar.active_item = 2;
@@ -31,42 +31,42 @@ static void updateHotbar(void) {
     }
 }
 
-static const char* getActiveIngredientName(t_item* item) {
+static const char* get_active_ingredient_name(t_item* item) {
     static char buffer[50];
-    const char* stateStr;
-    const char* typeStr;
+    const char* state_str;
+    const char* type_str;
 
     switch (item->state) {
-    case DIRTY:   stateStr = "Dirty"; break;
-    case CLEAN:   stateStr = "Washed"; break;
-    case PEELED:  stateStr = "Peeled"; break;
-    case JUICED:  stateStr = "Juiced"; break;
-    case FRIED:   stateStr = "Fryied"; break;
-    case SLICED:  stateStr = "Sliced"; break;
-    default:      stateStr = ""; break;
+    case DIRTY:   state_str = "Dirty"; break;
+    case CLEAN:   state_str = "Washed"; break;
+    case PEELED:  state_str = "Peeled"; break;
+    case JUICED:  state_str = "Juiced"; break;
+    case FRIED:   state_str = "Fryied"; break;
+    case SLICED:  state_str = "Sliced"; break;
+    default:      state_str = ""; break;
     }
 
     switch (item->type) {
-    case APPLE:    typeStr = "apple"; break;
-    case POTATO:   typeStr = "potato"; break;
-    case CUCUMBER: typeStr = "cucumber"; break;
-    case TOMATO:   typeStr = "tomato"; break;
-    case SALAD:    typeStr = "salad"; break;
-    default:       typeStr = "unknown"; break;
+    case APPLE:    type_str = "apple"; break;
+    case POTATO:   type_str = "potato"; break;
+    case CUCUMBER: type_str = "cucumber"; break;
+    case TOMATO:   type_str = "tomato"; break;
+    case SALAD:    type_str = "salad"; break;
+    default:       type_str = "unknown"; break;
     }
 
-    snprintf(buffer, sizeof(buffer), "%s %s", stateStr, typeStr);
+    snprintf(buffer, sizeof(buffer), "%s %s", state_str, type_str);
     return buffer;
 }
 
-static void drawHotbarText(const char* text) {
-    int screenWidth = GetScreenWidth();
-    int fontSize = 20;
+static void draw_hotbar_text(const char* text) {
+    int screen_width = GetScreenWidth();
+    int font_size = 20;
 
-    int textWidth = MeasureText(text, fontSize);
-    int xPos = (screenWidth / 2) - (textWidth / 2);
+    int text_width = MeasureText(text, font_size);
+    int x_pos = (screen_width / 2) - (text_width / 2);
 
-    DrawText(text, xPos, 750, fontSize, BLACK);
+    DrawText(text, x_pos, 750, font_size, BLACK);
 }
 
 static void drawIngredient(Rectangle rect, t_item* item, t_game_textures *textures) {
@@ -199,22 +199,22 @@ static void drawIngredient(Rectangle rect, t_item* item, t_game_textures *textur
 }
 
 void mx_render_hotbar(t_game_textures *textures) {
-    int hotbarCellWidth = hotbar_config.cell_width;
-    int hotbarCellHeight = hotbar_config.cell_height;
+    int hotbar_cell_width = hotbar_config.cell_width;
+    int hotbar_cell_height = hotbar_config.cell_height;
     int margin = hotbar_config.margin;
-    int startPositionX = (game_config.screen_width - (hotbarCellWidth * MX_INVENTORY_SIZE + margin * (MX_INVENTORY_SIZE - 1))) / 2;
+    int start_position_x = (game_config.screen_width - (hotbar_cell_width * MX_INVENTORY_SIZE + margin * (MX_INVENTORY_SIZE - 1))) / 2;
 
-    updateHotbar();
+    update_hotbar();
     
     // draw active item name
     if (hotbar.items[hotbar.active_item]) {
-        const char* activeIngredient = getActiveIngredientName(hotbar.items[hotbar.active_item]);
-        drawHotbarText(activeIngredient);
+        const char* active_ingredient = get_active_ingredient_name(hotbar.items[hotbar.active_item]);
+        draw_hotbar_text(active_ingredient);
     }
     
     // draw hotbar cells
     for (int i = 0; i < MX_INVENTORY_SIZE; i++) {
-        Rectangle rect = { startPositionX, 780, hotbarCellWidth, hotbarCellHeight };
+        Rectangle rect = { start_position_x, 780, hotbar_cell_width, hotbar_cell_height };
 
         // draw a cell
         DrawRectangleRec(rect, hotbar_config.cell_color);
@@ -232,6 +232,6 @@ void mx_render_hotbar(t_game_textures *textures) {
             drawIngredient(rect, hotbar.items[i], textures);
         }
 
-        startPositionX += margin + hotbarCellWidth;
+        start_position_x += margin + hotbar_cell_width;
     }
 }

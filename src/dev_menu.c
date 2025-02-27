@@ -30,18 +30,18 @@ void mx_render_developers(t_game_textures *textures) {
     Rectangle back_button = mx_draw_back_button(textures);
 
     Vector2 mouse = GetMousePosition();
-    bool cursorChanged = false;
+    bool cursor_changed = false;
 
     if (CheckCollisionPointRec(mouse, back_button)) {
         SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
-        cursorChanged = true;
+        cursor_changed = true;
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             mx_play_sound_effect(button_click);
             current_state = MAIN_MENU;
             SetMouseCursor(MOUSE_CURSOR_DEFAULT);
         }
     }
-    if (!cursorChanged) {
+    if (!cursor_changed) {
         SetMouseCursor(MOUSE_CURSOR_DEFAULT);
     }
 }

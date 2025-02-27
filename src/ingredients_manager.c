@@ -1,6 +1,6 @@
 #include "../inc/header.h"
 
-t_item* allocateItemMemory(void) {
+t_item* allocate_item_memory(void) {
 	t_item* item = (t_item*)malloc(sizeof(t_item));
 
 	if (!item)
@@ -17,7 +17,7 @@ void mx_delete_item(t_item** item) {
 }
 
 t_item* mx_get_dirty_item(t_ingredient type) {
-	t_item* item = allocateItemMemory();
+	t_item* item = allocate_item_memory();
 
 	if (!item)
 		return NULL;
@@ -35,7 +35,7 @@ void mx_update_item(t_item* item, t_ingredient_state state) {
 }
 
 t_item* mx_get_salad(void) {
-	t_item* item = allocateItemMemory();
+	t_item* item = allocate_item_memory();
 
 	if (!item)
 		return NULL;

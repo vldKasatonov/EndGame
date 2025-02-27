@@ -1,6 +1,6 @@
 #include "../inc/header.h"
 
-int currentLevel = 0;
+int current_level = 0;
 
 void mx_initialize_level(t_level_data* level_data, t_level* level) {
     level->next_guest_index = 0;
@@ -14,7 +14,7 @@ void mx_initialize_level(t_level_data* level_data, t_level* level) {
     for (int i = 0; i < level->guest_count; i++) {
         level->all_guests[i].id = i + 1;
         level->all_guests[i].arrival_time = i * 15;
-        level->all_guests[i].order = &level_data->levelMenu[i];
+        level->all_guests[i].order = &level_data->level_menu[i];
 
         level->all_guests[i].x = queue_config.register_x;
         level->all_guests[i].y = queue_config.register_y + 200;
@@ -38,7 +38,7 @@ void mx_clear_level(t_level* level) {
     level->guest_count = 0;
 }
 
-void mx_try_add_guest_to_register(t_level* level, t_queue* queue, int currentTime) {
+void mx_try_add_guest_to_register(t_level* level, t_queue* queue, int current_time) {
     if (queue->at_register != NULL || !mx_has_queue_space(queue)) {
         return;
     }
@@ -51,7 +51,7 @@ void mx_try_add_guest_to_register(t_level* level, t_queue* queue, int currentTim
     nextGuest->target_x = queue_config.register_x;
     nextGuest->target_y = queue_config.register_y;
 
-    if (nextGuest->arrival_time <= currentTime) {
+    if (nextGuest->arrival_time <= current_time) {
         queue->at_register = nextGuest;
         level->next_guest_index++;
     }

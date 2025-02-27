@@ -12,7 +12,7 @@ Sound wrong_order;
 Sound pouring;
 Sound level_complete;
 
-static float effectsVolume = 0.5f;  
+static float effects_volume = 0.5f;  
 
 void mx_init_sound_effects(void) {
     InitAudioDevice(); 
@@ -28,17 +28,17 @@ void mx_init_sound_effects(void) {
     pouring = LoadSound("resource/audio/effects/pouring.wav");
     level_complete = LoadSound("resource/audio/effects/level_complete.wav");
     
-    SetSoundVolume(button_click, effectsVolume);
-    SetSoundVolume(item_pickup, effectsVolume);
-    SetSoundVolume(complete_order, effectsVolume);
-    SetSoundVolume(cutting, effectsVolume);
-    SetSoundVolume(frying, effectsVolume);
-    SetSoundVolume(leaves, effectsVolume);
-    SetSoundVolume(peeling, effectsVolume);
-    SetSoundVolume(washing, effectsVolume);
-    SetSoundVolume(wrong_order, effectsVolume);
-    SetSoundVolume(pouring, effectsVolume);
-    SetSoundVolume(level_complete, effectsVolume);
+    SetSoundVolume(button_click, effects_volume);
+    SetSoundVolume(item_pickup, effects_volume);
+    SetSoundVolume(complete_order, effects_volume);
+    SetSoundVolume(cutting, effects_volume);
+    SetSoundVolume(frying, effects_volume);
+    SetSoundVolume(leaves, effects_volume);
+    SetSoundVolume(peeling, effects_volume);
+    SetSoundVolume(washing, effects_volume);
+    SetSoundVolume(wrong_order, effects_volume);
+    SetSoundVolume(pouring, effects_volume);
+    SetSoundVolume(level_complete, effects_volume);
     
     
 }
@@ -48,7 +48,7 @@ void mx_play_sound_effect(Sound sound) {
 }
 
 void mx_set_effects_volume(float volume) {
-    effectsVolume = volume;
+    effects_volume = volume;
     SetSoundVolume(button_click, volume);
     SetSoundVolume(item_pickup, volume);
     SetSoundVolume(complete_order, volume);

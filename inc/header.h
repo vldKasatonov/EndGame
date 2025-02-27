@@ -202,7 +202,7 @@ typedef struct {
 
 typedef struct s_level_data {
     int guest_count;
-    t_item levelMenu[MX_MAX_LEVEL_GUESTS];
+    t_item level_menu[MX_MAX_LEVEL_GUESTS];
     t_surface surfaces[34];
     int surface_count;
 } t_level_data;

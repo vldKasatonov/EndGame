@@ -2,31 +2,31 @@
 
 /* static const char* getOrderName(t_item* item) {
   static char buffer[50];
-  const char* stateStr;
-  const char* typeStr;
+  const char* state_str;
+  const char* type_str;
 
   Texture2D drawOrder;
 
   switch (item->state) {
-  case DIRTY:   stateStr = "Dirty"; break;
-  case CLEAN:   stateStr = "Washed"; break;
-  case PEELED:  stateStr = "Peeled"; break;
-  case JUICED:  stateStr = "Juiced"; break;
-  case FRIED:   stateStr = "Fryied"; break;
-  case SLICED:  stateStr = "Sliced"; break;
-  default:      stateStr = ""; break;
+  case DIRTY:   state_str = "Dirty"; break;
+  case CLEAN:   state_str = "Washed"; break;
+  case PEELED:  state_str = "Peeled"; break;
+  case JUICED:  state_str = "Juiced"; break;
+  case FRIED:   state_str = "Fryied"; break;
+  case SLICED:  state_str = "Sliced"; break;
+  default:      state_str = ""; break;
   }
 
   switch (item->type) {
-  case APPLE:    typeStr = "apple"; break;
-  case POTATO:   typeStr = "potato"; break;
-  case CUCUMBER: typeStr = "cucumber"; break;
-  case TOMATO:   typeStr = "tomato"; break;
-  case SALAD:    typeStr = "salad"; break;
-  default:       typeStr = "unknown"; break;
+  case APPLE:    type_str = "apple"; break;
+  case POTATO:   type_str = "potato"; break;
+  case CUCUMBER: type_str = "cucumber"; break;
+  case TOMATO:   type_str = "tomato"; break;
+  case SALAD:    type_str = "salad"; break;
+  default:       type_str = "unknown"; break;
   }
 
-  snprintf(buffer, sizeof(buffer), "%s %s", stateStr, typeStr);
+  snprintf(buffer, sizeof(buffer), "%s %s", state_str, type_str);
   return buffer;
 }
 
@@ -36,7 +36,7 @@ static void drawOrderText(int x, int y, const char* text) {
 
 
 
-static void drawOrderImage(int x, int y, t_item* item, t_game_textures* textures) {
+static void draw_order_image(int x, int y, t_item* item, t_game_textures* textures) {
     DrawTexturePro(textures->cloud, (Rectangle) { 0, 0, textures->cloud.width, textures->cloud.height },
         (Rectangle) {
         x + 70, y - 30, 90, 90
@@ -62,25 +62,25 @@ static void drawOrderImage(int x, int y, t_item* item, t_game_textures* textures
 
 
 }
-static bool activeItemIsOrder(t_inventory* hotbar, t_item* order) {
+static bool active_item_is_order(t_inventory* hotbar, t_item* order) {
   if (!order) return false;
   t_item* active_item = hotbar->items[hotbar->active_item];
   return active_item && active_item->state == order->state && active_item->type == order->type;
 }
 
-void updateGuestPosition(t_guest* guest, float deltaTime) {
-  float moveSpeed = 200.0f;
+void update_guest_position(t_guest* guest, float delta_time) {
+  float move_speed = 200.0f;
 
   float dx = guest->target_x - guest->x;
   float dy = guest->target_y - guest->y;
   float distance = sqrt(dx * dx + dy * dy);
 
   if (distance > 1.0f) {
-    float moveX = (dx / distance) * moveSpeed * deltaTime;
-    float moveY = (dy / distance) * moveSpeed * deltaTime;
+    float move_x = (dx / distance) * move_speed * delta_time;
+    float move_y = (dy / distance) * move_speed * delta_time;
 
-    guest->x += moveX;
-    guest->y += moveY;
+    guest->x += move_x;
+    guest->y += move_y;
   }
   else {
     guest->x = guest->target_x;
@@ -88,24 +88,24 @@ void updateGuestPosition(t_guest* guest, float deltaTime) {
   }
 }
 
-void mx_render_queue(Rectangle player, bool* isPopupOpen, int* servedCounter, t_game_textures *textures) {
-  double currentTime = mx_get_elapsed_time();
-  float deltaTime = GetFrameTime();
+void mx_render_queue(Rectangle player, bool* is_popup_open, int* served_counter, t_game_textures *textures) {
+  double current_time = mx_get_elapsed_time();
+  float delta_time = GetFrameTime();
 
-  mx_try_add_guest_to_register(&level, &queue, currentTime);
+  mx_try_add_guest_to_register(&level, &queue, current_time);
 
   // guest is waiting near cash register
   if (queue.at_register != NULL) {
     Rectangle client = { queue.at_register->x, queue.at_register->y, 100, 100 };
-    if (!(*isPopupOpen)) {
-      updateGuestPosition(queue.at_register, deltaTime);
+    if (!(*is_popup_open)) {
+      update_guest_position(queue.at_register, delta_time);
     }
     //DrawRectangleRec(client, RED);
     DrawTexture(textures->guest, client.x, client.y, WHITE);
 
     int index = mx_get_nearby_interactable(client, surfaces, surface_count);
 
-    if (index != -1 && !(*isPopupOpen)
+    if (index != -1 && !(*is_popup_open)
       && CheckCollisionRecs(client, surfaces[index].rect)
       && CheckCollisionRecs(player, surfaces[index].rect)) {
       if (IsKeyPressed(KEY_F)) {
@@ -118,18 +118,18 @@ void mx_render_queue(Rectangle player, bool* isPopupOpen, int* servedCounter, t_
   for (int i = 0; i < MX_MAX_QUEUE; i++) {
     if (queue.queue[i] != NULL) {
       Rectangle client = { queue.queue[i]->x, queue.queue[i]->y, 100, 100 };
-      if (!(*isPopupOpen)) {
-        updateGuestPosition(queue.queue[i], deltaTime);
+      if (!(*is_popup_open)) {
+        update_guest_position(queue.queue[i], delta_time);
       }
       //DrawRectangleRec(client, BLUE);
       DrawTexture(textures->guest, client.x, client.y, WHITE);
-      drawOrderImage(queue.queue[i]->x - 20, queue.queue[i]->y - 20, queue.queue[i]->order, textures);
+      draw_order_image(queue.queue[i]->x - 20, queue.queue[i]->y - 20, queue.queue[i]->order, textures);
       int index = mx_get_nearby_interactable(client, surfaces, surface_count);
-      if (index != -1 && !(*isPopupOpen) && CheckCollisionRecs(client, surfaces[index].rect) && CheckCollisionRecs(player, surfaces[index].rect)) {
-        if (IsKeyPressed(KEY_F) && activeItemIsOrder(&hotbar, queue.queue[i]->order)) {
+      if (index != -1 && !(*is_popup_open) && CheckCollisionRecs(client, surfaces[index].rect) && CheckCollisionRecs(player, surfaces[index].rect)) {
+        if (IsKeyPressed(KEY_F) && active_item_is_order(&hotbar, queue.queue[i]->order)) {
           mx_interact_with_guest(&hotbar, &queue, i, surfaces[index].type);
           if (surfaces[index].type == PICK_UP) {
-              (*servedCounter)++;
+              (*served_counter)++;
           }
         }
       }
@@ -138,8 +138,8 @@ void mx_render_queue(Rectangle player, bool* isPopupOpen, int* servedCounter, t_
   // served guest leaves
   if (queue.out_of_queue != NULL) {
     Rectangle client = { queue.out_of_queue->x, queue.out_of_queue->y, 100, 100 };
-    if (!(*isPopupOpen)) {
-      updateGuestPosition(queue.out_of_queue, deltaTime);
+    if (!(*is_popup_open)) {
+      update_guest_position(queue.out_of_queue, delta_time);
     }
     //DrawRectangleRec(client, GREEN);
     DrawTexture(textures->reversed_guest, client.x, client.y, WHITE);

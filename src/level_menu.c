@@ -1,6 +1,6 @@
 #include "../inc/header.h"
 
-extern int currentLevel;
+extern int current_level;
 
 static void reset_player_data(t_player* playerData) {
     Vector2 pos = { 300, 350 };
@@ -15,7 +15,7 @@ void mx_render_level_menu(t_game_textures* textures, t_level_stars* game_state, 
 
     double best_times[3];
     for (int i = 0; i < 3; i++) {
-        currentLevel = i;
+        current_level = i;
         mx_load_best_time();
         best_times[i] = mx_get_best_time();
     }
@@ -50,11 +50,11 @@ void mx_render_level_menu(t_game_textures* textures, t_level_stars* game_state, 
     mx_draw_arrow(textures->right_arrow, right_arrow_rec);
     
     Vector2 mouse = GetMousePosition();
-    bool cursorChanged = false;
+    bool cursor_changed = false;
 
     if (CheckCollisionPointRec(mouse, gear_rect)) {
         SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
-        cursorChanged = true;
+        cursor_changed = true;
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             mx_play_sound_effect(button_click);
             previous_state = current_state;
@@ -64,7 +64,7 @@ void mx_render_level_menu(t_game_textures* textures, t_level_stars* game_state, 
     }  
     if (CheckCollisionPointRec(mouse, back_button)) {
         SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
-        cursorChanged = true;
+        cursor_changed = true;
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             mx_play_sound_effect(button_click);
             current_state = SELECT_PLAYER;
@@ -73,7 +73,7 @@ void mx_render_level_menu(t_game_textures* textures, t_level_stars* game_state, 
     }
     if (CheckCollisionPointRec(mouse, right_arrow_rec)) {
         SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
-        cursorChanged = true;
+        cursor_changed = true;
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             mx_play_sound_effect(button_click);
             current_state = LEVEL_MENU2;
@@ -82,11 +82,11 @@ void mx_render_level_menu(t_game_textures* textures, t_level_stars* game_state, 
     }
     if (CheckCollisionPointCircle(mouse, circle, radius)) {
         SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
-        cursorChanged = true;
+        cursor_changed = true;
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             mx_play_sound_effect(button_click);
             
-            currentLevel = 0;
+            current_level = 0;
             mx_load_best_time();
             mx_start_game_timer();
             current_state = GAMEPLAY;
@@ -103,11 +103,11 @@ void mx_render_level_menu(t_game_textures* textures, t_level_stars* game_state, 
     }
     if (CheckCollisionPointCircle(mouse, (Vector2){ circle.x + space, circle.y }, radius)) {
         SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
-        cursorChanged = true;
+        cursor_changed = true;
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             mx_play_sound_effect(button_click);
             
-            currentLevel = 1;
+            current_level = 1;
             mx_load_best_time();
             mx_start_game_timer();
             current_state = GAMEPLAY;
@@ -124,11 +124,11 @@ void mx_render_level_menu(t_game_textures* textures, t_level_stars* game_state, 
     }
     if (CheckCollisionPointCircle(mouse, (Vector2) { circle.x + space * 2, circle.y }, radius)) {
         SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
-        cursorChanged = true;
+        cursor_changed = true;
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             mx_play_sound_effect(button_click);
             
-            currentLevel = 2;
+            current_level = 2;
             mx_load_best_time();
             mx_start_game_timer();
             current_state = GAMEPLAY;
@@ -143,7 +143,7 @@ void mx_render_level_menu(t_game_textures* textures, t_level_stars* game_state, 
             SetMouseCursor(MOUSE_CURSOR_DEFAULT);
         }
     }
-    if (!cursorChanged) {
+    if (!cursor_changed) {
         SetMouseCursor(MOUSE_CURSOR_DEFAULT);
     }
 
@@ -172,11 +172,11 @@ void mx_render_level_menu2(t_game_textures *textures) {
     mx_draw_arrow(textures->left_arrow, left_arrow_rec);
 
     Vector2 mouse = GetMousePosition();
-    bool cursorChanged = false;
+    bool cursor_changed = false;
 
     if (CheckCollisionPointRec(mouse, gear_rect)) {
         SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
-        cursorChanged = true;
+        cursor_changed = true;
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             mx_play_sound_effect(button_click);
             previous_state = current_state;
@@ -186,7 +186,7 @@ void mx_render_level_menu2(t_game_textures *textures) {
     }
     if (CheckCollisionPointRec(mouse, back_button)) {
         SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
-        cursorChanged = true;
+        cursor_changed = true;
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             mx_play_sound_effect(button_click);
             current_state = SELECT_PLAYER;
@@ -195,14 +195,14 @@ void mx_render_level_menu2(t_game_textures *textures) {
     }
     if (CheckCollisionPointRec(mouse, left_arrow_rec)) {
         SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
-        cursorChanged = true;
+        cursor_changed = true;
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             mx_play_sound_effect(button_click);
             current_state = LEVEL_MENU;
             SetMouseCursor(MOUSE_CURSOR_DEFAULT);
         }
     }
-    if (!cursorChanged) {
+    if (!cursor_changed) {
         SetMouseCursor(MOUSE_CURSOR_DEFAULT);
     }
 }

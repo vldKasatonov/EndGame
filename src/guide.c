@@ -27,11 +27,11 @@ void mx_render_guide_page1(t_game_textures *textures) {
                    1244, 700 }, (Vector2) { 0, 0 }, 0.0f, WHITE);
 
     Vector2 mouse = GetMousePosition();
-    bool cursorChanged = false;
+    bool cursor_changed = false;
     
     if (CheckCollisionPointRec(mouse, back_button)) {
         SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
-        cursorChanged = true;
+        cursor_changed = true;
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             mx_play_sound_effect(button_click);
             current_state = previous_guide_state;
@@ -40,14 +40,14 @@ void mx_render_guide_page1(t_game_textures *textures) {
     }
     if (CheckCollisionPointRec(mouse, right_arrow_rec)) {
         SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
-        cursorChanged = true;
+        cursor_changed = true;
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
 	    mx_play_sound_effect(button_click);
             current_state = GUIDE_PAGE2;
             SetMouseCursor(MOUSE_CURSOR_DEFAULT);
         }
     }
-    if (!cursorChanged) {
+    if (!cursor_changed) {
         SetMouseCursor(MOUSE_CURSOR_DEFAULT);
     }
 }
@@ -69,11 +69,11 @@ void mx_render_guide_page2(t_game_textures *textures) {
                    125, 1244, 700 }, (Vector2) { 0, 0 }, 0.0f, WHITE);
 
     Vector2 mouse = GetMousePosition();
-    bool cursorChanged = false;
+    bool cursor_changed = false;
 
     if (CheckCollisionPointRec(mouse, back_button)) {
         SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
-        cursorChanged = true;
+        cursor_changed = true;
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             mx_play_sound_effect(button_click);
             current_state = previous_guide_state;
@@ -82,7 +82,7 @@ void mx_render_guide_page2(t_game_textures *textures) {
     }
     if (CheckCollisionPointRec(mouse, right_arrow_rec)) {
         SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
-        cursorChanged = true;
+        cursor_changed = true;
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
 	    mx_play_sound_effect(button_click);
             current_state = GUIDE_PAGE3;
@@ -91,14 +91,14 @@ void mx_render_guide_page2(t_game_textures *textures) {
     }
     if (CheckCollisionPointRec(mouse, left_arrow_rec)) {
         SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
-        cursorChanged = true;
+        cursor_changed = true;
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
 	    mx_play_sound_effect(button_click);
             current_state = GUIDE_PAGE1;
             SetMouseCursor(MOUSE_CURSOR_DEFAULT);
         }
     }
-    if (!cursorChanged) {
+    if (!cursor_changed) {
         SetMouseCursor(MOUSE_CURSOR_DEFAULT);
     }
 }
@@ -118,11 +118,11 @@ void mx_render_guide_page3(t_game_textures *textures) {
                    125, 1244, 700 }, (Vector2) { 0, 0 }, 0.0f, WHITE);
 
     Vector2 mouse = GetMousePosition();
-    bool cursorChanged = false;
+    bool cursor_changed = false;
 
     if (CheckCollisionPointRec(mouse, back_button)) {
         SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
-        cursorChanged = true;
+        cursor_changed = true;
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             mx_play_sound_effect(button_click);
             current_state = previous_guide_state;
@@ -131,14 +131,14 @@ void mx_render_guide_page3(t_game_textures *textures) {
     }
     if (CheckCollisionPointRec(mouse, left_arrow_rec)) {
         SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
-        cursorChanged = true;
+        cursor_changed = true;
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             mx_play_sound_effect(button_click);
             current_state = GUIDE_PAGE2;
             SetMouseCursor(MOUSE_CURSOR_DEFAULT);
         }
     }
-    if (!cursorChanged) {
+    if (!cursor_changed) {
         SetMouseCursor(MOUSE_CURSOR_DEFAULT);
     }
 }
