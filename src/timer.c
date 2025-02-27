@@ -8,7 +8,7 @@ static double pausedTime = 0.0;
 static double bestTimes[MAX_LEVELS] = { -1.0 };  
 static bool timerRunning = false;
 static bool timerPaused = false;
-extern int currentLevel;  
+extern int currentLevel;
 
 void mx_start_game_timer(void) {
     if (currentLevel < 0 || currentLevel >= MAX_LEVELS) {

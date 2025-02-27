@@ -57,7 +57,7 @@ int main(void)
     bool isExitPopupOpen = false;
     bool isPopupOpen = false;
 
-	t_level_stars gameState = { {0, 0, 0} };
+	t_level_stars game_state = { {0, 0, 0} };
 
 	while (!WindowShouldClose())
 	{
@@ -144,7 +144,7 @@ int main(void)
 		case LEVEL_MENU:
 		{
 			draw_moving_background(&textures, pos_background);
-			mx_render_level_menu(&textures, &gameState, &playerData);
+			mx_render_level_menu(&textures, &game_state, &playerData);
 		} break;
 		case LEVEL_MENU2:
 		{
@@ -154,7 +154,7 @@ int main(void)
 		case SETTINGS:
 		{
 			draw_moving_background(&textures, pos_background);
-			mx_render_settings(&textures, &volumeMusic, &volumeEffects, &gameState);
+			mx_render_settings(&textures, &volumeMusic, &volumeEffects, &game_state);
 			mx_update_music_volume(volumeMusic);
 		} break;
 		case GAMEPLAY_SETTINGS:

@@ -1,33 +1,27 @@
 #include "../inc/header.h"
 
-void resetGameProgress(t_level_stars *gameState) {
+void resetGameProgress(t_level_stars *game_state) {
     char filename[50];
-
     for (int i = 0; i < 3; i++) {  
-        snprintf(filename, sizeof(filename), "resource/best_time_level_%d.txt", i);
+        snprintf(filename, sizeof(filename),
+                 "resource/best_time_level_%d.txt", i);
         remove(filename); 
     }
-
     printf("INFO: All best time files deleted\n");
-
     for (int i = 0; i < 3; i++) { 
-        gameState->level_stars[i] = 0;
+        game_state->level_stars[i] = 0;
     }
-
     printf("INFO: Deleting progress and resetting stars\n");
 }
 
-void mx_render_settings(t_game_textures *textures, float *volumeMusic, float *volumeEffects, t_level_stars *gameState) {
+void mx_render_settings(t_game_textures *textures, float *volumeMusic, float *volumeEffects, t_level_stars *game_state) {
     int sliderWidth = 500;
     int sliderHeight = 30;
     int knobSize = 30;
-
     int centerX = game_config.screen_width / 2;
     int centerY = game_config.screen_height / 2;
-
     Rectangle sliderBarMusic = { centerX - sliderWidth / 2, centerY - 100 - 50, sliderWidth, sliderHeight };
     Rectangle sliderBarEffects = { centerX - sliderWidth / 2, centerY + 40 - 30, sliderWidth, sliderHeight };
-
     Rectangle sliderKnobMusic = { sliderBarMusic.x + (*volumeMusic) * sliderWidth - knobSize / 2,
                                   sliderBarMusic.y - (knobSize - sliderHeight) / 2,
                                   knobSize, knobSize };
@@ -35,18 +29,15 @@ void mx_render_settings(t_game_textures *textures, float *volumeMusic, float *vo
     Rectangle sliderKnobEffects = { sliderBarEffects.x + (*volumeEffects) * sliderWidth - knobSize / 2,
                                     sliderBarEffects.y - (knobSize - sliderHeight) / 2,
                                     knobSize, knobSize };
-
     int iconSize = 60;
     Rectangle iconMusicRect = { sliderBarMusic.x - iconSize - 35, sliderBarMusic.y + (sliderHeight - iconSize) / 2, iconSize, iconSize };
     Rectangle iconEffectsRect = { sliderBarEffects.x - iconSize - 30, sliderBarEffects.y + (sliderHeight - iconSize) / 2, iconSize, iconSize };
-
     Vector2 mouse = GetMousePosition();
     bool cursorChanged = false;
 
     if (CheckCollisionPointRec(mouse, sliderKnobMusic) || CheckCollisionPointRec(mouse, sliderKnobEffects)) {
         cursorChanged = true;
     }
-
     if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
         if (CheckCollisionPointRec(mouse, sliderBarMusic)) {
             cursorChanged = true;
@@ -76,13 +67,10 @@ void mx_render_settings(t_game_textures *textures, float *volumeMusic, float *vo
     } else {
         SetMouseCursor(MOUSE_CURSOR_DEFAULT);
     }
-
     sliderKnobMusic.x = sliderBarMusic.x + (*volumeMusic) * sliderWidth - knobSize / 2;
     sliderKnobEffects.x = sliderBarEffects.x + (*volumeEffects) * sliderWidth - knobSize / 2;
-
     float cornerRadius = 0.8f;
     int segments = 10;
-
     Rectangle filledBarMusic = { sliderBarMusic.x, sliderBarMusic.y, (*volumeMusic) * sliderWidth, sliderHeight };
     Rectangle filledBarEffects = { sliderBarEffects.x, sliderBarEffects.y, (*volumeEffects) * sliderWidth, sliderHeight };
 
@@ -114,19 +102,7 @@ void mx_render_settings(t_game_textures *textures, float *volumeMusic, float *vo
     Vector2 textPos_effects = {(GetScreenWidth() - textWidthEffects) / 2 - 80, sliderBarEffects.y - 80};
     DrawTextEx(mx_get_custom_font(), "Effects Volume", textPos_effects, game_config.font_size_paragraph + 40, 3, WHITE);
 
-
-    int textWidth = MeasureText("BACK", game_config.font_size_paragraph + 50);
-    int button_height = 80;
-    int iconWidth = textures->exit.width ;
-    int iconHeight = textures->exit.height ;
-    int button_width = iconWidth + textWidth + 80;
-    Rectangle backButton = { 30, 40, button_width, button_height };
-    Rectangle backTextRect = { backButton.x + textures->arrow.width + 5, backButton.y, textWidth, button_height };
-    Rectangle backRect = { backButton.x , backButton.y + (button_height - iconHeight) / 2, iconWidth, iconHeight };
-    DrawTexturePro(textures->arrow, (Rectangle){0, 0, textures->arrow.width, textures->arrow.height}, backRect, (Vector2){0, 0}, 0.0f, WHITE);
-    Vector2 textPos1 = { backTextRect.x, backTextRect.y - 10};
-    DrawTextEx(mx_get_custom_font(), "BACK", textPos1, game_config.font_size_paragraph + 70, 3, WHITE);
-
+    Rectangle back_button = mx_draw_back_button(textures);
 
     int buttonX2 = (1600 - (MeasureText("DELETE PROGRESS", game_config.font_size_paragraph + 20) + iconSize + 10)) / 2 - 90;
     int buttonY2 = sliderBarEffects.y + 150;
@@ -140,7 +116,6 @@ void mx_render_settings(t_game_textures *textures, float *volumeMusic, float *vo
         deleteTextRect.y - 10
     };
     DrawTextEx(mx_get_custom_font(), "DELETE PROGRESS", textPos3, game_config.font_size_paragraph + 30, 3, custom_colors.red_color);
-
 
     int buttonX1 = 1200;
     int buttonY1 = 780;
@@ -156,7 +131,7 @@ void mx_render_settings(t_game_textures *textures, float *volumeMusic, float *vo
     Vector2 textPos2 = { guideTextRect.x, guideTextRect.y - 20 };
     DrawTextEx(mx_get_custom_font(), buttonText, textPos2, game_config.font_size_paragraph + 70, 3, WHITE);
 
-    if (CheckCollisionPointRec(mouse, backButton)) {
+    if (CheckCollisionPointRec(mouse, back_button)) {
         SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
         cursorChanged = true;
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
@@ -165,16 +140,14 @@ void mx_render_settings(t_game_textures *textures, float *volumeMusic, float *vo
             SetMouseCursor(MOUSE_CURSOR_DEFAULT);
         }
     }
-
     if (CheckCollisionPointRec(mouse, deleteButton)) {
         SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
         cursorChanged = true;
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             mx_play_sound_effect(button_click);
-            resetGameProgress(gameState);
+            resetGameProgress(game_state);
         }
     }
-
     if (CheckCollisionPointRec(mouse, guideButton)) {
         SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
         cursorChanged = true;
@@ -185,10 +158,7 @@ void mx_render_settings(t_game_textures *textures, float *volumeMusic, float *vo
             SetMouseCursor(MOUSE_CURSOR_DEFAULT);
         }
     }
-
     if (!cursorChanged) {
         SetMouseCursor(MOUSE_CURSOR_DEFAULT);
     }
-
-
 }

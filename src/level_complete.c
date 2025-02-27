@@ -3,13 +3,11 @@
 void mx_draw_stars_gameplay(int space, double elapsedTime, t_game_textures *textures, Vector2 circle) {
     Rectangle starRec = { 225, 390, 75, 75 };
     Rectangle srcStar = { 0, 0, textures->star.width, textures->star.height };
-
     Color starColors[3] = {
         custom_colors.nonactive_star_color,
         custom_colors.nonactive_star_color,
         custom_colors.nonactive_star_color
     };
-
     if (elapsedTime > 1.0) {
         if (elapsedTime <= 120.0) {
             starColors[0] = custom_colors.active_star_color;
@@ -43,7 +41,7 @@ void mx_disable_gameplay_input(bool isPopupOpen) {
             IsKeyPressed(KEY_E) ||
             IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             return;
-            }
+        }
     }
 }
 
@@ -56,7 +54,6 @@ void mx_draw_level_sucsses(bool *isExitPopupOpen, t_game_textures *textures, int
         popupWidth,
         popupHeight
     };
-
     DrawRectangleRounded(popupRect, 0.5f, 10, custom_colors.button_background_color);
     DrawRectangleRoundedLinesEx(popupRect, 0.5f, 10, 5, WHITE);
 
@@ -113,15 +110,14 @@ void mx_draw_level_sucsses(bool *isExitPopupOpen, t_game_textures *textures, int
             *servedCounter = 0;
         }
     }
-
     if (!cursorChanged) {
         SetMouseCursor(MOUSE_CURSOR_DEFAULT);
     }
 }
 
-void mx_update_level_stars(t_level_stars *gameState, int level, int stars) {
+void mx_update_level_stars(t_level_stars *game_state, int level, int stars) {
     if (level >= 0 && level < MX_NUM_LEVELS) {
-        gameState->level_stars[level] = stars;
+        game_state->level_stars[level] = stars;
     }
 }
 
@@ -136,6 +132,5 @@ int mx_calculate_stars_for_level(void) {
     } else if (bestTime < 300) {
         stars = 1;
     }
-
     return stars;
 }

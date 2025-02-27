@@ -80,49 +80,78 @@ static void DrawExitConfirmation(bool *isExitPopupOpen) {
     }
 }
 
+static Rectangle draw_exit_button(Texture2D icon) {
+    int text_width = MeasureText("EXIT", game_config.font_size_paragraph + 50);
+    int button_height = 80;
+    int icon_width = icon.width - 10;
+    int icon_height = icon.height - 10;
+    int button_width = icon_width + text_width + 50;
+    Rectangle exit_button = { 30, 40, button_width, button_height };
+    Rectangle exit_text_rect = { exit_button.x + icon.width + 5,
+                              exit_button.y, text_width, button_height };
+    Rectangle exit_rect = { exit_button.x , exit_button.y + (button_height
+                          - icon_height) / 2, icon_width, icon_height };
+    DrawTexturePro(icon, (Rectangle){0, 0, icon.width, icon.height},
+                   exit_rect, (Vector2){0, 0}, 0.0f, WHITE);
+    Vector2 text_pos = {exit_text_rect.x, exit_text_rect.y - 10};
+    DrawTextEx(mx_get_custom_font(), "EXIT", text_pos,
+               game_config.font_size_paragraph + 70, 3, WHITE);
+    return exit_button;
+}
+
+static Rectangle draw_dev_button(void) {
+    Vector2 text_dev = MeasureTextEx(mx_get_custom_font(),
+                                     "DEVELOPERS", 70, 3);
+    Vector2 text_pos_dev = {
+        30,
+        game_config.screen_height - 30 - text_dev.y - 10
+    };
+    DrawTextEx(mx_get_custom_font(), "DEVELOPERS", text_pos_dev,
+               game_config.font_size_paragraph + 50, 3, WHITE);
+    Rectangle dev_button = { text_pos_dev.x, text_pos_dev.y,
+                            text_dev.x, text_dev.y };
+    return dev_button;
+}
+
+static void draw_chef(Texture2D image) {
+    Rectangle src_image_chef = { 0, 0, image.width, image.height };
+    Vector2 size_image = { 104 * 2, 194 * 2 };
+    Rectangle image_chef = { game_config.screen_width - size_image.x * 2,
+                           game_config.screen_height - size_image.y,
+                           size_image.x, size_image.y };
+    DrawTexturePro(image, src_image_chef, image_chef,
+                   (Vector2){0, 0}, 0.0f, WHITE);
+}
+
+static Rectangle draw_play_button(void) {
+    Vector2 button = {
+        (GetScreenWidth() - game_config.button_width) / 2 - 75,
+        (int)(GetScreenHeight() * 0.55)
+    };
+    Rectangle button_rect = { button.x, button.y, 450, 150 };
+    Vector2 text_size = MeasureTextEx(mx_get_custom_font(),
+                                      "FUNNY CHEF", 140, 3);
+    Vector2 text_pos = {
+        (GetScreenWidth() - text_size.x) / 2 - 180,
+        (GetScreenHeight() - text_size.y) / 2 - 130
+    };
+    DrawTextEx(mx_get_custom_font(), "FUNNY CHEF", text_pos, 200, 3, WHITE);
+    DrawCenteredButton("PLAY", game_config.font_size_header2 + 100,
+                       custom_colors.button_background_color, WHITE, button_rect);
+    return button_rect;
+}
 
 void mx_render_main_menu(t_game_textures *textures, bool *isExitPopupOpen) {
     Vector2 mouse = GetMousePosition();
-
-    int buttonX = (GetScreenWidth() - game_config.button_width) / 2 - 75;
-    int buttonY = (int)(GetScreenHeight() * 0.55) ;
-    Rectangle buttonRect = { buttonX, buttonY, 450, 150 };
-
     bool cursorChanged = false;
+    Rectangle button_rect = draw_play_button();
+    Rectangle gear_rect = mx_draw_settings_icon(textures);
+    Rectangle exit_button = draw_exit_button(textures->exit);
+    Rectangle dev_button = draw_dev_button();
 
-    int gearSize = 115;
-    Rectangle gearRect = { game_config.screen_width - gearSize - 30, 20, gearSize, gearSize };
-    DrawTexturePro(textures->settings, (Rectangle){ 0, 0, textures->settings.width, textures->settings.height }, gearRect, (Vector2){0, 0}, 0.0f, WHITE);
-
-    int textWidth = MeasureText("EXIT", game_config.font_size_paragraph + 50);
-    int button_height = 80;
-    int iconWidth = textures->exit.width - 10;
-    int iconHeight = textures->exit.height - 10;
-    int button_width = iconWidth + textWidth + 50;
-    Rectangle exitButton = { 30, 40, button_width, button_height };
-    Rectangle exitTextRect = { exitButton.x + textures->exit.width + 5, exitButton.y, textWidth, button_height };
-    Rectangle exitRect = { exitButton.x , exitButton.y + (button_height - iconHeight) / 2, iconWidth, iconHeight };
-    DrawTexturePro(textures->exit, (Rectangle){0, 0, textures->exit.width, textures->exit.height}, exitRect, (Vector2){0, 0}, 0.0f, WHITE);
-    Vector2 textPos1 = {exitTextRect.x, exitTextRect.y - 10};
-    DrawTextEx(mx_get_custom_font(), "EXIT", textPos1, game_config.font_size_paragraph + 70, 3, WHITE);
-
-    Vector2 textDev = MeasureTextEx(mx_get_custom_font(), "DEVELOPERS", game_config.font_size_paragraph + 50, 3);
-    Vector2 textPosDev = {
-        exitRect.x,
-        game_config.screen_height - textPos1.y - textDev.y - 10
-    };
-    DrawTextEx(mx_get_custom_font(), "DEVELOPERS", textPosDev, game_config.font_size_paragraph + 50, 3, WHITE);
-    Rectangle DevButton = { textPosDev.x, textPosDev.y, textDev.x, textDev.y };
-
-    Rectangle srcImageChef = { 0, 0, textures->chef.width, textures->chef.height };
-    Vector2 sizeImage = { 104 * 2, 194 * 2 };
-    Rectangle imageChef = { game_config.screen_width - sizeImage.x * 2, game_config.screen_height - sizeImage.y, sizeImage.x, sizeImage.y };
-
-    DrawTexturePro(textures->chef, srcImageChef, imageChef,
-                   (Vector2){0, 0}, 0.0f, WHITE);
-
+    draw_chef(textures->chef);
     if (!(*isExitPopupOpen)) {
-        if (CheckCollisionPointRec(mouse, buttonRect)) {
+        if (CheckCollisionPointRec(mouse, button_rect)) {
             SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
             cursorChanged = true;
             if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
@@ -131,8 +160,7 @@ void mx_render_main_menu(t_game_textures *textures, bool *isExitPopupOpen) {
                 SetMouseCursor(MOUSE_CURSOR_DEFAULT);
             }
         }
-
-        if (CheckCollisionPointRec(mouse, gearRect)) {
+        if (CheckCollisionPointRec(mouse, gear_rect)) {
             SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
             cursorChanged = true;
             if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
@@ -142,8 +170,7 @@ void mx_render_main_menu(t_game_textures *textures, bool *isExitPopupOpen) {
                 SetMouseCursor(MOUSE_CURSOR_DEFAULT);
             }
         }
-
-        if (CheckCollisionPointRec(mouse, exitButton)) {
+        if (CheckCollisionPointRec(mouse, exit_button)) {
             SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
             cursorChanged = true;
             if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
@@ -151,8 +178,7 @@ void mx_render_main_menu(t_game_textures *textures, bool *isExitPopupOpen) {
                 *isExitPopupOpen = true;
             }
         }
-
-        if (CheckCollisionPointRec(mouse, DevButton)) {
+        if (CheckCollisionPointRec(mouse, dev_button)) {
             SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
             cursorChanged = true;
             if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
@@ -162,16 +188,6 @@ void mx_render_main_menu(t_game_textures *textures, bool *isExitPopupOpen) {
             }
         }
     }
-
-    Vector2 textSize = MeasureTextEx(mx_get_custom_font(), "FUNNY CHEF", 140, 3);
-    Vector2 textPos = {
-        (GetScreenWidth() - textSize.x) / 2 - 180,
-        (GetScreenHeight() - textSize.y) / 2 - 130
-    };
-    DrawTextEx(mx_get_custom_font(), "FUNNY CHEF", textPos, 200, 3, WHITE);
-
-    DrawCenteredButton("PLAY", game_config.font_size_header2 + 100, custom_colors.button_background_color, WHITE, buttonRect);
-
     if (*isExitPopupOpen) {
         DrawExitConfirmation(isExitPopupOpen);
     }
