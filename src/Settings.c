@@ -1,6 +1,6 @@
 #include "../inc/header.h"
 
-void resetGameProgress(Level_stars *gameState) {
+void resetGameProgress(t_level_stars *gameState) {
     char filename[50];
 
     for (int i = 0; i < 3; i++) {  
@@ -11,19 +11,19 @@ void resetGameProgress(Level_stars *gameState) {
     printf("INFO: All best time files deleted\n");
 
     for (int i = 0; i < 3; i++) { 
-        gameState->levelStars[i] = 0;
+        gameState->level_stars[i] = 0;
     }
 
     printf("INFO: Deleting progress and resetting stars\n");
 }
 
-void renderSettings(GameTextures *textures, float *volumeMusic, float *volumeEffects, Level_stars *gameState) {
+void mx_render_settings(t_game_textures *textures, float *volumeMusic, float *volumeEffects, t_level_stars *gameState) {
     int sliderWidth = 500;
     int sliderHeight = 30;
     int knobSize = 30;
 
-    int centerX = gameConfig.screenWidth / 2;
-    int centerY = gameConfig.screenHeight / 2;
+    int centerX = game_config.screen_width / 2;
+    int centerY = game_config.screen_height / 2;
 
     Rectangle sliderBarMusic = { centerX - sliderWidth / 2, centerY - 100 - 50, sliderWidth, sliderHeight };
     Rectangle sliderBarEffects = { centerX - sliderWidth / 2, centerY + 40 - 30, sliderWidth, sliderHeight };
@@ -57,7 +57,7 @@ void renderSettings(GameTextures *textures, float *volumeMusic, float *volumeEff
             if (*volumeMusic > 1.0f) {
                 *volumeMusic = 1.0f;
             }
-            UpdateMusicVolume(*volumeMusic);
+            mx_update_music_volume(*volumeMusic);
         }
         if (CheckCollisionPointRec(mouse, sliderBarEffects)) {
             cursorChanged = true;
@@ -68,7 +68,7 @@ void renderSettings(GameTextures *textures, float *volumeMusic, float *volumeEff
             if (*volumeEffects > 1.0f) {
                 *volumeEffects = 1.0f;
             }
-            SetEffectsVolume(*volumeEffects);
+            mx_set_effects_volume(*volumeEffects);
         }
     }
     if (cursorChanged) {
@@ -87,11 +87,11 @@ void renderSettings(GameTextures *textures, float *volumeMusic, float *volumeEff
     Rectangle filledBarEffects = { sliderBarEffects.x, sliderBarEffects.y, (*volumeEffects) * sliderWidth, sliderHeight };
 
     DrawRectangleRounded(sliderBarMusic, cornerRadius, segments, WHITE);
-    DrawRectangleRounded(filledBarMusic, cornerRadius, segments, customColors.musicColor);
-    DrawCircleV((Vector2){sliderKnobMusic.x + knobSize / 2, sliderKnobMusic.y + knobSize / 2}, knobSize * 0.65, customColors.sliderColor);
+    DrawRectangleRounded(filledBarMusic, cornerRadius, segments, custom_colors.music_color);
+    DrawCircleV((Vector2){sliderKnobMusic.x + knobSize / 2, sliderKnobMusic.y + knobSize / 2}, knobSize * 0.65, custom_colors.slider_color);
     DrawRectangleRounded(sliderBarEffects, cornerRadius, segments, WHITE);
-    DrawRectangleRounded(filledBarEffects, cornerRadius, segments, customColors.musicColor);
-    DrawCircleV((Vector2){sliderKnobEffects.x + knobSize / 2, sliderKnobEffects.y + knobSize / 2}, knobSize * 0.65, customColors.sliderColor);
+    DrawRectangleRounded(filledBarEffects, cornerRadius, segments, custom_colors.music_color);
+    DrawCircleV((Vector2){sliderKnobEffects.x + knobSize / 2, sliderKnobEffects.y + knobSize / 2}, knobSize * 0.65, custom_colors.slider_color);
 
     if (sliderKnobMusic.x <= sliderBarMusic.x) {
         DrawTexturePro(textures->music_off, (Rectangle){0, 0, textures->music_off.width, textures->music_off.height}, iconMusicRect, (Vector2){0, 0}, 0.0f, WHITE);
@@ -107,61 +107,61 @@ void renderSettings(GameTextures *textures, float *volumeMusic, float *volumeEff
         DrawTexturePro(textures->volume_on, (Rectangle){0, 0, textures->volume_on.width, textures->volume_on.height}, iconEffectsRect, (Vector2){0, 0}, 0.0f, WHITE);
     }
 
-    float textWidthMusic = MeasureText("Music Volume", gameConfig.fontSizeParagraph + 20);
-    float textWidthEffects = MeasureText("Effects Volume", gameConfig.fontSizeParagraph + 20);
+    float textWidthMusic = MeasureText("Music Volume", game_config.font_size_paragraph + 20);
+    float textWidthEffects = MeasureText("Effects Volume", game_config.font_size_paragraph + 20);
     Vector2 textPos_music = {(GetScreenWidth() - textWidthMusic) / 2 - 80, sliderBarMusic.y - 80};
-    DrawTextEx(GetCustomFont(), "Music Volume", textPos_music, gameConfig.fontSizeParagraph + 40, 3, WHITE);
+    DrawTextEx(mx_get_custom_font(), "Music Volume", textPos_music, game_config.font_size_paragraph + 40, 3, WHITE);
     Vector2 textPos_effects = {(GetScreenWidth() - textWidthEffects) / 2 - 80, sliderBarEffects.y - 80};
-    DrawTextEx(GetCustomFont(), "Effects Volume", textPos_effects, gameConfig.fontSizeParagraph + 40, 3, WHITE);
+    DrawTextEx(mx_get_custom_font(), "Effects Volume", textPos_effects, game_config.font_size_paragraph + 40, 3, WHITE);
 
 
-    int textWidth = MeasureText("BACK", gameConfig.fontSizeParagraph + 50);
-    int buttonHeight = 80;
+    int textWidth = MeasureText("BACK", game_config.font_size_paragraph + 50);
+    int button_height = 80;
     int iconWidth = textures->exit.width ;
     int iconHeight = textures->exit.height ;
-    int buttonWidth = iconWidth + textWidth + 80;
-    Rectangle backButton = { 30, 40, buttonWidth, buttonHeight };
-    Rectangle backTextRect = { backButton.x + textures->arrow.width + 5, backButton.y, textWidth, buttonHeight };
-    Rectangle backRect = { backButton.x , backButton.y + (buttonHeight - iconHeight) / 2, iconWidth, iconHeight };
+    int button_width = iconWidth + textWidth + 80;
+    Rectangle backButton = { 30, 40, button_width, button_height };
+    Rectangle backTextRect = { backButton.x + textures->arrow.width + 5, backButton.y, textWidth, button_height };
+    Rectangle backRect = { backButton.x , backButton.y + (button_height - iconHeight) / 2, iconWidth, iconHeight };
     DrawTexturePro(textures->arrow, (Rectangle){0, 0, textures->arrow.width, textures->arrow.height}, backRect, (Vector2){0, 0}, 0.0f, WHITE);
     Vector2 textPos1 = { backTextRect.x, backTextRect.y - 10};
-    DrawTextEx(GetCustomFont(), "BACK", textPos1, gameConfig.fontSizeParagraph + 70, 3, WHITE);
+    DrawTextEx(mx_get_custom_font(), "BACK", textPos1, game_config.font_size_paragraph + 70, 3, WHITE);
 
 
-    int buttonX2 = (1600 - (MeasureText("DELETE PROGRESS", gameConfig.fontSizeParagraph + 20) + iconSize + 10)) / 2 - 90;
+    int buttonX2 = (1600 - (MeasureText("DELETE PROGRESS", game_config.font_size_paragraph + 20) + iconSize + 10)) / 2 - 90;
     int buttonY2 = sliderBarEffects.y + 150;
     int textOffsetX2 = buttonX2 + iconSize + 10;
-    Rectangle deleteButton = { buttonX2, buttonY2, MeasureText("DELETE PROGRESS", gameConfig.fontSizeParagraph + 31) + iconSize + 10, 50 };
+    Rectangle deleteButton = { buttonX2, buttonY2, MeasureText("DELETE PROGRESS", game_config.font_size_paragraph + 31) + iconSize + 10, 50 };
     Rectangle deleteIconRect = { buttonX2, buttonY2 + (50 - iconSize) / 2 + 10, iconSize, iconSize };
-    Rectangle deleteTextRect = { textOffsetX2, buttonY2 + (50 - gameConfig.fontSizeParagraph + 15) / 2 - 5, MeasureText("DELETE PROGRESS", gameConfig.fontSizeParagraph + 20), 50 };
+    Rectangle deleteTextRect = { textOffsetX2, buttonY2 + (50 - game_config.font_size_paragraph + 15) / 2 - 5, MeasureText("DELETE PROGRESS", game_config.font_size_paragraph + 20), 50 };
     DrawTexturePro(textures->del_texture, (Rectangle){0, 0, textures->del_texture.width, textures->del_texture.height}, deleteIconRect, (Vector2){0, 0}, 0.0f, WHITE);
     Vector2 textPos3 = {
         deleteTextRect.x,
         deleteTextRect.y - 10
     };
-    DrawTextEx(GetCustomFont(), "DELETE PROGRESS", textPos3, gameConfig.fontSizeParagraph + 30, 3, customColors.redColor);
+    DrawTextEx(mx_get_custom_font(), "DELETE PROGRESS", textPos3, game_config.font_size_paragraph + 30, 3, custom_colors.red_color);
 
 
     int buttonX1 = 1200;
     int buttonY1 = 780;
     iconSize += 20;
     const char* buttonText = "GUIDE";
-    int textWidth2 = MeasureText(buttonText, gameConfig.fontSizeHeader2 + 30) + 45;
+    int textWidth2 = MeasureText(buttonText, game_config.font_size_header2 + 30) + 45;
     int buttonWidth2 = iconSize + textWidth2 + 55;
     int textOffsetX = buttonX1 + iconSize + 10;
     Rectangle guideButton = { buttonX1, buttonY1, buttonWidth2, 50 };
     Rectangle guideIconRect = { buttonX1, buttonY1 + (50 - iconSize) / 2 + 20, iconSize, iconSize };
-    Rectangle guideTextRect = { textOffsetX, buttonY1 + (50 - gameConfig.fontSizeHeader2 + 30) / 2 - 5, textWidth2, 50 };
+    Rectangle guideTextRect = { textOffsetX, buttonY1 + (50 - game_config.font_size_header2 + 30) / 2 - 5, textWidth2, 50 };
     DrawTexturePro(textures->guide, (Rectangle){0, 0, textures->guide.width, textures->guide.height}, guideIconRect, (Vector2){0, 0}, 0.0f, WHITE);
     Vector2 textPos2 = { guideTextRect.x, guideTextRect.y - 20 };
-    DrawTextEx(GetCustomFont(), buttonText, textPos2, gameConfig.fontSizeParagraph + 70, 3, WHITE);
+    DrawTextEx(mx_get_custom_font(), buttonText, textPos2, game_config.font_size_paragraph + 70, 3, WHITE);
 
     if (CheckCollisionPointRec(mouse, backButton)) {
         SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
         cursorChanged = true;
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-            PlaySoundEffect(buttonClick);
-            currentState = previousState;
+            mx_play_sound_effect(button_click);
+            current_state = previous_state;
             SetMouseCursor(MOUSE_CURSOR_DEFAULT);
         }
     }
@@ -170,7 +170,7 @@ void renderSettings(GameTextures *textures, float *volumeMusic, float *volumeEff
         SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
         cursorChanged = true;
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-            PlaySoundEffect(buttonClick);
+            mx_play_sound_effect(button_click);
             resetGameProgress(gameState);
         }
     }
@@ -178,10 +178,10 @@ void renderSettings(GameTextures *textures, float *volumeMusic, float *volumeEff
     if (CheckCollisionPointRec(mouse, guideButton)) {
         SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
         cursorChanged = true;
-        previousGuideState = currentState;
+        previous_guide_state = current_state;
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-            PlaySoundEffect(buttonClick);
-            currentState = GUIDE_PAGE1;
+            mx_play_sound_effect(button_click);
+            current_state = GUIDE_PAGE1;
             SetMouseCursor(MOUSE_CURSOR_DEFAULT);
         }
     }

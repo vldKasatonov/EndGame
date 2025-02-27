@@ -1,12 +1,12 @@
 #include "../inc/header.h"
 
-GameScreen currentState = MAIN_MENU;
-GameScreen previousState = MAIN_MENU;
-GameScreen previousGuideState = SETTINGS;
+t_game_screen current_state = MAIN_MENU;
+t_game_screen previous_state = MAIN_MENU;
+t_game_screen previous_guide_state = SETTINGS;
 
-Inventory hotbar;
-Queue queue;
-Level level;
-int surfaceCount;
-Surface surfaces[34];
+t_inventory hotbar;
+t_queue queue;
+t_level level;
+int surface_count;
+t_surface surfaces[34];
 

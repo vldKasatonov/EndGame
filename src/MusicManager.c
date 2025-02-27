@@ -6,7 +6,7 @@ static bool musicLoaded = false;
 static bool musicPlaying = false;
 static bool gameplayMusicPlaying = false;
 
-void InitGameAudio(void) {
+void mx_init_game_audio(void) {
     InitAudioDevice();
     menuMusic = LoadMusicStream("resource/audio/music/menu_music.wav");
     gameplayMusic = LoadMusicStream("resource/audio/music/gameplay_music.mp3");  
@@ -15,25 +15,25 @@ void InitGameAudio(void) {
     musicLoaded = true;
 }
 
-void UpdateGameAudio(void) {
+void mx_updat_game_audio(void) {
     if (musicLoaded) {
         if (musicPlaying) UpdateMusicStream(menuMusic);
         if (gameplayMusicPlaying) UpdateMusicStream(gameplayMusic);
     }
 }
 
-void UpdateMenuMusic(void) {
+void mx_update_menu_music(void) {
     if (!musicLoaded) return;
 
-    if (currentState == MAIN_MENU ||
-        currentState == DEVELOPERS ||
-        currentState == LEVEL_MENU ||
-        currentState == LEVEL_MENU2 ||
-        currentState == SETTINGS || 
-        currentState == GUIDE_PAGE1 ||
-        currentState == GUIDE_PAGE2 ||
-        currentState == GUIDE_PAGE3 || 
-        currentState == SELECT_PLAYER) {
+    if (current_state == MAIN_MENU ||
+        current_state == DEVELOPERS ||
+        current_state == LEVEL_MENU ||
+        current_state == LEVEL_MENU2 ||
+        current_state == SETTINGS || 
+        current_state == GUIDE_PAGE1 ||
+        current_state == GUIDE_PAGE2 ||
+        current_state == GUIDE_PAGE3 || 
+        current_state == SELECT_PLAYER) {
 
         if (!musicPlaying) {
             StopMusicStream(gameplayMusic);
@@ -50,10 +50,10 @@ void UpdateMenuMusic(void) {
     }
 }
 
-void UpdateGameplayMusic(void) {
+void mx_update_gameplay_music(void) {
     if (!musicLoaded) return;
 
-    if (currentState == GAMEPLAY || currentState == GAMEPLAY_SETTINGS) {
+    if (current_state == GAMEPLAY || current_state == GAMEPLAY_SETTINGS) {
         if (!gameplayMusicPlaying) {
             StopMusicStream(menuMusic);
             musicPlaying = false;
@@ -69,14 +69,14 @@ void UpdateGameplayMusic(void) {
     }
 }
 
-void UpdateMusicVolume(float volume) {
+void mx_update_music_volume(float volume) {
     if (musicLoaded) {
         SetMusicVolume(menuMusic, volume);
         SetMusicVolume(gameplayMusic, volume); 
     }
 }
 
-void UnloadGameAudio(void) {
+void mx_unload_game_audio(void) {
     if (musicLoaded) {
         StopMusicStream(menuMusic);
         StopMusicStream(gameplayMusic);

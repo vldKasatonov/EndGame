@@ -1,21 +1,21 @@
 #include "../inc/header.h"
 
 static void drawTextDev(char *text, int space) {
-    Vector2 textSize = MeasureTextEx(GetCustomFont(), text, 70, 3);
+    Vector2 textSize = MeasureTextEx(mx_get_custom_font(), text, 70, 3);
     Vector2 textPos = {
         (GetScreenWidth() - textSize.x) / 2,
         (GetScreenHeight() - textSize.y) / 3
     };
-    DrawTextEx(GetCustomFont(), text, (Vector2){textPos.x, textPos.y + space}, 70, 3, WHITE);
+    DrawTextEx(mx_get_custom_font(), text, (Vector2){textPos.x, textPos.y + space}, 70, 3, WHITE);
 }
 
-void renderDevelopers(GameTextures *textures) {
-    Vector2 textSizeHeader = MeasureTextEx(GetCustomFont(), "OUR TEAM:", 100, 3);
+void mx_render_developers(t_game_textures *textures) {
+    Vector2 textSizeHeader = MeasureTextEx(mx_get_custom_font(), "OUR TEAM:", 100, 3);
     Vector2 textPosHeader = {
-        (gameConfig.screenWidth - textSizeHeader.x) / 2,
-        (gameConfig.screenHeight - textSizeHeader.y) / 6
+        (game_config.screen_width - textSizeHeader.x) / 2,
+        (game_config.screen_height - textSizeHeader.y) / 6
     };
-    DrawTextEx(GetCustomFont(), "OUR TEAM:", textPosHeader, 100, 3, WHITE);
+    DrawTextEx(mx_get_custom_font(), "OUR TEAM:", textPosHeader, 100, 3, WHITE);
     int space = 90;
     drawTextDev("Daniil Burlachenko", 0);
     drawTextDev("Albina Milshyna", space * 1);
@@ -24,16 +24,16 @@ void renderDevelopers(GameTextures *textures) {
     drawTextDev("Viktoriia Shaforostova", space * 4);
     drawTextDev("Vladyslav Kasatonov", space * 5);
 
-    int textWidth = MeasureText("BACK", gameConfig.fontSizeParagraph + 50);
-    int buttonHeight = 80;
+    int textWidth = MeasureText("BACK", game_config.font_size_paragraph + 50);
+    int button_height = 80;
     int iconWidth = textures->exit.width ;
     int iconHeight = textures->exit.height ;
-    int buttonWidth = iconWidth + textWidth + 80;
-    Rectangle backButton = { 30, 40, buttonWidth, buttonHeight };
+    int button_width = iconWidth + textWidth + 80;
+    Rectangle backButton = { 30, 40, button_width, button_height };
     Rectangle backTextRect = { backButton.x + textures->arrow.width + 5,
-                      backButton.y, textWidth, buttonHeight };
+                      backButton.y, textWidth, button_height };
 
-    Rectangle backRect = { backButton.x , backButton.y + (buttonHeight -
+    Rectangle backRect = { backButton.x , backButton.y + (button_height -
                   iconHeight) / 2, iconWidth, iconHeight };
 
     DrawTexturePro(textures->arrow, (Rectangle){0, 0, textures->arrow.width,
@@ -41,7 +41,7 @@ void renderDevelopers(GameTextures *textures) {
                0.0f, WHITE);
 
     Vector2 textPos1 = { backTextRect.x, backTextRect.y - 10};
-    DrawTextEx(GetCustomFont(), "BACK", textPos1, gameConfig.fontSizeParagraph + 70, 3, WHITE);
+    DrawTextEx(mx_get_custom_font(), "BACK", textPos1, game_config.font_size_paragraph + 70, 3, WHITE);
 
     Vector2 mouse = GetMousePosition();
     bool cursorChanged = false;
@@ -50,8 +50,8 @@ void renderDevelopers(GameTextures *textures) {
         SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
         cursorChanged = true;
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-            PlaySoundEffect(buttonClick);
-            currentState = MAIN_MENU;
+            mx_play_sound_effect(button_click);
+            current_state = MAIN_MENU;
             SetMouseCursor(MOUSE_CURSOR_DEFAULT);
         }
     }

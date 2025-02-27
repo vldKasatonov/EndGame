@@ -1,28 +1,28 @@
 #include "../inc/header.h"
 
-void drawStars_gameplay(int space, double elapsedTime, GameTextures *textures, Vector2 circle) {
+void mx_draw_stars_gameplay(int space, double elapsedTime, t_game_textures *textures, Vector2 circle) {
     Rectangle starRec = { 225, 390, 75, 75 };
     Rectangle srcStar = { 0, 0, textures->star.width, textures->star.height };
 
     Color starColors[3] = {
-        customColors.nonactiveStarColor,
-        customColors.nonactiveStarColor,
-        customColors.nonactiveStarColor
+        custom_colors.nonactive_star_color,
+        custom_colors.nonactive_star_color,
+        custom_colors.nonactive_star_color
     };
 
     if (elapsedTime > 1.0) {
         if (elapsedTime <= 120.0) {
-            starColors[0] = customColors.activeStarColor;
-            starColors[1] = customColors.activeStarColor;
-            starColors[2] = customColors.activeStarColor;
+            starColors[0] = custom_colors.active_star_color;
+            starColors[1] = custom_colors.active_star_color;
+            starColors[2] = custom_colors.active_star_color;
         } else if (elapsedTime <= 180.0) {
-            starColors[0] = customColors.activeStarColor;
-            starColors[1] = customColors.activeStarColor;
-            starColors[2] = customColors.nonactiveStarColor;
+            starColors[0] = custom_colors.active_star_color;
+            starColors[1] = custom_colors.active_star_color;
+            starColors[2] = custom_colors.nonactive_star_color;
         } else if (elapsedTime <= 300.0) {
-            starColors[0] = customColors.activeStarColor;
-            starColors[1] = customColors.nonactiveStarColor;
-            starColors[2] = customColors.nonactiveStarColor;
+            starColors[0] = custom_colors.active_star_color;
+            starColors[1] = custom_colors.nonactive_star_color;
+            starColors[2] = custom_colors.nonactive_star_color;
         }
     }
     for (int i = 0; i < 3; ++i) {
@@ -32,8 +32,8 @@ void drawStars_gameplay(int space, double elapsedTime, GameTextures *textures, V
     }
 }
 
-void DisableGameplayInput(bool isPopupOpen) {
-    if (currentState == GAMEPLAY && isPopupOpen) {
+void mx_disable_gameplay_input(bool isPopupOpen) {
+    if (current_state == GAMEPLAY && isPopupOpen) {
         if (IsKeyPressed(KEY_SPACE) ||
             IsKeyPressed(KEY_W) ||
             IsKeyPressed(KEY_A) ||
@@ -47,7 +47,7 @@ void DisableGameplayInput(bool isPopupOpen) {
     }
 }
 
-void DrawLevelSucsses(bool *isExitPopupOpen, GameTextures *textures, int *servedCounter) {
+void mx_draw_level_sucsses(bool *isExitPopupOpen, t_game_textures *textures, int *servedCounter) {
     int popupWidth = 900;
     int popupHeight = 500;
     Rectangle popupRect = {
@@ -57,46 +57,46 @@ void DrawLevelSucsses(bool *isExitPopupOpen, GameTextures *textures, int *served
         popupHeight
     };
 
-    DrawRectangleRounded(popupRect, 0.5f, 10, customColors.buttonBackgroundColor);
+    DrawRectangleRounded(popupRect, 0.5f, 10, custom_colors.button_background_color);
     DrawRectangleRoundedLinesEx(popupRect, 0.5f, 10, 5, WHITE);
 
-    Vector2 textSize = MeasureTextEx(GetCustomFont(), "Congratulations!", 70, 3);
+    Vector2 textSize = MeasureTextEx(mx_get_custom_font(), "Congratulations!", 70, 3);
     Vector2 textPos = {
         popupRect.x + (popupRect.width - textSize.x) / 2,
         popupRect.y + 60
     };
-    DrawTextEx(GetCustomFont(), "Congratulations!", textPos, 70, 3, WHITE);
+    DrawTextEx(mx_get_custom_font(), "Congratulations!", textPos, 70, 3, WHITE);
 
-    double elapsedTime = GetElapsedTime();
+    double elapsedTime = mx_get_elapsed_time();
     Vector2 popupCenter = { popupRect.x + popupWidth / 2 - 130 , popupRect.y + popupHeight / 2 - 90};
     int space = 10;
-    drawStars_gameplay(space, elapsedTime, textures, popupCenter);
+    mx_draw_stars_gameplay(space, elapsedTime, textures, popupCenter);
 
     int minutes = (int)(elapsedTime / 60);
     int seconds = (int)(elapsedTime) % 60;
     char yourTime[10];
     snprintf(yourTime, sizeof(yourTime), "%02d:%02d", minutes, seconds);
-    Vector2 timeTextSize = MeasureTextEx(GetCustomFont(), "Your time", 50, 3);
+    Vector2 timeTextSize = MeasureTextEx(mx_get_custom_font(), "Your time", 50, 3);
     Vector2 timeTextPos = {
         popupRect.x + (popupRect.width - timeTextSize.x) / 2,
         popupRect.y + 260
     };
-    DrawTextEx(GetCustomFont(), "Your time", timeTextPos, 50, 3, WHITE);
-    Vector2 yourTimeSize = MeasureTextEx(GetCustomFont(), yourTime, 50, 3);
+    DrawTextEx(mx_get_custom_font(), "Your time", timeTextPos, 50, 3, WHITE);
+    Vector2 yourTimeSize = MeasureTextEx(mx_get_custom_font(), yourTime, 50, 3);
     Vector2 yourTimePos = {
         popupRect.x + (popupRect.width - yourTimeSize.x) / 2,
         popupRect.y + 320
     };
-    DrawTextEx(GetCustomFont(), yourTime, yourTimePos, 50, 3, WHITE);
+    DrawTextEx(mx_get_custom_font(), yourTime, yourTimePos, 50, 3, WHITE);
 
     Rectangle okeyButton = { popupRect.x + (popupRect.width - 150) / 2, popupRect.y + popupHeight - 100, 150, 60 };
     DrawRectangleRounded(okeyButton, 0.5f, 10, GREEN);
-    Vector2 okeyTextSize = MeasureTextEx(GetCustomFont(), "OK", 40, 3);
+    Vector2 okeyTextSize = MeasureTextEx(mx_get_custom_font(), "OK", 40, 3);
     Vector2 okeyTextPos = {
         okeyButton.x + (okeyButton.width - okeyTextSize.x) / 2,
         okeyButton.y + (okeyButton.height - okeyTextSize.y) / 2
     };
-    DrawTextEx(GetCustomFont(), "OK", okeyTextPos, 40, 3, WHITE);
+    DrawTextEx(mx_get_custom_font(), "OK", okeyTextPos, 40, 3, WHITE);
 
     Vector2 mouse = GetMousePosition();
     bool cursorChanged = false;
@@ -105,11 +105,11 @@ void DrawLevelSucsses(bool *isExitPopupOpen, GameTextures *textures, int *served
         cursorChanged = true;
 
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-            PlaySoundEffect(buttonClick);
-            currentState = LEVEL_MENU;
+            mx_play_sound_effect(button_click);
+            current_state = LEVEL_MENU;
             *isExitPopupOpen = false;
-            SaveBestTime();
-            ResumeGameTimer();
+            mx_save_best_time();
+            mx_resume_game_timer();
             *servedCounter = 0;
         }
     }
@@ -119,14 +119,14 @@ void DrawLevelSucsses(bool *isExitPopupOpen, GameTextures *textures, int *served
     }
 }
 
-void updateLevelStars(Level_stars *gameState, int level, int stars) {
-    if (level >= 0 && level < NUM_LEVELS) {
-        gameState->levelStars[level] = stars;
+void mx_update_level_stars(t_level_stars *gameState, int level, int stars) {
+    if (level >= 0 && level < MX_NUM_LEVELS) {
+        gameState->level_stars[level] = stars;
     }
 }
 
-int calculateStarsForLevel(void) {
-    double bestTime = GetBestTime();
+int mx_calculate_stars_for_level(void) {
+    double bestTime = mx_get_best_time();
     int stars = 0;
 
     if (bestTime < 120) {

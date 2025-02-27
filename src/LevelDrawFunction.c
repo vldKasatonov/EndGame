@@ -1,24 +1,24 @@
 #include "../inc/header.h"
 
-void drawStars(int space, int star, GameTextures *textures, Vector2 circle) {
+void mx_draw_stars(int space, int star, t_game_textures *textures, Vector2 circle) {
     Rectangle starRec = { 225, 390, 75, 75 };
     Rectangle srcStar = { 0, 0, textures->star.width,
     		   	 textures->star.height };
-    Color star1 = customColors.nonactiveStarColor;
-    Color star2 = customColors.nonactiveStarColor;
-    Color star3 = customColors.nonactiveStarColor;
+    Color star1 = custom_colors.nonactive_star_color;
+    Color star2 = custom_colors.nonactive_star_color;
+    Color star3 = custom_colors.nonactive_star_color;
     switch(star) {
         case 1:
-            star1 = customColors.activeStarColor;
+            star1 = custom_colors.active_star_color;
             break;
         case 2:
-            star1 = customColors.activeStarColor;
-            star2 = customColors.activeStarColor;
+            star1 = custom_colors.active_star_color;
+            star2 = custom_colors.active_star_color;
             break;
         case 3:
-            star1 = customColors.activeStarColor;
-            star2 = customColors.activeStarColor;
-            star3 = customColors.activeStarColor;
+            star1 = custom_colors.active_star_color;
+            star2 = custom_colors.active_star_color;
+            star3 = custom_colors.active_star_color;
             break;
         default: 
             break;
@@ -36,9 +36,9 @@ void drawStars(int space, int star, GameTextures *textures, Vector2 circle) {
     		   {0, 0}, 0.0f, star3);
 }
 
-void drawText(int space, Rectangle levelRec, Vector2 circle, char *level, char *time) {
-    int textTimeWidth = MeasureText("00:00", gameConfig.fontSizeParagraph + 30);
-    int textLevelWidth = MeasureText(level, gameConfig.fontSizeParagraph + 20);
+void mx_draw_text(int space, Rectangle levelRec, Vector2 circle, char *level, char *time) {
+    int textTimeWidth = MeasureText("00:00", game_config.font_size_paragraph + 30);
+    int textLevelWidth = MeasureText(level, game_config.font_size_paragraph + 20);
     Vector2 textLevelPos = {
         levelRec.x + 195 - textLevelWidth / 2,
         levelRec.y + levelRec.height * 0.62
@@ -51,21 +51,21 @@ void drawText(int space, Rectangle levelRec, Vector2 circle, char *level, char *
         circle.x - textTimeWidth / 2 - 5,
         levelRec.y + levelRec.height * 0.83
     };	       
-    DrawTextEx(GetCustomFont(), level, (Vector2)
+    DrawTextEx(mx_get_custom_font(), level, (Vector2)
     	       { textLevelPos.x + space, textLevelPos.y },
-    	       gameConfig.fontSizeParagraph + 20, 3, WHITE); 
+    	       game_config.font_size_paragraph + 20, 3, WHITE); 
     	       
-    DrawTextEx(GetCustomFont(), "The best score", (Vector2)
+    DrawTextEx(mx_get_custom_font(), "The best score", (Vector2)
     	       { textPos.x + space, textPos.y },
-    	       gameConfig.fontSizeParagraph + 20, 2, WHITE);
+    	       game_config.font_size_paragraph + 20, 2, WHITE);
     	       
-    DrawTextEx(GetCustomFont(), time, (Vector2)
+    DrawTextEx(mx_get_custom_font(), time, (Vector2)
     	       { textTimePos.x + space, textTimePos.y },
-    	       gameConfig.fontSizeParagraph + 20, 3, WHITE);
+    	       game_config.font_size_paragraph + 20, 3, WHITE);
 }
 
-void drawLevel(int space, int star,
-		      GameTextures *textures, Texture2D map_image, Vector2 circle) {    
+void mx_draw_level(int space, int star,
+		      t_game_textures *textures, Texture2D map_image, Vector2 circle) {    
     
     float mainCorner = 0.3f;
     float smallCorner = 0.52f;
@@ -76,7 +76,7 @@ void drawLevel(int space, int star,
     DrawRectangleRounded((Rectangle){ mainRec.x + space, mainRec.y,
     				      mainRec.width, mainRec.height },
     				      mainCorner, segments,
-    				      customColors.levelRectangleColor);
+    				      custom_colors.level_rectangle_color);
     Rectangle srcImage = { 0, 0, map_image.width, map_image.height };
     
     DrawTexturePro(map_image, srcImage, (Rectangle){ smallRec.x
@@ -85,12 +85,12 @@ void drawLevel(int space, int star,
     		   
     DrawRectangleRounded((Rectangle){ smallRec.x + space, smallRec.y,
     				      smallRec.width, smallRec.height },
-    				      smallCorner, segments, customColors.tonedPreviewColor);
+    				      smallCorner, segments, custom_colors.tonedreview_color);
     
     DrawCircleV((Vector2) { circle.x + space, circle.y }, 50,
-    			    customColors.circleColor);
+    			    custom_colors.circle_color);
     DrawCircleLinesV((Vector2) { circle.x + space, circle.y }, 50,
-    				 customColors.circleStrokeColor);
+    				 custom_colors.circle_stroke_color);
     
     Rectangle playButton = { circle.x - 18, circle.y - 25, 45, 50 };
     Rectangle srcPlayButton = { 0, 0, textures->play_button.width,
@@ -101,14 +101,14 @@ void drawLevel(int space, int star,
     		   (Rectangle){ playButton.x + space, playButton.y,
     		   playButton.width, playButton.height },
     		   (Vector2){0, 0}, 0.0f, active_play);
-    drawStars(space, star, textures, circle);
+    mx_draw_stars(space, star, textures, circle);
 }
 
-void tonedRect (int space) {
+void mx_toned_rect (int space) {
 	Rectangle mainRec = { 150, 249, 400, 450 };
 	float mainCorner = 0.3f;
 	int segments = 10;
 	DrawRectangleRounded((Rectangle){ mainRec.x + space, mainRec.y,
 						  mainRec.width, mainRec.height },mainCorner,
-						  segments, customColors.nonactiveLevelColor);
+						  segments, custom_colors.nonactive_level_color);
 }

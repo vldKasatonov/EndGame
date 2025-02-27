@@ -2,12 +2,12 @@
 
 extern int currentLevel;
 
-static void resetPlayerData(Player* playerData) {
+static void resetPlayerData(t_player* playerData) {
     Vector2 pos = { 300, 350 };
     playerData->position = pos;
 }
 
-void renderLevelMenu(GameTextures* textures, Level_stars* gameState, Player* player) {
+void mx_render_level_menu(t_game_textures* textures, t_level_stars* gameState, t_player* player) {
     int space = 450;
     Vector2 circle = { 350, 475 };
     int radius = 50;
@@ -16,7 +16,7 @@ void renderLevelMenu(GameTextures* textures, Level_stars* gameState, Player* pla
     double bestTimes[3];
     for (int i = 0; i < 3; i++) {
         currentLevel = i;
-        LoadBestTime();    bestTimes[i] = GetBestTime();
+        mx_load_best_time();    bestTimes[i] = mx_get_best_time();
     }
     char bestTimeText[3][11];
     for (int i = 0; i < 3; i++) {
@@ -27,17 +27,17 @@ void renderLevelMenu(GameTextures* textures, Level_stars* gameState, Player* pla
             int bestMin = (int)bestTimes[i] / 60;
             int bestSec = (int)bestTimes[i] % 60;
             snprintf(bestTimeText[i], sizeof(bestTimeText[i]), "%02d:%02d", bestMin, bestSec);
-            int starsEarned = calculateStarsForLevel();
-            updateLevelStars(gameState, i, starsEarned);
+            int starsEarned = mx_calculate_stars_for_level();
+            mx_update_level_stars(gameState, i, starsEarned);
         }
     }
-    int level1Stars = gameState->levelStars[0];
-    int level2Stars = gameState->levelStars[1];
-    int level3Stars = gameState->levelStars[2];
+    int level1Stars = gameState->level_stars[0];
+    int level2Stars = gameState->level_stars[1];
+    int level3Stars = gameState->level_stars[2];
 
-    drawLevel(0, level1Stars, textures, textures->image1, circle);
-    drawLevel(space, level2Stars, textures, textures->image2, circle);
-    drawLevel(space * 2, level3Stars, textures, textures->image3, circle);
+    mx_draw_level(0, level1Stars, textures, textures->image1, circle);
+    mx_draw_level(space, level2Stars, textures, textures->image2, circle);
+    mx_draw_level(space * 2, level3Stars, textures, textures->image3, circle);
 
     Rectangle rightArrow = { 1525 - 30, circle.y - 30, 60, 60 };
     DrawTexturePro(textures->right_arrow, (Rectangle) {
@@ -45,22 +45,22 @@ void renderLevelMenu(GameTextures* textures, Level_stars* gameState, Player* pla
             textures->right_arrow.width, textures->right_arrow.height
     },
         rightArrow, (Vector2) { 0, 0 }, 0.0f, WHITE);
-    drawText(0, mainRec, circle, "LEVEL 1", bestTimeText[0]);
-    drawText(space, mainRec, circle, "LEVEL 2", bestTimeText[1]);    
-    drawText(space * 2, mainRec, circle, "LEVEL 3", bestTimeText[2]);
-    //tonedRect(space);
-    /*tonedRect(space * 2);*/
+    mx_draw_text(0, mainRec, circle, "LEVEL 1", bestTimeText[0]);
+    mx_draw_text(space, mainRec, circle, "LEVEL 2", bestTimeText[1]);    
+    mx_draw_text(space * 2, mainRec, circle, "LEVEL 3", bestTimeText[2]);
+    //mx_toned_rect(space);
+    /*mx_toned_rect(space * 2);*/
       
-    int textWidth = MeasureText("BACK", gameConfig.fontSizeParagraph + 50);
-    int buttonHeight = 80;
+    int textWidth = MeasureText("BACK", game_config.font_size_paragraph + 50);
+    int button_height = 80;
     int iconWidth = textures->exit.width ;
     int iconHeight = textures->exit.height ;
-    int buttonWidth = iconWidth + textWidth + 80;
-    Rectangle backButton = { 30, 40, buttonWidth, buttonHeight };
+    int button_width = iconWidth + textWidth + 80;
+    Rectangle backButton = { 30, 40, button_width, button_height };
     Rectangle backTextRect = { backButton.x + textures->arrow.width + 5,
-    			      backButton.y, textWidth, buttonHeight };
+    			      backButton.y, textWidth, button_height };
     			      
-    Rectangle backRect = { backButton.x , backButton.y + (buttonHeight -
+    Rectangle backRect = { backButton.x , backButton.y + (button_height -
     			  iconHeight) / 2, iconWidth, iconHeight };
     			  
     DrawTexturePro(textures->arrow, (Rectangle){0, 0, textures->arrow.width,
@@ -68,12 +68,12 @@ void renderLevelMenu(GameTextures* textures, Level_stars* gameState, Player* pla
     		   0.0f, WHITE);
     		   
     Vector2 textPos1 = { backTextRect.x, backTextRect.y - 10};
-    DrawTextEx(GetCustomFont(), "BACK", textPos1, gameConfig.fontSizeParagraph + 70, 3, WHITE);
+    DrawTextEx(mx_get_custom_font(), "BACK", textPos1, game_config.font_size_paragraph + 70, 3, WHITE);
     
     int gearSize = 115;
-    Rectangle gearRect = { gameConfig.screenWidth - gearSize - 30, 20, gearSize, gearSize };
-    DrawTexturePro(textures->gearTexture, (Rectangle){ 0, 0,
-    		   textures->gearTexture.width, textures->gearTexture.height },
+    Rectangle gearRect = { game_config.screen_width - gearSize - 30, 20, gearSize, gearSize };
+    DrawTexturePro(textures->settings, (Rectangle){ 0, 0,
+    		   textures->settings.width, textures->settings.height },
     		   gearRect, (Vector2){0, 0}, 0.0f, WHITE);
     
     Vector2 mouse = GetMousePosition();
@@ -83,9 +83,9 @@ void renderLevelMenu(GameTextures* textures, Level_stars* gameState, Player* pla
         SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
         cursorChanged = true;
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-            PlaySoundEffect(buttonClick);
-            previousState = currentState;
-            currentState = SETTINGS;
+            mx_play_sound_effect(button_click);
+            previous_state = current_state;
+            current_state = SETTINGS;
             SetMouseCursor(MOUSE_CURSOR_DEFAULT);
         }
     }  
@@ -93,8 +93,8 @@ void renderLevelMenu(GameTextures* textures, Level_stars* gameState, Player* pla
         SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
         cursorChanged = true;
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-            PlaySoundEffect(buttonClick);
-            currentState = SELECT_PLAYER;
+            mx_play_sound_effect(button_click);
+            current_state = SELECT_PLAYER;
             SetMouseCursor(MOUSE_CURSOR_DEFAULT);
         }
     }
@@ -102,19 +102,19 @@ void renderLevelMenu(GameTextures* textures, Level_stars* gameState, Player* pla
         SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
         cursorChanged = true;
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-            PlaySoundEffect(buttonClick);
+            mx_play_sound_effect(button_click);
             
             currentLevel = 0;
-            LoadBestTime();
-            StartGameTimer();
-            currentState = GAMEPLAY;
+            mx_load_best_time();
+            mx_start_game_timer();
+            current_state = GAMEPLAY;
 
             resetPlayerData(player);
-            initializeSurfaces(&levelData[0]);
-            initializeInventory(&hotbar);            //
-            initializeQueue(&queue);                 // gameplay initializers
-            initializeLevel(&levelData[0], &level);  //
-            levelNumber = 1;
+            mx_initialize_surfaces(&level_data[0]);
+            mx_initialize_inventory(&hotbar);            //
+            mx_initialize_queue(&queue);                 // gameplay initializers
+            mx_initialize_level(&level_data[0], &level);  //
+            level_number = 1;
 
             SetMouseCursor(MOUSE_CURSOR_DEFAULT);
         }
@@ -123,19 +123,19 @@ void renderLevelMenu(GameTextures* textures, Level_stars* gameState, Player* pla
         SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
         cursorChanged = true;
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-            PlaySoundEffect(buttonClick);
+            mx_play_sound_effect(button_click);
             
             currentLevel = 1;
-            LoadBestTime();
-            StartGameTimer();
-            currentState = GAMEPLAY;
+            mx_load_best_time();
+            mx_start_game_timer();
+            current_state = GAMEPLAY;
 
             resetPlayerData(player);
-            initializeSurfaces(&levelData[1]);
-            initializeInventory(&hotbar);            //
-            initializeQueue(&queue);                 // gameplay initializers
-            initializeLevel(&levelData[1], &level);  //
-            levelNumber = 2;
+            mx_initialize_surfaces(&level_data[1]);
+            mx_initialize_inventory(&hotbar);            //
+            mx_initialize_queue(&queue);                 // gameplay initializers
+            mx_initialize_level(&level_data[1], &level);  //
+            level_number = 2;
 
             SetMouseCursor(MOUSE_CURSOR_DEFAULT);
         }
@@ -144,19 +144,19 @@ void renderLevelMenu(GameTextures* textures, Level_stars* gameState, Player* pla
         SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
         cursorChanged = true;
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-            PlaySoundEffect(buttonClick);
+            mx_play_sound_effect(button_click);
             
             currentLevel = 2;
-            LoadBestTime();
-            StartGameTimer();
-            currentState = GAMEPLAY;
+            mx_load_best_time();
+            mx_start_game_timer();
+            current_state = GAMEPLAY;
 
             resetPlayerData(player);
-            initializeSurfaces(&levelData[2]);
-            initializeInventory(&hotbar);            //
-            initializeQueue(&queue);                 // gameplay initializers
-            initializeLevel(&levelData[2], &level);  //
-            levelNumber = 3;
+            mx_initialize_surfaces(&level_data[2]);
+            mx_initialize_inventory(&hotbar);            //
+            mx_initialize_queue(&queue);                 // gameplay initializers
+            mx_initialize_level(&level_data[2], &level);  //
+            level_number = 3;
 
             SetMouseCursor(MOUSE_CURSOR_DEFAULT);
         }
@@ -165,8 +165,8 @@ void renderLevelMenu(GameTextures* textures, Level_stars* gameState, Player* pla
         SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
         cursorChanged = true;
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-	    PlaySoundEffect(buttonClick);
-            currentState = LEVEL_MENU2;
+	    mx_play_sound_effect(button_click);
+            current_state = LEVEL_MENU2;
             SetMouseCursor(MOUSE_CURSOR_DEFAULT);
         }
     }

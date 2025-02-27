@@ -10,9 +10,9 @@ static bool timerRunning = false;
 static bool timerPaused = false;
 extern int currentLevel;  
 
-void StartGameTimer(void) {
+void mx_start_game_timer(void) {
     if (currentLevel < 0 || currentLevel >= MAX_LEVELS) {
-        printf("Error: Invalid level (%d) in StartGameTimer()\n", currentLevel);
+        printf("Error: Invalid level (%d) in mx_start_game_timer()\n", currentLevel);
         return;
     }
     startTime = GetTime();
@@ -20,28 +20,28 @@ void StartGameTimer(void) {
     timerPaused = false;
 }
 
-void PauseGameTimer(void) {
+void mx_pause_game_timer(void) {
     if (timerRunning && !timerPaused) {
         pausedTime = GetTime() - startTime;
         timerPaused = true;
     }
 }
 
-void ResumeGameTimer(void) {
+void mx_resume_game_timer(void) {
     if (timerRunning && timerPaused) {
         startTime = GetTime() - pausedTime;
         timerPaused = false;
     }
 }
 
-double GetElapsedTime(void) {
+double mx_get_elapsed_time(void) {
     if (!timerRunning) return 0.0;
     return timerPaused ? pausedTime : (GetTime() - startTime);
 }
 
-void LoadBestTime(void) {
+void mx_load_best_time(void) {
     if (currentLevel < 0 || currentLevel >= MAX_LEVELS) {
-        printf("Error: Invalid level (%d) in LoadBestTime()\n", currentLevel);
+        printf("Error: Invalid level (%d) in mx_load_best_time()\n", currentLevel);
         return;
     }
 
@@ -59,15 +59,15 @@ void LoadBestTime(void) {
     }
 }
 
-void SaveBestTime(void) {
+void mx_save_best_time(void) {
     if (!timerRunning) return;
 
     if (currentLevel < 0 || currentLevel >= MAX_LEVELS) {
-        printf("Error: Invalid level (%d) in SaveBestTime()\n", currentLevel);
+        printf("Error: Invalid level (%d) in mx_save_best_time()\n", currentLevel);
         return;
     }
 
-    double elapsedTime = GetElapsedTime();
+    double elapsedTime = mx_get_elapsed_time();
     timerRunning = false;
 
     if (bestTimes[currentLevel] < 0 || elapsedTime < bestTimes[currentLevel]) {
@@ -86,12 +86,12 @@ void SaveBestTime(void) {
     }
 }
 
-void ResetGameTimer(void) {
+void mx_reset_game_timer(void) {
     timerRunning = false;
     timerPaused = false;
 }
 
-double GetBestTime(void) {
+double mx_get_best_time(void) {
     if (currentLevel < 0 || currentLevel >= MAX_LEVELS) return -1.0;
     return bestTimes[currentLevel];
 }

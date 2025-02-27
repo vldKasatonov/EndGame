@@ -8,16 +8,16 @@
 #include <stdlib.h>
 #include <math.h>
 
-Font GetCustomFont(void);
-void UnloadCustomFont(void);
+Font mx_get_custom_font(void);
+void mx_unload_custom_font(void);
 
-#define NUM_LEVELS 3
-#define INVENTORY_SIZE 7
-#define MAX_QUEUE 3
-#define MAX_LEVEL_GUESTS 6
+#define MX_NUM_LEVELS 3
+#define MX_INVENTORY_SIZE 7
+#define MX_MAX_QUEUE 3
+#define MX_MAX_LEVEL_GUESTS 6
 
 // gamestate
-typedef enum GameScreen {
+typedef enum e_game_screen {
     MAIN_MENU = 0,
     SELECT_PLAYER,
     SETTINGS,
@@ -29,41 +29,41 @@ typedef enum GameScreen {
     GAMEPLAY,
     GAMEPLAY_SETTINGS,
     DEVELOPERS
-} GameScreen;
+} t_game_screen;
 
-typedef struct Level_stars {
-    int levelStars[NUM_LEVELS];
-} Level_stars;
+typedef struct s_level_stars {
+    int level_stars[MX_NUM_LEVELS];
+} t_level_stars;
 
-typedef struct GameConfig {
-    double screenWidth;
-    double screenHeight;
-    double buttonWidth;
-    double buttonHeight;
-    double fontSizeHeader1;
-    double fontSizeHeader2;
-    double fontSizeHeader3;
-    double fontSizeParagraph;
-} GameConfig;
+typedef struct s_game_config {
+    double screen_width;
+    double screen_height;
+    double button_width;
+    double button_height;
+    double font_size_header1;
+    double font_size_header2;
+    double font_size_header3;
+    double font_size_paragraph;
+} t_game_config;
 
-typedef struct CustomColors {
-    Color buttonBackgroundColor;
-    Color menuBackgroundColor;
-    Color musicColor;
-    Color sliderColor;
-    Color redColor;
-    Color levelRectangleColor;
-    Color circleColor;
-    Color circleStrokeColor;
-    Color nonactiveStarColor;
-    Color activeStarColor;
-    Color noneColor;
-    Color nonactiveLevelColor;
-    Color tonedPreviewColor;
-} CustomColors;
+typedef struct s_custom_colors {
+    Color button_background_color;
+    Color menu_background_color;
+    Color music_color;
+    Color slider_color;
+    Color red_color;
+    Color level_rectangle_color;
+    Color circle_color;
+    Color circle_stroke_color;
+    Color nonactive_star_color;
+    Color active_star_color;
+    Color none_color;
+    Color nonactive_level_color;
+    Color tonedreview_color;
+} t_custom_colors;
 
-typedef struct GameTextures {
-    Texture2D gearTexture;
+typedef struct s_game_textures {
+    Texture2D settings;
     Texture2D volume_on;
     Texture2D volume_on2;
     Texture2D music_on;
@@ -87,67 +87,67 @@ typedef struct GameTextures {
     Texture2D level_preview;
     Texture2D served_icon;
     Texture2D guest;
-    Texture2D reversedGuest;
-    Texture2D dirtyApple;
-    Texture2D washedApple;
-    Texture2D slicedApple;
+    Texture2D reversed_guest;
+    Texture2D dirty_apple;
+    Texture2D washed_apple;
+    Texture2D sliced_apple;
     Texture2D juice;
-    Texture2D dirtyPotato;
-    Texture2D washedPotato;
-    Texture2D slicedPotato;
-    Texture2D peeledPotato;
-    Texture2D friedPotato;
-    Texture2D dirtyCucumber;
-    Texture2D washedCucumber;
-    Texture2D slicedCucumber;
-    Texture2D dirtyTomato;
-    Texture2D washedTomato;
-    Texture2D slicedTomato;
+    Texture2D dirty_potato;
+    Texture2D washed_potato;
+    Texture2D sliced_potato;
+    Texture2D peeled_potato;
+    Texture2D fried_potato;
+    Texture2D dirty_cucumber;
+    Texture2D washed_cucumber;
+    Texture2D sliced_cucumber;
+    Texture2D dirty_tomato;
+    Texture2D washed_tomato;
+    Texture2D sliced_tomato;
     Texture2D salad;
-    Texture2D guideJuice;
-    Texture2D guidePotato;
-    Texture2D guideSalad;
+    Texture2D guide_juice;
+    Texture2D guide_potato;
+    Texture2D guide_salad;
     Texture2D image1;
     Texture2D image2;
     Texture2D map1;
     Texture2D map2;
     Texture2D cloud;
-    Texture2D fButton;
-} GameTextures;
+    Texture2D f_button;
+} t_game_textures;
 
-void LoadTextures(GameTextures *textures);
-void UnloadTextures(GameTextures *textures);
+void mx_load_textures(t_game_textures *textures);
+void mx_unload_textures(t_game_textures *textures);
 
 // gameplay
-typedef struct Player {
+typedef struct s_player {
     Vector2 position;
-} Player;
+} t_player;
 
-typedef struct PlayerConfig {
+typedef struct s_player_config {
     float speed;
-    float playerWidth;
-    float playerHeight;
-} PlayerConfig;
+    float player_width;
+    float player_height;
+} t_player_config;
 
 typedef struct {
     int x;
     int y;
-} Position;
+} t_position;
 
-typedef struct QueueConfig {
-    int registerX;
-    int registerY;
-    Position spots[MAX_QUEUE];
-} QueueConfig;
+typedef struct s_queue_config {
+    int register_x;
+    int register_y;
+    t_position spots[MX_MAX_QUEUE];
+} t_queue_config;
 
-typedef struct HotbarConfig {
-    int cellWidth;
-    int cellHeight;
+typedef struct s_hotbar_config {
+    int cell_width;
+    int cell_height;
     int margin;
-    Color cellColor;
-    Color cellBorderColor;
-    Color cellBorderColorActive;
-} HotbarConfig;
+    Color cell_color;
+    Color cell_border_color;
+    Color cell_border_color_active;
+} t_hotbar_config;
 
 typedef enum {
     NONE,
@@ -164,13 +164,13 @@ typedef enum {
     PICK_UP,
     CASHBOX,
     PLATE
-} InteractableType;
+} t_interactable_type;
 
 typedef struct {
     Rectangle rect;
     Color color;
-    InteractableType type;
-} Surface;
+    t_interactable_type type;
+} t_surface;
 
 typedef enum {
     DIRTY,
@@ -180,7 +180,7 @@ typedef enum {
     FRIED,
     SLICED,
     MIXED
-} IngredientState;
+} t_ingredient_state;
 
 typedef enum {
     APPLE,
@@ -188,150 +188,150 @@ typedef enum {
     CUCUMBER,
     TOMATO,
     SALAD
-} Ingredient;
+} t_ingredient;
 
 typedef struct {
-    IngredientState state;
-    Ingredient type;
-} Item;
+    t_ingredient_state state;
+    t_ingredient type;
+} t_item;
 
 typedef struct {
-    Item* items[INVENTORY_SIZE];
-    int activeItem;
-} Inventory;
+    t_item* items[MX_INVENTORY_SIZE];
+    int active_item;
+} t_inventory;
 
-typedef struct LevelData {
-    int guestCount;
-    Item levelMenu[MAX_LEVEL_GUESTS];
-    Surface surfaces[34];
-    int surfaceCount;
-} LevelData;
+typedef struct s_level_data {
+    int guest_count;
+    t_item levelMenu[MX_MAX_LEVEL_GUESTS];
+    t_surface surfaces[34];
+    int surface_count;
+} t_level_data;
 
 typedef struct {
     int id;
-    int arrivalTime;
-    Item* order;
+    int arrival_time;
+    t_item* order;
     int x;
     int y;
-    int targetX;
-    int targetY;
-} Guest;
+    int target_x;
+    int target_y;
+} t_guest;
 
 typedef struct {
-    Guest* queue[MAX_QUEUE];
-    int queueSize;
-    Guest* atRegister;
-    Guest* outOfQueue;
-} Queue;
+    t_guest* queue[MX_MAX_QUEUE];
+    int queue_size;
+    t_guest* at_register;
+    t_guest* out_of_queue;
+} t_queue;
 
 typedef struct {
-    Guest* allGuests;
-    int nextGuestIndex;
-    int guestCount;
-} Level;
+    t_guest* all_guests;
+    int next_guest_index;
+    int guest_count;
+} t_level;
 
-void initializeQueue(Queue*);
-bool hasQueueSpace(Queue*);
-bool acceptOrder(Queue*);
-void serveGuestAtIndex(Queue*, int);
-void initializeLevel(LevelData*, Level*);
-void loadLevel(LevelData*, Level*);
-void clearLevel(Level*);
-void tryAddGuestToRegister(Level*, Queue*, int);
-void initializeSurfaces(LevelData*);
-void initializeInventory(Inventory*);
-int findFreeCell(Inventory*);
-int addItem(Inventory*, Item*);
-Item* removeActiveItem(Inventory*);
-void clearInventory(Inventory*);
-void setActiveItem(Inventory*, int);
-void reloadInventory(Inventory*);
-extern LevelData levelData[];
+void mx_initialize_queue(t_queue*);
+bool mx_has_queue_space(t_queue*);
+bool mx_accept_order(t_queue*);
+void mx_serve_guest_at_index(t_queue*, int);
+void mx_initialize_level(t_level_data*, t_level*);
+void mx_load_level(t_level_data*, t_level*);
+void mx_clear_level(t_level*);
+void mx_try_add_guest_to_register(t_level*, t_queue*, int);
+void mx_initialize_surfaces(t_level_data*);
+void mx_initialize_inventory(t_inventory*);
+int mx_find_free_cell(t_inventory*);
+int mx_add_item(t_inventory*, t_item*);
+t_item* mx_remove_active_item(t_inventory*);
+void mx_clear_inventory(t_inventory*);
+void mx_set_active_item(t_inventory*, int);
+void mx_reload_inventory(t_inventory*);
+extern t_level_data level_data[];
 
-bool canFry(Item*);
-bool canWash(Item*);
-bool canPeel(Item*);
-bool canJuice(Item*);
-bool canSlice(Item*);
-bool canServe(Item*);
-bool canThrowAway(Item* item);
+bool mx_can_fry(t_item*);
+bool mx_can_wash(t_item*);
+bool mx_can_peel(t_item*);
+bool mx_can_juice(t_item*);
+bool mx_can_slice(t_item*);
+bool mx_can_serve(t_item*);
+bool mx_can_throw_away(t_item* item);
 
-Item* getDirtyItem(Ingredient);
-void updateItem(Item*, IngredientState);
-void deleteItem(Item** item);
-Item* getSalad(void);
+t_item* mx_get_dirty_item(t_ingredient);
+void mx_update_item(t_item*, t_ingredient_state);
+void mx_delete_item(t_item** item);
+t_item* mx_get_salad(void);
 
 // game render
-void renderTimer(void);
-void renderLevelMenu(GameTextures *textures, Level_stars *level_star, Player*);
-void renderLevelMenu2(GameTextures*);
-void renderDevelopers(GameTextures *textures);
-void drawStars(int, int, GameTextures*, Vector2);
-void drawText(int, Rectangle, Vector2, char*, char* time);
-void drawLevel(int, int, GameTextures*, Texture2D, Vector2);
-void tonedRect(int);
-void renderMainMenu(GameTextures*, bool*);
-void renderGameplaySettings(GameTextures*, float*, float*, bool*, int*);
-void renderGuidePage1(GameTextures *textures);
-void renderGuidePage2(GameTextures *textures);
-void renderGuidePage3(GameTextures *textures);
-void renderSelectPlayer(GameTextures*);
-void renderSettings(GameTextures *textures, float *volumeMusic, float *volumeEffects, Level_stars *gameState);
-void renderHotbar(GameTextures*);
-void renderQueue(Rectangle, bool*, int*, GameTextures*);
-void renderGameplay(Player*, GameTextures*, bool*, int *servedCounter, int maxServed);
-void drawStars_gameplay(int, double, GameTextures*, Vector2);
-void DisableGameplayInput(bool);
-void DrawLevelSucsses(bool *isExitPopupOpen, GameTextures *textures, int*);
-void updateLevelStars(Level_stars*, int, int);
-int calculateStarsForLevel(void);
-void interactWithGuest(Inventory* inventory, Queue* queue, int index, InteractableType type);
-int getNearbyInteractable(Rectangle player, Surface* surfaces, int surfaceCount);
-void interactWithObject(Inventory*, InteractableType);
-void InitGameAudio(void);
-void UpdateGameAudio(void);
-void UnloadGameAudio(void);
-void SetMusicVolumeLevel(float volume);
-void UpdateMenuMusic(void);
-void UpdateGameplayMusic(void);
-void UpdateMusicVolume(float volume);
-void InitSoundEffects(void);
-void UnloadSoundEffects(void);
-void PlaySoundEffect(Sound sound);
-void SetEffectsVolume(float volume);
-void StartGameTimer(void);
-void PauseGameTimer(void);
-void ResumeGameTimer(void);
-void ResetGameTimer(void);
-double GetElapsedTime(void);
-void LoadBestTime(void);
-void SaveBestTime(void);
-double GetBestTime(void);
+void mx_render_timer(void);
+void mx_render_level_menu(t_game_textures *textures, t_level_stars *level_star, t_player*);
+void mx_render_level_menu2(t_game_textures*);
+void mx_render_developers(t_game_textures *textures);
+void mx_draw_stars(int, int, t_game_textures*, Vector2);
+void mx_draw_text(int, Rectangle, Vector2, char*, char* time);
+void mx_draw_level(int, int, t_game_textures*, Texture2D, Vector2);
+void mx_toned_rect(int);
+void mx_render_main_menu(t_game_textures*, bool*);
+void mx_render_gameplay_settings(t_game_textures*, float*, float*, bool*, int*);
+void mx_render_guide_page1(t_game_textures *textures);
+void mx_render_guide_page2(t_game_textures *textures);
+void mx_render_guide_page3(t_game_textures *textures);
+void mx_render_select_player(t_game_textures*);
+void mx_render_settings(t_game_textures *textures, float *volumeMusic, float *volumeEffects, t_level_stars *gameState);
+void mx_render_hotbar(t_game_textures*);
+void mx_render_queue(Rectangle, bool*, int*, t_game_textures*);
+void mx_render_gameplay(t_player*, t_game_textures*, bool*, int *servedCounter, int maxServed);
+void mx_draw_stars_gameplay(int, double, t_game_textures*, Vector2);
+void mx_disable_gameplay_input(bool);
+void mx_draw_level_sucsses(bool *isExitPopupOpen, t_game_textures *textures, int*);
+void mx_update_level_stars(t_level_stars*, int, int);
+int mx_calculate_stars_for_level(void);
+void mx_interact_with_guest(t_inventory* inventory, t_queue* queue, int index, t_interactable_type type);
+int mx_get_nearby_interactable(Rectangle player, t_surface* surfaces, int surface_count);
+void mx_interact_with_object(t_inventory*, t_interactable_type);
+void mx_init_game_audio(void);
+void mx_updat_game_audio(void);
+void mx_unload_game_audio(void);
+void mx_set_music_volume_level(float volume);
+void mx_update_menu_music(void);
+void mx_update_gameplay_music(void);
+void mx_update_music_volume(float volume);
+void mx_init_sound_effects(void);
+void mx_unload_sound_effects(void);
+void mx_play_sound_effect(Sound sound);
+void mx_set_effects_volume(float volume);
+void mx_start_game_timer(void);
+void mx_pause_game_timer(void);
+void mx_resume_game_timer(void);
+void mx_reset_game_timer(void);
+double mx_get_elapsed_time(void);
+void mx_load_best_time(void);
+void mx_save_best_time(void);
+double mx_get_best_time(void);
 
-extern GameScreen currentState;
-extern GameScreen previousState;
-extern GameScreen previousGuideState;
-extern Inventory hotbar;
-extern Queue queue;
-extern Level level;
-extern Surface surfaces[];
-extern int surfaceCount;
-extern GameConfig gameConfig;
-extern CustomColors customColors;
-extern QueueConfig queueConfig;
-extern HotbarConfig hotbarConfig;
-extern PlayerConfig playerConfig;
-extern int levelNumber;
-extern Sound buttonClick;
-extern Sound itemPickup;
-extern Sound completeOrder;
+extern t_game_screen current_state;
+extern t_game_screen previous_state;
+extern t_game_screen previous_guide_state;
+extern t_inventory hotbar;
+extern t_queue queue;
+extern t_level level;
+extern t_surface surfaces[];
+extern int surface_count;
+extern t_game_config game_config;
+extern t_custom_colors custom_colors;
+extern t_queue_config queue_config;
+extern t_hotbar_config hotbar_config;
+extern t_player_config player_config;
+extern int level_number;
+extern Sound button_click;
+extern Sound item_pickup;
+extern Sound complete_order;
 extern Sound cutting;
 extern Sound frying;
 extern Sound leaves;
 extern Sound peeling;
 extern Sound washing;
-extern Sound wrongOrder;
+extern Sound wrong_order;
 extern Sound pouring;
-extern Sound levelComplete;
+extern Sound level_complete;
 
 #endif

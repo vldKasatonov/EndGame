@@ -1,7 +1,7 @@
 #include "../inc/header.h"
 
-void LoadTextures(GameTextures *textures) {
-    textures->gearTexture = LoadTexture("resource/images/settings.png");
+void mx_load_textures(t_game_textures *textures) {
+    textures->settings = LoadTexture("resource/images/settings.png");
     textures->volume_on = LoadTexture("resource/images/volume1.png");
     textures->volume_on2 = LoadTexture("resource/images/volume3.png");
     textures->music_on = LoadTexture("resource/images/music1.png");
@@ -25,36 +25,36 @@ void LoadTextures(GameTextures *textures) {
     textures->left_arrow = LoadTexture("resource/images/arrow_left.png");
     textures->served_icon = LoadTexture("resource/images/served_icon.png");
     textures->guest = LoadTexture("resource/images/bee.png");
-    textures->reversedGuest = LoadTexture("resource/images/reversedBee.png");
-    textures->dirtyApple = LoadTexture("resource/images/dirtyApple.png");
-    textures->washedApple = LoadTexture("resource/images/washedApple.png");
-    textures->slicedApple = LoadTexture("resource/images/slicedApple.png");
+    textures->reversed_guest = LoadTexture("resource/images/reversedBee.png");
+    textures->dirty_apple = LoadTexture("resource/images/dirtyApple.png");
+    textures->washed_apple = LoadTexture("resource/images/washedApple.png");
+    textures->sliced_apple = LoadTexture("resource/images/slicedApple.png");
     textures->juice = LoadTexture("resource/images/juice.png");
-    textures->dirtyPotato = LoadTexture("resource/images/dirtyPotato.png");
-    textures->washedPotato = LoadTexture("resource/images/washedPotato.png");
-    textures->peeledPotato = LoadTexture("resource/images/peeledPotato.png");
-    textures->slicedPotato = LoadTexture("resource/images/slicedPotato.png");
-    textures->friedPotato = LoadTexture("resource/images/friedPotato.png");
-    textures->dirtyCucumber = LoadTexture("resource/images/dirtyCucumber.png");
-    textures->washedCucumber = LoadTexture("resource/images/washedCucumber.png");
-    textures->slicedCucumber = LoadTexture("resource/images/slicedCucumber.png");
-    textures->dirtyTomato = LoadTexture("resource/images/dirtyTomato.png");
-    textures->washedTomato = LoadTexture("resource/images/washedTomato.png");
-    textures->slicedTomato = LoadTexture("resource/images/slicedTomato.png");
+    textures->dirty_potato = LoadTexture("resource/images/dirtyPotato.png");
+    textures->washed_potato = LoadTexture("resource/images/washedPotato.png");
+    textures->peeled_potato = LoadTexture("resource/images/peeledPotato.png");
+    textures->sliced_potato = LoadTexture("resource/images/slicedPotato.png");
+    textures->fried_potato = LoadTexture("resource/images/friedPotato.png");
+    textures->dirty_cucumber = LoadTexture("resource/images/dirtyCucumber.png");
+    textures->washed_cucumber = LoadTexture("resource/images/washedCucumber.png");
+    textures->sliced_cucumber = LoadTexture("resource/images/slicedCucumber.png");
+    textures->dirty_tomato = LoadTexture("resource/images/dirtyTomato.png");
+    textures->washed_tomato = LoadTexture("resource/images/washedTomato.png");
+    textures->sliced_tomato = LoadTexture("resource/images/slicedTomato.png");
     textures->salad = LoadTexture("resource/images/salad.png");
-    textures->guideJuice = LoadTexture("resource/images/guidePage1.png");
-    textures->guidePotato = LoadTexture("resource/images/guidePage2.png");
-    textures->guideSalad = LoadTexture("resource/images/guidePage3.png");
+    textures->guide_juice = LoadTexture("resource/images/guidePage1.png");
+    textures->guide_potato = LoadTexture("resource/images/guidePage2.png");
+    textures->guide_salad = LoadTexture("resource/images/guidePage3.png");
     textures->image1 = LoadTexture("resource/images/image_lvl_1.png");
     textures->image2 = LoadTexture("resource/images/image_lvl_2.png");
     textures->map1 = LoadTexture("resource/images/map1.png");
     textures->map2 = LoadTexture("resource/images/map2.png");
     textures->cloud = LoadTexture("resource/images/cloud.png");
-    textures->fButton = LoadTexture("resource/images/fButton.png");
+    textures->f_button = LoadTexture("resource/images/fButton.png");
 }
 
-void UnloadTextures(GameTextures *textures) {
-    UnloadTexture(textures->gearTexture);
+void mx_unload_textures(t_game_textures *textures) {
+    UnloadTexture(textures->settings);
     UnloadTexture(textures->volume_on);
     UnloadTexture(textures->volume_on2);
     UnloadTexture(textures->music_on);
@@ -78,30 +78,30 @@ void UnloadTextures(GameTextures *textures) {
     UnloadTexture(textures->left_arrow);
     UnloadTexture(textures->served_icon);
     UnloadTexture(textures->guest);
-    UnloadTexture(textures->reversedGuest);
-    UnloadTexture(textures->dirtyApple);
-    UnloadTexture(textures->washedApple);
-    UnloadTexture(textures->slicedApple);
+    UnloadTexture(textures->reversed_guest);
+    UnloadTexture(textures->dirty_apple);
+    UnloadTexture(textures->washed_apple);
+    UnloadTexture(textures->sliced_apple);
     UnloadTexture(textures->juice);
-    UnloadTexture(textures->dirtyPotato);
-    UnloadTexture(textures->washedPotato);
-    UnloadTexture(textures->slicedPotato);
-    UnloadTexture(textures->peeledPotato);
-    UnloadTexture(textures->friedPotato);
-    UnloadTexture(textures->dirtyCucumber);
-    UnloadTexture(textures->washedCucumber);
-    UnloadTexture(textures->slicedCucumber);
-    UnloadTexture(textures->dirtyTomato);
-    UnloadTexture(textures->washedTomato);
-    UnloadTexture(textures->slicedTomato);
+    UnloadTexture(textures->dirty_potato);
+    UnloadTexture(textures->washed_potato);
+    UnloadTexture(textures->sliced_potato);
+    UnloadTexture(textures->peeled_potato);
+    UnloadTexture(textures->fried_potato);
+    UnloadTexture(textures->dirty_cucumber);
+    UnloadTexture(textures->washed_cucumber);
+    UnloadTexture(textures->sliced_cucumber);
+    UnloadTexture(textures->dirty_tomato);
+    UnloadTexture(textures->washed_tomato);
+    UnloadTexture(textures->sliced_tomato);
     UnloadTexture(textures->salad);
-    UnloadTexture(textures->guideJuice);
-    UnloadTexture(textures->guidePotato);
-    UnloadTexture(textures->guideSalad);
+    UnloadTexture(textures->guide_juice);
+    UnloadTexture(textures->guide_potato);
+    UnloadTexture(textures->guide_salad);
     UnloadTexture(textures->image1);
     UnloadTexture(textures->image2);
     UnloadTexture(textures->map1);
     UnloadTexture(textures->map2);
     UnloadTexture(textures->cloud);
-    UnloadTexture(textures->fButton);
+    UnloadTexture(textures->f_button);
 }

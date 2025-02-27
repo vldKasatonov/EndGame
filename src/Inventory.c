@@ -1,50 +1,50 @@
 #include "../inc/header.h"
 
-void initializeInventory(Inventory* inventory) {
-	for (int i = 0; i < INVENTORY_SIZE; i++) {
+void mx_initialize_inventory(t_inventory* inventory) {
+	for (int i = 0; i < MX_INVENTORY_SIZE; i++) {
 		inventory->items[i] = NULL;
 	}
-	inventory->activeItem = 0;
+	inventory->active_item = 0;
 }
 
-int findFreeCell(Inventory* inventory) {
-	for (int i = 0; i < INVENTORY_SIZE; i++) {
+int mx_find_free_cell(t_inventory* inventory) {
+	for (int i = 0; i < MX_INVENTORY_SIZE; i++) {
 		if (inventory->items[i] == NULL)
 			return i;
 	}
 	return -1;
 }
 
-int addItem(Inventory* inventory, Item* item) {
-	int freeCell = findFreeCell(inventory);
+int mx_add_item(t_inventory* inventory, t_item* item) {
+	int freeCell = mx_find_free_cell(inventory);
 	
 	if (freeCell != -1) {
 		inventory->items[freeCell] = item;
-		inventory->activeItem = freeCell;
+		inventory->active_item = freeCell;
 		return freeCell;
 	}
 	
 	return -1;
 }
 
-Item* removeActiveItem(Inventory* inventory) {
-	Item* removedItem = inventory->items[inventory->activeItem];
+t_item* mx_remove_active_item(t_inventory* inventory) {
+	t_item* removedItem = inventory->items[inventory->active_item];
 
-	inventory->items[inventory->activeItem] = NULL;
+	inventory->items[inventory->active_item] = NULL;
 	return removedItem;
 }
 
-void clearInventory(Inventory* inventory) {
-	for (int i = 0; i < INVENTORY_SIZE; i++) {
+void mx_clear_inventory(t_inventory* inventory) {
+	for (int i = 0; i < MX_INVENTORY_SIZE; i++) {
 		inventory->items[i] = NULL;
 	}
 }
 
-void setActiveItem(Inventory* inventory, int index) {
-	inventory->activeItem = index;
+void mx_set_active_item(t_inventory* inventory, int index) {
+	inventory->active_item = index;
 }
 
-void reloadInventory(Inventory* inventory) {
-	clearInventory(inventory);
-	inventory->activeItem = 0;
+void mx_reload_inventory(t_inventory* inventory) {
+	mx_clear_inventory(inventory);
+	inventory->active_item = 0;
 }

@@ -1,7 +1,7 @@
 #include "../inc/header.h"
 
-Item* allocateItemMemory(void) {
-	Item* item = (Item*)malloc(sizeof(Item));
+t_item* allocateItemMemory(void) {
+	t_item* item = (t_item*)malloc(sizeof(t_item));
 
 	if (!item)
 		return NULL;
@@ -9,15 +9,15 @@ Item* allocateItemMemory(void) {
 	return item;
 }
 
-void deleteItem(Item** item) {
+void mx_delete_item(t_item** item) {
 	if (item && *item) {
 		free(*item);
 		*item = NULL;
 	}
 }
 
-Item* getDirtyItem(Ingredient type) {
-	Item* item = allocateItemMemory();
+t_item* mx_get_dirty_item(t_ingredient type) {
+	t_item* item = allocateItemMemory();
 
 	if (!item)
 		return NULL;
@@ -28,14 +28,14 @@ Item* getDirtyItem(Ingredient type) {
 	return item;
 }
 
-void updateItem(Item* item, IngredientState state) {
+void mx_update_item(t_item* item, t_ingredient_state state) {
 	if (item) {
 		item->state = state;
 	}
 }
 
-Item* getSalad(void) {
-	Item* item = allocateItemMemory();
+t_item* mx_get_salad(void) {
+	t_item* item = allocateItemMemory();
 
 	if (!item)
 		return NULL;
@@ -45,8 +45,8 @@ Item* getSalad(void) {
 
 	return item;
 }
-//Item* mixIngredients(Inventory* inventory, int index1, int index2) {
-//	Item* item = (Item*)malloc(sizeof(Item));
+//t_item* mixIngredients(t_inventory* inventory, int index1, int index2) {
+//	t_item* item = (t_item*)malloc(sizeof(t_item));
 //
 //	if (!item)
 //		return NULL;
@@ -54,8 +54,8 @@ Item* getSalad(void) {
 //	item->type = SALAD;
 //	item->state = MIXED;
 //
-//	deleteItem(&i1);
-//	deleteItem(&i2);
+//	mx_delete_item(&i1);
+//	mx_delete_item(&i2);
 //
 //	return item;
 //}

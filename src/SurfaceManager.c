@@ -1,32 +1,32 @@
 #include "../inc/header.h"
 
-void initializeSurfaces(LevelData* levelData) {
-	surfaceCount = levelData->surfaceCount;
+void mx_initialize_surfaces(t_level_data* level_data) {
+	surface_count = level_data->surface_count;
 
-	for (int i = 0; i < surfaceCount; i++) {
-		surfaces[i] = levelData->surfaces[i];
+	for (int i = 0; i < surface_count; i++) {
+		surfaces[i] = level_data->surfaces[i];
 	}
 }
 
-//void clearSurfaces(Surface* surfaces, int* surfaceCount) {
+//void clearSurfaces(t_surface* surfaces, int* surface_count) {
 //    if (surfaces) {
 //        free(surfaces);
 //        surfaces = NULL;
 //    }
-//    *surfaceCount = 0;
+//    *surface_count = 0;
 //}
 //
-//void loadSurfaces(LevelData* levelData, Surface** surfaces, int* surfaceCount) {
-//    clearSurfaces(*surfaces, surfaceCount);
+//void loadSurfaces(t_level_data* level_data, t_surface** surfaces, int* surface_count) {
+//    clearSurfaces(*surfaces, surface_count);
 //
-//    *surfaceCount = levelData->surfaceCount;
-//    *surfaces = malloc(sizeof(Surface) * (*surfaceCount));
+//    *surface_count = level_data->surface_count;
+//    *surfaces = malloc(sizeof(t_surface) * (*surface_count));
 //
 //    if (*surfaces == NULL) {
 //        return;
 //    }
 //
-//    for (int i = 0; i < *surfaceCount; i++) {
-//        (*surfaces)[i] = levelData->surfaces[i];
+//    for (int i = 0; i < *surface_count; i++) {
+//        (*surfaces)[i] = level_data->surfaces[i];
 //    }
 //}

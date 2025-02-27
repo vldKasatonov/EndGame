@@ -1,22 +1,22 @@
 #include "../inc/header.h"
 
-GameConfig gameConfig = {
-	1600, // screenWidth
-	900, // screenHeight
-	300, // buttonWidth
-	60,  // buttonHeight
-	80,  // fontSizeHeader1
-	35,  // fontSizeHeader2
-	25,	 // fontSizeHeader3
-	20,  // fontSizeParagraph
+t_game_config game_config = {
+	1600, // screen_width
+	900, // screen_height
+	300, // button_width
+	60,  // button_height
+	80,  // font_size_header1
+	35,  // font_size_header2
+	25,	 // font_size_header3
+	20,  // font_size_paragraph
 };
 
-CustomColors customColors = {
-    { 241, 129, 59, 255 }, // buttonBackgroundColor
-    { 242, 155, 101, 100 }, // menuBackgroundColor
-    { 232, 110, 35, 255 }, // musicColor
-    { 186, 77, 9, 255 }, // sliderColor
-    { 255, 0, 0, 255 }, // redColor
+t_custom_colors custom_colors = {
+    { 241, 129, 59, 255 }, // button_background_color
+    { 242, 155, 101, 100 }, // menu_background_color
+    { 232, 110, 35, 255 }, // music_color
+    { 186, 77, 9, 255 }, // slider_color
+    { 255, 0, 0, 255 }, // red_color
     { 207, 99, 32, 255 }, // level rectangle
     { 217, 105, 35, 255 }, // circle
     { 135, 65, 21, 255 }, // circle stroke
@@ -27,4 +27,4 @@ CustomColors customColors = {
     { 0, 0, 0, 40}, // toned level preview
 };
 
-int levelNumber = 0;
+int level_number = 0;

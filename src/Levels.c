@@ -1,6 +1,6 @@
 #include "../inc/header.h"
 
-LevelData levelData[] = {
+t_level_data level_data[] = {
 	{
 		5,
 		{ {JUICED, APPLE}, {JUICED, APPLE}, {JUICED, APPLE}, {JUICED, APPLE}, {JUICED, APPLE} },
