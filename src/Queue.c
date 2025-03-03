@@ -2,20 +2,18 @@
 
 static void draw_order_image(int x, int y, t_item* item, t_game_textures* textures) {
     DrawTexturePro(textures->cloud, (Rectangle) { 0, 0, textures->cloud.width, textures->cloud.height },
-        (Rectangle) {
-        x + 70, y - 30, 90, 90
-    }, (Vector2) { 0, 0 }, 0.0f, WHITE);
+        (Rectangle) {x + 70, y - 30, 90, 90}, (Vector2) { 0, 0 }, 0.0f, WHITE);
     if (item->state == JUICED && item->type == APPLE) {
         DrawTexturePro(textures->juice, (Rectangle) { 0, 0, textures->juice.width, textures->juice.height },
-        (Rectangle) {x + 92, y - 8, 45, 45}, (Vector2) { 0, 0 }, 0.0f, WHITE);
+        	(Rectangle) {x + 92, y - 8, 45, 45}, (Vector2) { 0, 0 }, 0.0f, WHITE);
     }
     if (item->state == FRIED && item->type == POTATO) {
         DrawTexturePro(textures->fried_potato, (Rectangle) { 0, 0, textures->fried_potato.width, textures->fried_potato.height },
-        (Rectangle) {x + 92, y - 8, 45, 55}, (Vector2) { 0, 0 }, 0.0f, WHITE);
+        	(Rectangle) {x + 92, y - 8, 45, 55}, (Vector2) { 0, 0 }, 0.0f, WHITE);
     }
     if (item->state == MIXED && item->type == SALAD) {
         DrawTexturePro(textures->salad, (Rectangle) { 0, 0, textures->salad.width, textures->salad.height },
-        (Rectangle) {x + 92, y - 8, 45, 45}, (Vector2) { 0, 0 }, 0.0f, WHITE);
+        	(Rectangle) {x + 92, y - 8, 45, 45}, (Vector2) { 0, 0 }, 0.0f, WHITE);
     }
 }
 
