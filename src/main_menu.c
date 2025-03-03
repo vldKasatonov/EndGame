@@ -2,10 +2,6 @@
 
 void DrawCenteredButton(const char* text, int font_size, Color button_background, Color font_color, Rectangle button_rect) {
     DrawRectangleRounded(button_rect, 0.5f, 10, button_background);
-    /*int text_width = MeasureText(text, font_size);
-    int textX = button_rect.x + (button_rect.width - text_width) / 2;
-    int textY = button_rect.y + (button_rect.height - font_size) / 2;
-    DrawText(text, textX, textY, font_size, font_color);*/
 
     Vector2 text_size = MeasureTextEx(mx_get_custom_font(), text, font_size, 2);
     Vector2 text_pos = {

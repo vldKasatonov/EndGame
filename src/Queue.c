@@ -55,7 +55,6 @@ void mx_render_queue(Rectangle player, bool* is_popup_open, int* served_counter,
     	if (!(*is_popup_open)) {
       		update_guest_position(queue.at_register, delta_time);
     	}
-    	//DrawRectangleRec(client, RED);
     	DrawTexture(textures->guest, client.x, client.y, WHITE);
 
     	int index = mx_get_nearby_interactable(client, surfaces, surface_count);
@@ -76,7 +75,6 @@ void mx_render_queue(Rectangle player, bool* is_popup_open, int* served_counter,
       		if (!(*is_popup_open)) {
         		update_guest_position(queue.queue[i], delta_time);
       		}
-      		//DrawRectangleRec(client, BLUE);
       		DrawTexture(textures->guest, client.x, client.y, WHITE);
       		draw_order_image(queue.queue[i]->x - 20, queue.queue[i]->y - 20, queue.queue[i]->order, textures);
       		int index = mx_get_nearby_interactable(client, surfaces, surface_count);
@@ -96,7 +94,6 @@ void mx_render_queue(Rectangle player, bool* is_popup_open, int* served_counter,
     	if (!(*is_popup_open)) {
       		update_guest_position(queue.out_of_queue, delta_time);
     	}
-    	//DrawRectangleRec(client, GREEN);
     	DrawTexture(textures->reversed_guest, client.x, client.y, WHITE);
 
     	if (queue.out_of_queue->x < -50) {

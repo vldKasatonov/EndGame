@@ -73,14 +73,12 @@ static void drawIngredient(Rectangle rect, t_item* item, t_game_textures *textur
     switch (item->type) {
         case POTATO:
             if (item->state == DIRTY) {
-                // DrawRectangle(rect.x + 30, rect.y + 30, 20, 20, (Color) { 64, 52, 0, 255 });
                 DrawTexturePro(textures->dirty_potato, (Rectangle) { 0, 0, textures->dirty_potato.width, textures->dirty_potato.height },
                     (Rectangle) {
                     rect.x + 2.5, rect.y + 2.5, 70, 70
                 }, (Vector2) { 0, 0 }, 0.0f, WHITE);
             }
             else if (item->state == CLEAN) {
-              // DrawRectangle(rect.x + 30, rect.y + 30, 20, 20, (Color) { 105, 52, 0, 255 });
                DrawTexturePro(textures->washed_potato, (Rectangle) { 0, 0, textures->washed_potato.width, textures->washed_potato.height },
                    (Rectangle) {
                    rect.x + 2.5, rect.y + 2.5, 70, 70
@@ -88,22 +86,18 @@ static void drawIngredient(Rectangle rect, t_item* item, t_game_textures *textur
                
             }
             else if (item->state == PEELED) {
-               // DrawRectangle(rect.x + 30, rect.y + 30, 20, 20, YELLOW);
                 DrawTexturePro(textures->peeled_potato, (Rectangle) { 0, 0, textures->peeled_potato.width, textures->peeled_potato.height },
                     (Rectangle) {
                     rect.x + 2.5, rect.y + 5, 70, 70
                 }, (Vector2) { 0, 0 }, 0.0f, WHITE);
             }
             else if (item->state == SLICED) {
-               // DrawRectangle(rect.x + 30, rect.y + 30, 10, 20, YELLOW);
-               // DrawRectangle(rect.x + 50, rect.y + 30, 10, 20, YELLOW);
                 DrawTexturePro(textures->sliced_potato, (Rectangle) { 0, 0, textures->sliced_potato.width, textures->sliced_potato.height },
                     (Rectangle) {
                     rect.x + 5, rect.y + 10, 65, 65
                 }, (Vector2) { 0, 0 }, 0.0f, WHITE);
             }
             else {
-                // DrawRectangle(rect.x + 30, rect.y + 30, 20, 20, BLACK);
                 DrawTexturePro(textures->fried_potato, (Rectangle) { 0, 0, textures->fried_potato.width, textures->fried_potato.height },
                     (Rectangle) {
                     rect.x, rect.y, 75, 85
@@ -113,21 +107,18 @@ static void drawIngredient(Rectangle rect, t_item* item, t_game_textures *textur
 
         case TOMATO:
             if (item->state == DIRTY) {
-                //DrawRectangle(rect.x + 30, rect.y + 30, 20, 20, DARKPURPLE);
                 DrawTexturePro(textures->dirty_tomato, (Rectangle) { 0, 0, textures->dirty_tomato.width, textures->dirty_tomato.height },
                     (Rectangle) {
                     rect.x, rect.y, 75, 75
                 }, (Vector2) { 0, 0 }, 0.0f, WHITE);
             }
             else if (item->state == CLEAN) {
-               // DrawRectangle(rect.x + 30, rect.y + 30, 20, 20, RED);
                 DrawTexturePro(textures->washed_tomato, (Rectangle) { 0, 0, textures->washed_tomato.width, textures->washed_tomato.height },
                     (Rectangle) {
                     rect.x, rect.y, 75, 75
                 }, (Vector2) { 0, 0 }, 0.0f, WHITE);
             }
             else {
-                //DrawRectangle(rect.x + 30, rect.y + 30, 20, 20, BLACK);
                 DrawTexturePro(textures->sliced_tomato, (Rectangle) { 0, 0, textures->sliced_tomato.width, textures->sliced_tomato.height },
                     (Rectangle) {
                     rect.x + 5, rect.y + 5, 70, 70
@@ -136,21 +127,18 @@ static void drawIngredient(Rectangle rect, t_item* item, t_game_textures *textur
             break;
         case CUCUMBER:
             if (item->state == DIRTY) {
-                //DrawRectangle(rect.x + 30, rect.y + 30, 20, 20, DARKPURPLE);
                 DrawTexturePro(textures->dirty_cucumber, (Rectangle) { 0, 0, textures->dirty_cucumber.width, textures->dirty_cucumber.height },
                     (Rectangle) {
                     rect.x, rect.y, 75, 75
                 }, (Vector2) { 0, 0 }, 0.0f, WHITE);
             }
             else if (item->state == CLEAN) {
-                // DrawRectangle(rect.x + 30, rect.y + 30, 20, 20, RED);
                 DrawTexturePro(textures->washed_cucumber, (Rectangle) { 0, 0, textures->washed_cucumber.width, textures->washed_cucumber.height },
                     (Rectangle) {
                     rect.x, rect.y, 75, 75
                 }, (Vector2) { 0, 0 }, 0.0f, WHITE);
             }
             else {
-                //DrawRectangle(rect.x + 30, rect.y + 30, 20, 20, BLACK);
                 DrawTexturePro(textures->sliced_cucumber, (Rectangle) { 0, 0, textures->sliced_cucumber.width, textures->sliced_cucumber.height },
                     (Rectangle) {
                     rect.x + 3, rect.y + 5, 65, 65
@@ -159,7 +147,6 @@ static void drawIngredient(Rectangle rect, t_item* item, t_game_textures *textur
             break;
         case SALAD:
             if (item->state == MIXED) {
-                //DrawRectangle(rect.x + 30, rect.y + 30, 20, 20, DARKPURPLE);
                 DrawTexturePro(textures->salad, (Rectangle) { 0, 0, textures->salad.width, textures->salad.height },
                     (Rectangle) {
                     rect.x, rect.y, 75, 75
@@ -168,26 +155,22 @@ static void drawIngredient(Rectangle rect, t_item* item, t_game_textures *textur
             break;
         case APPLE:
             if (item->state == DIRTY) {
-                //DrawRectangle(rect.x + 30, rect.y + 30, 20, 20, (Color) { 102, 0, 0, 255 });
                 DrawTexturePro(textures->dirty_apple, (Rectangle) { 0, 0, textures->dirty_apple.width, textures->dirty_apple.height },
                     (Rectangle) { rect.x, rect.y, 75, 75 }, (Vector2) { 0, 0 }, 0.0f, WHITE);
             }
             else if (item->state == CLEAN) {
-                //DrawRectangle(rect.x + 30, rect.y + 30, 20, 20, (Color) { 255, 0, 0, 255 });
                 DrawTexturePro(textures->washed_apple, (Rectangle) { 0, 0, textures->washed_apple.width, textures->washed_apple.height },
                     (Rectangle) {
                     rect.x, rect.y, 75, 75
                 }, (Vector2) { 0, 0 }, 0.0f, WHITE);
             }
             else if (item->state == SLICED) {
-                //DrawRectangle(rect.x + 30, rect.y + 30, 20, 20, (Color) { 240, 190, 0, 255 });
                 DrawTexturePro(textures->sliced_apple, (Rectangle) { 0, 0, textures->sliced_apple.width, textures->sliced_apple.height },
                     (Rectangle) {
                     rect.x, rect.y, 75, 75
                 }, (Vector2) { 0, 0 }, 0.0f, WHITE);
             }
             else {
-               // DrawRectangle(rect.x + 30, rect.y + 30, 20, 20, BLACK);
                 DrawTexturePro(textures->juice, (Rectangle) { 0, 0, textures->juice.width, textures->juice.height },
                     (Rectangle) {
                     rect.x + 5, rect.y + 5, 65, 65

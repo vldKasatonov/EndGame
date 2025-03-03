@@ -45,17 +45,3 @@ t_item* mx_get_salad(void) {
 
 	return item;
 }
-//t_item* mixIngredients(t_inventory* inventory, int index1, int index2) {
-//	t_item* item = (t_item*)malloc(sizeof(t_item));
-//
-//	if (!item)
-//		return NULL;
-//
-//	item->type = SALAD;
-//	item->state = MIXED;
-//
-//	mx_delete_item(&i1);
-//	mx_delete_item(&i2);
-//
-//	return item;
-//}

@@ -39,8 +39,6 @@ void mx_init_sound_effects(void) {
     SetSoundVolume(wrong_order, effects_volume);
     SetSoundVolume(pouring, effects_volume);
     SetSoundVolume(level_complete, effects_volume);
-    
-    
 }
 
 void mx_play_sound_effect(Sound sound) {

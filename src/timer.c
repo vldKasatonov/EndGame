@@ -95,5 +95,3 @@ double mx_get_best_time(void) {
     if (current_level < 0 || current_level >= MX_MAX_LEVELS) return -1.0;
     return best_times[current_level];
 }
-
-

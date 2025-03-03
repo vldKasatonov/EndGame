@@ -40,7 +40,7 @@ int main(void)
 	
 	SetTargetFPS(60);
 
-	//    int levelProgress = 0;
+	//int levelProgress = 0;
 
 	t_player player_data;
 	player_data.position.x = 300;

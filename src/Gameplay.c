@@ -17,8 +17,6 @@ static void update_gameplay(t_player* player_data, t_surface* surfaces, const in
     bool collision = false;
 
     Rectangle player_hitbox = { new_pos.x + 5, new_pos.y + 8, 90, 1};
-//    /////////////////
-//    DrawRectangle(new_pos.x + 5, new_pos.y + 8, 90, 1, RED);
 
     for (int i = 0; i < surface_count; i++) {
         if (CheckCollisionRecs(player_hitbox, surfaces[i].rect)) {
@@ -42,7 +40,6 @@ void mx_render_gameplay(t_player* player_data, t_game_textures* textures, bool* 
     if (!(*is_popup_open)) {
         update_gameplay(player_data, surfaces, surface_count);
     }
-    
 
     // draw surfaces
     for (int i = 0; i < surface_count; i++) {
@@ -61,22 +58,16 @@ void mx_render_gameplay(t_player* player_data, t_game_textures* textures, bool* 
         default:
           break;
     }
-//    DrawTexture(textures->map3, 0, 0, WHITE);
     // draw player
     DrawTexture(textures->chef, texture_draw_x, texture_draw_y, WHITE);
-
-//    ////////////
-//    DrawRectangle(player.x, player.y, player.width, player.height, BLUE);
     
     int interactable_object = mx_get_nearby_interactable(player, surfaces, surface_count);
     for (int i = 0; i < surface_count; i++) {
         if (CheckCollisionRecs(player, surfaces[i].rect)) {
             if (surfaces[i].type != NONE)
-                DrawTexturePro(textures->f_button, (Rectangle) { 0, 0, textures->f_button.width, textures->f_button.height },
-                    (Rectangle) {
-                surfaces[i].rect.x + surfaces[i].rect.width - 100, surfaces[i].rect.y - 50, 150, 150
-            }, (Vector2) { 0, 0 }, 0.0f, WHITE);
-                //DrawText("F", surfaces[i].rect.x - 10, surfaces[i].rect.y - 10, 20, BLACK);
+                DrawTexturePro(textures->f_button, (Rectangle) {0, 0, textures->f_button.width, textures->f_button.height},
+                    (Rectangle) {surfaces[i].rect.x + surfaces[i].rect.width - 100, surfaces[i].rect.y - 50, 150, 150},
+                    (Vector2) { 0, 0 }, 0.0f, WHITE);
             break;
         }
     }

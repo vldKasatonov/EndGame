@@ -9,4 +9,3 @@ t_queue queue;
 t_level level;
 int surface_count;
 t_surface surfaces[34];
-
