@@ -15,7 +15,6 @@ Sound level_complete;
 static float effects_volume = 0.5f;  
 
 void mx_init_sound_effects(void) {
-    InitAudioDevice(); 
     button_click = LoadSound("resource/audio/effects/button_click.wav");
     item_pickup = LoadSound("resource/audio/effects/item_pickup.wav");
     complete_order = LoadSound("resource/audio/effects/complete_order.wav");
@@ -72,5 +71,4 @@ void mx_unload_sound_effects(void) {
     UnloadSound(wrong_order);
     UnloadSound(pouring);
     UnloadSound(level_complete);
-    CloseAudioDevice();
 }
