@@ -40,8 +40,7 @@ static const char* get_active_ingredient_name(t_item* item) {
     case DIRTY:   state_str = "Dirty"; break;
     case CLEAN:   state_str = "Washed"; break;
     case PEELED:  state_str = "Peeled"; break;
-    case JUICED:  state_str = "Juiced"; break;
-    case FRIED:   state_str = "Fryied"; break;
+    case FRIED:   state_str = "Fried"; break;
     case SLICED:  state_str = "Sliced"; break;
     default:      state_str = ""; break;
     }
@@ -55,6 +54,10 @@ static const char* get_active_ingredient_name(t_item* item) {
     default:       type_str = "unknown"; break;
     }
 
+    if (item->state == JUICED && item->type == APPLE) {
+        state_str = "Apple";
+        type_str = "juice";
+    }
     snprintf(buffer, sizeof(buffer), "%s %s", state_str, type_str);
     return buffer;
 }
