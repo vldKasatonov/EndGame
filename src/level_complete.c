@@ -45,7 +45,8 @@ void mx_disable_gameplay_input(bool is_popup_open) {
     }
 }
 
-void mx_draw_level_sucsses(bool *is_exit_popup_open, t_game_textures *textures, int *served_counter) {
+void mx_draw_level_sucsses(bool *is_exit_popup_open, t_game_textures *textures,
+                           int *served_counter, bool *cursor_changed) {
     int popup_width = 900;
     int popup_height = 500;
     Rectangle popup_rect = {
@@ -96,11 +97,9 @@ void mx_draw_level_sucsses(bool *is_exit_popup_open, t_game_textures *textures, 
     DrawTextEx(mx_get_custom_font(), "OK", okeytext_pos, 40, 3, WHITE);
 
     Vector2 mouse = GetMousePosition();
-    bool cursor_changed = false;
     if (CheckCollisionPointRec(mouse, okey_button)) {
         SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
-        cursor_changed = true;
-
+        *cursor_changed = true;
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             mx_play_sound_effect(button_click);
             current_state = LEVEL_MENU;
@@ -108,10 +107,8 @@ void mx_draw_level_sucsses(bool *is_exit_popup_open, t_game_textures *textures, 
             mx_save_best_time();
             mx_resume_game_timer();
             *served_counter = 0;
+            SetMouseCursor(MOUSE_CURSOR_DEFAULT);
         }
-    }
-    if (!cursor_changed) {
-        SetMouseCursor(MOUSE_CURSOR_DEFAULT);
     }
 }
 
@@ -124,6 +121,7 @@ void mx_update_level_stars(t_level_stars *game_state, int level, int stars) {
 int mx_calculate_stars_for_level(void) {
     double best_time = mx_get_best_time();
     int stars = 0;
+
 
     if (best_time < 120) {
         stars = 3;

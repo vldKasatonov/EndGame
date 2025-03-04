@@ -27,6 +27,11 @@ void mx_render_select_player(t_game_textures *textures) {
         game_config.screen_width / 3, game_config.screen_height / 2
     };
     int radius = 200;
+    Rectangle gear_rect = mx_draw_settings_icon(textures);
+    Rectangle back_button = mx_draw_back_button(textures);
+    bool cursor_changed = false;
+    Vector2 mouse = GetMousePosition();
+
     draw_select_icon(circle, 2 * circle.x, radius,
                      custom_colors.button_background_color,
                      textures->one_player, "1 PLAYER");
@@ -35,28 +40,14 @@ void mx_render_select_player(t_game_textures *textures) {
                      textures->two_players, "2 PLAYERS");
     toned_circle(circle, radius);
 
-    Rectangle gear_rect = mx_draw_settings_icon(textures);
-    Rectangle back_button = mx_draw_back_button(textures);
-
-    bool cursor_changed = false;
-    Vector2 mouse = GetMousePosition();
-    
+    check_collision(mouse, &cursor_changed, back_button, MAIN_MENU);
     if (CheckCollisionPointRec(mouse, gear_rect)) {
         SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
         cursor_changed = true;
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-            mx_play_sound_effect(button_click);
             previous_state = current_state;
-            current_state = SETTINGS;
-            SetMouseCursor(MOUSE_CURSOR_DEFAULT);
-        }
-    }
-    if (CheckCollisionPointRec(mouse, back_button)) {
-        SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
-        cursor_changed = true;
-        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             mx_play_sound_effect(button_click);
-            current_state = MAIN_MENU;
+            current_state = SETTINGS;
             SetMouseCursor(MOUSE_CURSOR_DEFAULT);
         }
     }

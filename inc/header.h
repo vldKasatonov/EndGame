@@ -285,7 +285,7 @@ void mx_render_queue(Rectangle, bool*, int*, t_game_textures*);
 void mx_render_gameplay(t_player*, t_game_textures*, bool*, int*, int);
 void mx_draw_stars_gameplay(int, double, t_game_textures*, Vector2);
 void mx_disable_gameplay_input(bool);
-void mx_draw_level_sucsses(bool*, t_game_textures*, int*);
+void mx_draw_level_sucsses(bool*, t_game_textures*, int*, bool*);
 void mx_update_level_stars(t_level_stars*, int, int);
 int mx_calculate_stars_for_level(void);
 void mx_interact_with_guest(t_inventory*, t_queue*, int, t_interactable_type);
@@ -310,6 +310,8 @@ double mx_get_elapsed_time(void);
 void mx_load_best_time(void);
 void mx_save_best_time(void);
 double mx_get_best_time(void);
+
+void check_collision(Vector2, bool*, Rectangle, t_game_screen);
 
 extern t_game_screen current_state;
 extern t_game_screen previous_state;

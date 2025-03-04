@@ -1,10 +1,10 @@
 #include "../inc/header.h"
 
-static void draw_exit_confirmation(bool *is_exit_popup_open, int *counter)
-{
+static void draw_exit_confirmation(bool *is_exit_popup_open, int *counter, bool *cursor_changed) {
     DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(BLACK, 0.4f));
     int popup_width = 900;
     int popup_height = 400;
+    Vector2 mouse = GetMousePosition();
     Rectangle popup_rect = {
         (GetScreenWidth() - popup_width) / 2,
         (GetScreenHeight() - popup_height) / 2,
@@ -42,31 +42,26 @@ static void draw_exit_confirmation(bool *is_exit_popup_open, int *counter)
     };
     DrawTextEx(mx_get_custom_font(), "NO", no_text_pos, 40, 3, WHITE);
 
-    Vector2 mouse = GetMousePosition();
-    bool cursor_changed = false;
     if (CheckCollisionPointRec(mouse, yes_button)) {
         SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
-        cursor_changed = true;
+        *cursor_changed = true;
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             mx_play_sound_effect(button_click);
             mx_reset_game_timer();
             current_state = LEVEL_MENU;
             *is_exit_popup_open = false;
             *counter = 0;
+            SetMouseCursor(MOUSE_CURSOR_DEFAULT);
         }
     }
     if (CheckCollisionPointRec(mouse, no_button)) {
         SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
-        cursor_changed = true;
+        *cursor_changed = true;
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             mx_play_sound_effect(button_click);
             *is_exit_popup_open = false;
             SetMouseCursor(MOUSE_CURSOR_DEFAULT);
-
         }
-    }
-    if (!cursor_changed) {
-        SetMouseCursor(MOUSE_CURSOR_DEFAULT);
     }
 }
 
@@ -94,7 +89,6 @@ void mx_render_gameplay_settings(t_game_textures *textures, float *volume_music,
     Rectangle icon_effects_rect = { slider_bar_effects.x - icon_size - 30, slider_bar_effects.y + (slider_height - icon_size) / 2, icon_size, icon_size };
 
     Vector2 mouse = GetMousePosition();
-
 
     slider_knob_music.x = slider_bar_music.x + (*volume_music) * slider_width - circle_size / 2;
     slider_knob_effects.x = slider_bar_effects.x + (*volume_effects) * slider_width - circle_size / 2;
@@ -174,8 +168,8 @@ void mx_render_gameplay_settings(t_game_textures *textures, float *volume_music,
     if (!(*is_exit_popup_open)) {
         if (CheckCollisionPointRec(mouse, slider_knob_music) || CheckCollisionPointRec(mouse, slider_knob_effects)) {
             cursor_changed = true;
+            SetMouseCursor(MOUSE_CURSOR_RESIZE_EW);
         }
-
         if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
             if (CheckCollisionPointRec(mouse, slider_bar_music)) {
                 cursor_changed = true;
@@ -200,12 +194,15 @@ void mx_render_gameplay_settings(t_game_textures *textures, float *volume_music,
                 mx_set_effects_volume(*volume_effects);
             }
         }
-        if (cursor_changed) {
-            SetMouseCursor(MOUSE_CURSOR_RESIZE_EW);
-        } else {
-            SetMouseCursor(MOUSE_CURSOR_DEFAULT);
+        if (CheckCollisionPointRec(mouse, resume_button)) {
+            SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
+            cursor_changed = true;
+            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+                mx_play_sound_effect(button_click);
+                mx_resume_game_timer();
+                current_state = GAMEPLAY;
+            }
         }
-
         if (CheckCollisionPointRec(mouse, guide_button)) {
             SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
             cursor_changed = true;
@@ -216,27 +213,18 @@ void mx_render_gameplay_settings(t_game_textures *textures, float *volume_music,
                 SetMouseCursor(MOUSE_CURSOR_DEFAULT);
             }
         }
-
-        if (CheckCollisionPointRec(mouse, resume_button)) {
-            SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
-            cursor_changed = true;
-            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-                mx_play_sound_effect(button_click);
-                current_state = GAMEPLAY;
-            }
-        }
-
         if (CheckCollisionPointRec(mouse, quit_button)) {
             SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
             cursor_changed = true;
             if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
                 mx_play_sound_effect(button_click);
                 *is_exit_popup_open = true;
+                SetMouseCursor(MOUSE_CURSOR_DEFAULT);
             }
         }
     }
     if (*is_exit_popup_open) {
-        draw_exit_confirmation(is_exit_popup_open, counter);
+        draw_exit_confirmation(is_exit_popup_open, counter, &cursor_changed);
     }
     if (!cursor_changed) {
         SetMouseCursor(MOUSE_CURSOR_DEFAULT);

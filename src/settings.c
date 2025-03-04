@@ -37,6 +37,7 @@ void mx_render_settings(t_game_textures *textures, float *volume_music, float *v
 
     if (CheckCollisionPointRec(mouse, slider_knob_music) || CheckCollisionPointRec(mouse, slider_knob_effects)) {
         cursor_changed = true;
+        SetMouseCursor(MOUSE_CURSOR_RESIZE_EW);
     }
     if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
         if (CheckCollisionPointRec(mouse, slider_bar_music)) {
@@ -61,11 +62,6 @@ void mx_render_settings(t_game_textures *textures, float *volume_music, float *v
             }
             mx_set_effects_volume(*volume_effects);
         }
-    }
-    if (cursor_changed) {
-        SetMouseCursor(MOUSE_CURSOR_RESIZE_EW);
-    } else {
-        SetMouseCursor(MOUSE_CURSOR_DEFAULT);
     }
     slider_knob_music.x = slider_bar_music.x + (*volume_music) * slider_width - circle_size / 2;
     slider_knob_effects.x = slider_bar_effects.x + (*volume_effects) * slider_width - circle_size / 2;
@@ -131,15 +127,7 @@ void mx_render_settings(t_game_textures *textures, float *volume_music, float *v
     Vector2 text_pos2 = { guide_text_rect.x, guide_text_rect.y - 20 };
     DrawTextEx(mx_get_custom_font(), button_text, text_pos2, game_config.font_size_paragraph + 70, 3, WHITE);
 
-    if (CheckCollisionPointRec(mouse, back_button)) {
-        SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
-        cursor_changed = true;
-        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-            mx_play_sound_effect(button_click);
-            current_state = previous_state;
-            SetMouseCursor(MOUSE_CURSOR_DEFAULT);
-        }
-    }
+    check_collision(mouse, &cursor_changed, back_button, previous_state);
     if (CheckCollisionPointRec(mouse, delete_button)) {
         SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
         cursor_changed = true;

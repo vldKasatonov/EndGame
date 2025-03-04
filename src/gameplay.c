@@ -84,27 +84,18 @@ void mx_render_gameplay(t_player* player_data, t_game_textures* textures, bool* 
     Vector2 mouse = GetMousePosition();
     bool cursor_changed = false;
     if (!(*is_popup_open)) {
-        if (CheckCollisionPointRec(mouse, gear_rect)) {
-            SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
-            cursor_changed = true;
-            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-                mx_play_sound_effect(button_click);
-                current_state = GAMEPLAY_SETTINGS;
-                SetMouseCursor(MOUSE_CURSOR_DEFAULT);
-            }
-        }
+        check_collision(mouse, &cursor_changed, gear_rect, GAMEPLAY_SETTINGS);
         if (*served_counter == max_served) {
             mx_play_sound_effect(level_complete);
             *is_popup_open = true;
         }
     }
-    if (*is_popup_open) {      
-        mx_draw_level_sucsses(is_popup_open, textures, served_counter);
+    if (*is_popup_open) {
         mx_pause_game_timer();
+        mx_draw_level_sucsses(is_popup_open, textures, served_counter, &cursor_changed);
     }
     if (!cursor_changed) {
         SetMouseCursor(MOUSE_CURSOR_DEFAULT);
     }
-
     mx_render_queue(player, is_popup_open, served_counter, textures);
 }

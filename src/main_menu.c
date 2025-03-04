@@ -11,7 +11,7 @@ void DrawCenteredButton(const char* text, int font_size, Color button_background
     DrawTextEx(mx_get_custom_font(), text, text_pos, font_size, 2, font_color);
 }
 
-static void DrawExitConfirmation(bool *is_exit_popup_open) {
+static void DrawExitConfirmation(bool *is_exit_popup_open, bool *cursor_changed) {
     DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(BLACK, 0.4f));
     int popup_width = 900;
     int popup_height = 400;
@@ -53,10 +53,9 @@ static void DrawExitConfirmation(bool *is_exit_popup_open) {
     DrawTextEx(mx_get_custom_font(), "NO", notext_pos, 40, 3, WHITE);
 
     Vector2 mouse = GetMousePosition();
-    bool cursor_changed = false;
     if (CheckCollisionPointRec(mouse, yes_button)) {
         SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
-        cursor_changed = true;
+        *cursor_changed = true;
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             mx_play_sound_effect(button_click);
             exit(0);
@@ -64,15 +63,12 @@ static void DrawExitConfirmation(bool *is_exit_popup_open) {
     }
     if (CheckCollisionPointRec(mouse, no_button)) {
         SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
-        cursor_changed = true;
+        *cursor_changed = true;
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             mx_play_sound_effect(button_click);
             *is_exit_popup_open = false;
             SetMouseCursor(MOUSE_CURSOR_DEFAULT);
         }
-    }
-    if (!cursor_changed) {
-        SetMouseCursor(MOUSE_CURSOR_DEFAULT);
     }
 }
 
@@ -147,15 +143,8 @@ void mx_render_main_menu(t_game_textures *textures, bool *is_exit_popup_open) {
 
     draw_chef(textures->chef);
     if (!(*is_exit_popup_open)) {
-        if (CheckCollisionPointRec(mouse, button_rect)) {
-            SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
-            cursor_changed = true;
-            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-                mx_play_sound_effect(button_click);
-                current_state = SELECT_PLAYER;
-                SetMouseCursor(MOUSE_CURSOR_DEFAULT);
-            }
-        }
+        check_collision(mouse, &cursor_changed, button_rect, SELECT_PLAYER);
+        check_collision(mouse, &cursor_changed, dev_button, DEVELOPERS);
         if (CheckCollisionPointRec(mouse, gear_rect)) {
             SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
             cursor_changed = true;
@@ -174,21 +163,11 @@ void mx_render_main_menu(t_game_textures *textures, bool *is_exit_popup_open) {
                 *is_exit_popup_open = true;
             }
         }
-        if (CheckCollisionPointRec(mouse, dev_button)) {
-            SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
-            cursor_changed = true;
-            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-                mx_play_sound_effect(button_click);
-                current_state = DEVELOPERS;
-                SetMouseCursor(MOUSE_CURSOR_DEFAULT);
-            }
-        }
     }
     if (*is_exit_popup_open) {
-        DrawExitConfirmation(is_exit_popup_open);
+        DrawExitConfirmation(is_exit_popup_open, &cursor_changed);
     }
     if (!cursor_changed) {
         SetMouseCursor(MOUSE_CURSOR_DEFAULT);
     }
-
 }
