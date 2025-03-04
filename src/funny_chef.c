@@ -16,7 +16,7 @@ static void draw_moving_background(t_game_textures* textures, Vector2 pos_backgr
 	}
 }
 
-static void drawCustomerCount(t_game_textures *textures, int served_counter, int max_served) {
+static void draw_customer_count(t_game_textures *textures, int served_counter, int max_served) {
     Rectangle src_icon = { 0, 0, textures->served_icon.width, textures->served_icon.height };
     Vector2 served_counter_pos = { game_config.screen_width / 5 + 15, 85 };
     Vector2 text_size = MeasureTextEx(mx_get_custom_font(), "0/5", 50, 2);
@@ -144,12 +144,11 @@ int main(void)
 			mx_render_gameplay(&player_data, &textures, &is_popup_open, &served_counter, max_served);
 			mx_render_hotbar(&textures);
 			mx_render_timer();
-			drawCustomerCount(&textures, served_counter, max_served);
+			draw_customer_count(&textures, served_counter, max_served);
 			break;
 		}
 		EndDrawing();
 	}
-	mx_save_best_time();
 	mx_unload_game_audio();
 	mx_unload_sound_effects();
     mx_unload_textures(&textures);
