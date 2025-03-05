@@ -3,3 +3,4 @@
 obj/
 endgame
 resource/raylib/src/libraylib.a
+resource/raylib/src/*.o
