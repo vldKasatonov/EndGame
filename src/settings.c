@@ -34,34 +34,27 @@ static void draw_delete_confirmation(bool *is_delete_popup_open, bool *cursor_ch
     };
     DrawTextEx(mx_get_custom_font(), "   Are you sure you want \nto delete your progress?", text_pos, 50, 3, WHITE);
 
-    const char *warning_text =
-    "This action will delete your best times\n"
-    "and block access to levels\n"
-    "that you have already completed!";
-    int line_height = 40;
-    Vector2 warning_text_size = MeasureTextEx(mx_get_custom_font(), warning_text, 30, 3);
-    Vector2 warning_text_pos = {
-        popup_rect.x + (popup_rect.width - warning_text_size.x) / 2,
+    const char *line1 = "This action will delete your best times";
+    const char *line2 = "and block access to levels";
+    const char *line3 = "that you have already completed!";
+    Vector2 line1_size = MeasureTextEx(mx_get_custom_font(), line1, 30, 3);
+    Vector2 line2_size = MeasureTextEx(mx_get_custom_font(), line2, 30, 3);
+    Vector2 line3_size = MeasureTextEx(mx_get_custom_font(), line3, 30, 3);
+    Vector2 line1_pos = {
+        popup_rect.x + (popup_rect.width - line1_size.x) / 2,
         popup_rect.y + 190
     };
-    int len = strlen(warning_text) + 1;
-    char *sub_text_copy = (char*)malloc(len);
-    memcpy(sub_text_copy, warning_text, len);
-
-    char *line = strtok(sub_text_copy, "\n");
-    int y_offset = 0;
-
-    while (line != NULL) {
-        Vector2 line_size = MeasureTextEx(mx_get_custom_font(), line, 30, 3);
-        Vector2 line_pos = {
-            popup_rect.x + (popup_rect.width - line_size.x) / 2,
-            warning_text_pos.y + y_offset
-        };
-        DrawTextEx(mx_get_custom_font(), line, line_pos, 30, 3, custom_colors.red_color);
-        y_offset += line_height;
-        line = strtok(NULL, "\n");
-    }
-    free(sub_text_copy);
+    Vector2 line2_pos = {
+        popup_rect.x + (popup_rect.width - line2_size.x) / 2,
+        line1_pos.y + 40
+    };
+    Vector2 line3_pos = {
+        popup_rect.x + (popup_rect.width - line3_size.x) / 2,
+        line2_pos.y + 40
+    };
+    DrawTextEx(mx_get_custom_font(), line1, line1_pos, 30, 3, custom_colors.red_color);
+    DrawTextEx(mx_get_custom_font(), line2, line2_pos, 30, 3, custom_colors.red_color);
+    DrawTextEx(mx_get_custom_font(), line3, line3_pos, 30, 3, custom_colors.red_color);
 
     Rectangle yes_button = { popup_rect.x + 150, popup_rect.y + popup_height - 100, 150, 60 };
     Rectangle no_button = { popup_rect.x + popup_width - 300, popup_rect.y + popup_height - 100, 150, 60 };
