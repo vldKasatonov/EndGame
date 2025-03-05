@@ -7,7 +7,6 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <math.h>
-#include <string.h>
 
 Font mx_get_custom_font(void);
 void mx_unload_custom_font(void);
