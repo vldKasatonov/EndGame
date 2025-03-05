@@ -80,6 +80,7 @@ static void draw_delete_confirmation(bool *is_delete_popup_open, bool *cursor_ch
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             mx_play_sound_effect(button_click);
             reset_game_progress(game_state);
+            completed_levels = 0;
             *is_delete_popup_open = false;
             current_state = SETTINGS;
         }

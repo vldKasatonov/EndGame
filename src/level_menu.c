@@ -1,6 +1,7 @@
 #include "../inc/header.h"
 
 extern int current_level;
+int completed_levels = 0;
 
 static void reset_player_data(t_player* playerData) {
     Vector2 pos = { 300, 350 };
@@ -49,7 +50,6 @@ void mx_render_level_menu(t_game_textures* textures, t_level_stars *game_state, 
     Rectangle back_button = mx_draw_back_button(textures);
     Rectangle right_arrow_rec = { 1495, circle.y - 30, 60, 60 };
     mx_draw_arrow(textures->right_arrow, right_arrow_rec);
-    
     Vector2 mouse = GetMousePosition();
     bool cursor_changed = false;
 
@@ -65,12 +65,11 @@ void mx_render_level_menu(t_game_textures* textures, t_level_stars *game_state, 
             SetMouseCursor(MOUSE_CURSOR_DEFAULT);
         }
     }
-    if (CheckCollisionPointCircle(mouse, circle, radius)) {
+    if (completed_levels >= 0 && CheckCollisionPointCircle(mouse, circle, radius)) {
         SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
         cursor_changed = true;
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             mx_play_sound_effect(button_click);
-            
             current_level = 0;
             mx_load_best_time();
             mx_start_game_timer();
@@ -82,16 +81,16 @@ void mx_render_level_menu(t_game_textures* textures, t_level_stars *game_state, 
             mx_initialize_queue(&queue);                 // gameplay initializers
             mx_initialize_level(&level_data[0], &level);  //
             level_number = 1;
+            completed_levels = 1;
 
             SetMouseCursor(MOUSE_CURSOR_DEFAULT);
         }
     }
-    if (CheckCollisionPointCircle(mouse, (Vector2){ circle.x + space, circle.y }, radius)) {
+    if (completed_levels >= 1 && CheckCollisionPointCircle(mouse, (Vector2){ circle.x + space, circle.y }, radius)) {
         SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
         cursor_changed = true;
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             mx_play_sound_effect(button_click);
-            
             current_level = 1;
             mx_load_best_time();
             mx_start_game_timer();
@@ -103,16 +102,19 @@ void mx_render_level_menu(t_game_textures* textures, t_level_stars *game_state, 
             mx_initialize_queue(&queue);                 // gameplay initializers
             mx_initialize_level(&level_data[1], &level);  //
             level_number = 2;
+            completed_levels = 2;
 
             SetMouseCursor(MOUSE_CURSOR_DEFAULT);
         }
     }
-    if (CheckCollisionPointCircle(mouse, (Vector2) { circle.x + space * 2, circle.y }, radius)) {
+    else if (completed_levels < 1) {
+            mx_toned_rect(space);
+    }
+    if (completed_levels >= 2 && CheckCollisionPointCircle(mouse, (Vector2) { circle.x + space * 2, circle.y }, radius)) {
         SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
         cursor_changed = true;
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-            mx_play_sound_effect(button_click);
-            
+           	mx_play_sound_effect(button_click);
             current_level = 2;
             mx_load_best_time();
             mx_start_game_timer();
@@ -124,9 +126,14 @@ void mx_render_level_menu(t_game_textures* textures, t_level_stars *game_state, 
             mx_initialize_queue(&queue);                 // gameplay initializers
             mx_initialize_level(&level_data[2], &level);  //
             level_number = 3;
+            completed_levels = 3;
 
             SetMouseCursor(MOUSE_CURSOR_DEFAULT);
         }
+
+    }
+    else if (completed_levels < 2) {
+            mx_toned_rect(space * 2);
     }
     if (!cursor_changed) {
         SetMouseCursor(MOUSE_CURSOR_DEFAULT);

@@ -327,6 +327,7 @@ extern t_queue_config queue_config;
 extern t_hotbar_config hotbar_config;
 extern t_player_config player_config;
 extern int level_number;
+extern int completed_levels;
 extern Sound button_click;
 extern Sound item_pickup;
 extern Sound complete_order;
