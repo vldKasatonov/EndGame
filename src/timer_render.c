@@ -19,7 +19,7 @@ void mx_render_timer(void) {
     snprintf(timeText, sizeof(timeText), "%02d:%02d", minutes, seconds);
 
     int posX = screen_width / 8 + 80;
-    int posY = 20;               
+    int posY = 20;
 
     Vector2 time_pos = { posX, posY };
 

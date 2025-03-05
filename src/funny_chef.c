@@ -18,10 +18,10 @@ static void draw_moving_background(t_game_textures* textures, Vector2 pos_backgr
 
 static void draw_customer_count(t_game_textures *textures, int served_counter, int max_served) {
     Rectangle src_icon = { 0, 0, textures->served_icon.width, textures->served_icon.height };
-    Vector2 served_counter_pos = { game_config.screen_width / 5 + 15, 85 };
+    Vector2 served_counter_pos = { game_config.screen_width / 5 - 290, 20 };
     Vector2 text_size = MeasureTextEx(mx_get_custom_font(), "0/5", 50, 2);
-    DrawTexturePro(textures->served_icon, src_icon, (Rectangle){ served_counter_pos.x - text_size.x / 2 - 15,
-                   served_counter_pos.y, 50, 50 }, (Vector2){0, 0}, 0.0f, WHITE);
+    DrawTexturePro(textures->served_icon, src_icon, (Rectangle){ served_counter_pos.x - text_size.x / 2 + 45,
+                   served_counter_pos.y - 45, 50, 50 }, (Vector2){0, 0}, 0.0f, BLANK);
     char counter_text[6];
     snprintf(counter_text, sizeof(counter_text), "%d/%d", served_counter, max_served);
     DrawTextEx(mx_get_custom_font(), counter_text, served_counter_pos, 50, 2, WHITE);

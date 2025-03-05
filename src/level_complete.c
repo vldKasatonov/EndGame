@@ -122,7 +122,6 @@ int mx_calculate_stars_for_level(void) {
     double best_time = mx_get_best_time();
     int stars = 0;
 
-
     if (best_time < 120) {
         stars = 3;
     } else if (best_time < 180) {
