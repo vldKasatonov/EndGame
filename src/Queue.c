@@ -91,9 +91,9 @@ void mx_render_queue(Rectangle player, bool* is_popup_open, int* served_counter,
   	// served guest leaves
   	if (queue.out_of_queue != NULL) {
     	Rectangle client = { queue.out_of_queue->x, queue.out_of_queue->y, 100, 100 };
-    	if (!(*is_popup_open)) {
+//    	if (!(*is_popup_open)) {
       		update_guest_position(queue.out_of_queue, delta_time);
-    	}
+//    	}
     	DrawTexture(textures->reversed_guest, client.x, client.y, WHITE);
 
     	if (queue.out_of_queue->x < -50) {
