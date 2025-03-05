@@ -49,6 +49,7 @@ int main(void) {
 
     bool is_exit_popup_open = false;
     bool is_popup_open = false;
+    bool is_delete_popup_open = false;
 
 	t_level_stars game_state = { {0, 0, 0} };
 
@@ -119,7 +120,7 @@ int main(void) {
 			break;
 		case SETTINGS:
 			draw_moving_background(&textures, pos_background);
-			mx_render_settings(&textures, &volume_music, &volume_effects, &game_state);
+			mx_render_settings(&textures, &volume_music, &volume_effects, &game_state, &is_delete_popup_open);
 			mx_update_music_volume(volume_music);
 			break;
 		case GAMEPLAY_SETTINGS:

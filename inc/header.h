@@ -7,6 +7,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <math.h>
+#include <string.h>
 
 Font mx_get_custom_font(void);
 void mx_unload_custom_font(void);
@@ -279,7 +280,7 @@ void mx_render_guide_page1(t_game_textures *textures);
 void mx_render_guide_page2(t_game_textures *textures);
 void mx_render_guide_page3(t_game_textures *textures);
 void mx_render_select_player(t_game_textures*);
-void mx_render_settings(t_game_textures*, float*, float*, t_level_stars*);
+void mx_render_settings(t_game_textures*, float*, float*, t_level_stars*, bool*);
 void mx_render_hotbar(t_game_textures*);
 void mx_render_queue(Rectangle, bool*, int*, t_game_textures*);
 void mx_render_gameplay(t_player*, t_game_textures*, bool*, int*, int);

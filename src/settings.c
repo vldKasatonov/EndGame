@@ -2,19 +2,102 @@
 
 static void reset_game_progress(t_level_stars *game_state) {
     char filename[50];
-    for (int i = 0; i < 3; i++) {  
+    for (int i = 0; i < 3; i++) {
         snprintf(filename, sizeof(filename),
                  "resource/best_time_level_%d.txt", i);
-        remove(filename); 
+        remove(filename);
     }
     printf("INFO: All best time files deleted\n");
-    for (int i = 0; i < 3; i++) { 
+    for (int i = 0; i < 3; i++) {
         game_state->level_stars[i] = 0;
     }
     printf("INFO: Deleting progress and resetting stars\n");
 }
 
-void mx_render_settings(t_game_textures *textures, float *volume_music, float *volume_effects, t_level_stars *game_state) {
+static void draw_delete_confirmation(bool *is_delete_popup_open, bool *cursor_changed, t_level_stars *game_state) {
+    DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(BLACK, 0.4f));
+    int popup_width = 900;
+    int popup_height = 450;
+    Rectangle popup_rect = {
+        (GetScreenWidth() - popup_width) / 2,
+        (GetScreenHeight() - popup_height) / 2,
+        popup_width,
+        popup_height
+    };
+    DrawRectangleRounded(popup_rect, 0.5f, 10, custom_colors.button_background_color);
+    DrawRectangleRoundedLinesEx(popup_rect, 0.5f, 10, 5, WHITE);
+
+    Vector2 text_size = MeasureTextEx(mx_get_custom_font(), "   Are you sure you want \nto delete your progress?", 50, 3);
+    Vector2 text_pos = {
+        popup_rect.x + (popup_rect.width - text_size.x) / 2,
+        popup_rect.y + 50
+    };
+    DrawTextEx(mx_get_custom_font(), "   Are you sure you want \nto delete your progress?", text_pos, 50, 3, WHITE);
+
+    const char *warning_text =
+    "! This action will delete your best times\n"
+    "and block access to levels\n"
+    "that you have already completed !";
+    int line_height = 40;
+    Vector2 warning_text_size = MeasureTextEx(mx_get_custom_font(), warning_text, 30, 3);
+    Vector2 warning_text_pos = {
+        popup_rect.x + (popup_rect.width - warning_text_size.x) / 2,
+        popup_rect.y + 190
+    };
+    char *sub_text_copy = strdup(warning_text);
+    char *line = strtok(sub_text_copy, "\n");
+    int y_offset = 0;
+    while (line != NULL) {
+        Vector2 line_size = MeasureTextEx(mx_get_custom_font(), line, 30, 3);
+        Vector2 line_pos = {
+            popup_rect.x + (popup_rect.width - line_size.x) / 2,
+            warning_text_pos.y + y_offset
+        };
+        DrawTextEx(mx_get_custom_font(), line, line_pos, 30, 3, custom_colors.red_color);
+        y_offset += line_height;
+        line = strtok(NULL, "\n");
+    }
+
+    Rectangle yes_button = { popup_rect.x + 150, popup_rect.y + popup_height - 100, 150, 60 };
+    Rectangle no_button = { popup_rect.x + popup_width - 300, popup_rect.y + popup_height - 100, 150, 60 };
+    DrawRectangleRounded(yes_button, 0.5f, 10, GREEN);
+    DrawRectangleRounded(no_button, 0.5f, 10, RED);
+    Vector2 yestext_size = MeasureTextEx(mx_get_custom_font(), "YES", 40, 3);
+    Vector2 yestext_pos = {
+        yes_button.x + (yes_button.width - yestext_size.x) / 2,
+        yes_button.y + (yes_button.height - yestext_size.y) / 2
+    };
+    DrawTextEx(mx_get_custom_font(), "YES", yestext_pos, 40, 3, WHITE);
+    Vector2 notext_size = MeasureTextEx(mx_get_custom_font(), "NO", 40, 3);
+    Vector2 notext_pos = {
+        no_button.x + (no_button.width - notext_size.x) / 2,
+        no_button.y + (no_button.height - notext_size.y) / 2
+    };
+    DrawTextEx(mx_get_custom_font(), "NO", notext_pos, 40, 3, WHITE);
+
+    Vector2 mouse = GetMousePosition();
+    if (CheckCollisionPointRec(mouse, yes_button)) {
+        SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
+        *cursor_changed = true;
+        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+            mx_play_sound_effect(button_click);
+            reset_game_progress(game_state);
+            *is_delete_popup_open = false;
+            current_state = SETTINGS;
+        }
+    }
+    if (CheckCollisionPointRec(mouse, no_button)) {
+        SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
+        *cursor_changed = true;
+        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+            mx_play_sound_effect(button_click);
+            *is_delete_popup_open = false;
+            SetMouseCursor(MOUSE_CURSOR_DEFAULT);
+        }
+    }
+}
+
+void mx_render_settings(t_game_textures *textures, float *volume_music, float *volume_effects, t_level_stars *game_state, bool *is_delete_popup_open) {
     int slider_width = 500;
     int slider_height = 30;
     int circle_size = 30;
@@ -127,24 +210,29 @@ void mx_render_settings(t_game_textures *textures, float *volume_music, float *v
     Vector2 text_pos2 = { guide_text_rect.x, guide_text_rect.y - 20 };
     DrawTextEx(mx_get_custom_font(), button_text, text_pos2, game_config.font_size_paragraph + 70, 3, WHITE);
 
-    check_collision(mouse, &cursor_changed, back_button, previous_state);
-    if (CheckCollisionPointRec(mouse, delete_button)) {
-        SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
-        cursor_changed = true;
-        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-            mx_play_sound_effect(button_click);
-            reset_game_progress(game_state);
+    if (!(*is_delete_popup_open)) {
+        check_collision(mouse, &cursor_changed, back_button, previous_state);
+        if (CheckCollisionPointRec(mouse, delete_button)) {
+            SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
+            cursor_changed = true;
+            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+                mx_play_sound_effect(button_click);
+                *is_delete_popup_open = true;
+            }
+        }
+        if (CheckCollisionPointRec(mouse, guide_button)) {
+            SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
+            cursor_changed = true;
+            previous_guide_state = current_state;
+            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+                mx_play_sound_effect(button_click);
+                current_state = GUIDE_PAGE1;
+                SetMouseCursor(MOUSE_CURSOR_DEFAULT);
+            }
         }
     }
-    if (CheckCollisionPointRec(mouse, guide_button)) {
-        SetMouseCursor(MOUSE_CURSOR_POINTING_HAND);
-        cursor_changed = true;
-        previous_guide_state = current_state;
-        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-            mx_play_sound_effect(button_click);
-            current_state = GUIDE_PAGE1;
-            SetMouseCursor(MOUSE_CURSOR_DEFAULT);
-        }
+    if (*is_delete_popup_open) {
+        draw_delete_confirmation(is_delete_popup_open, &cursor_changed, game_state);
     }
     if (!cursor_changed) {
         SetMouseCursor(MOUSE_CURSOR_DEFAULT);

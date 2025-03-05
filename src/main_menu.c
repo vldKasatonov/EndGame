@@ -121,16 +121,25 @@ static Rectangle draw_play_button(void) {
         (int)(GetScreenHeight() * 0.55)
     };
     Rectangle button_rect = { button.x, button.y, 450, 150 };
-    Vector2 text_size = MeasureTextEx(mx_get_custom_font(),
-                                      "FUNNY CHEF", 140, 3);
+    Vector2 mouse = GetMousePosition();
+    bool mouse_hovered = CheckCollisionPointRec(mouse, button_rect);
+    float scale = mouse_hovered ? 1.1f : 1.0f;
+    Rectangle scaled_button_rect = {
+        button.x - (button_rect.width * (scale - 1)) / 2,
+        button.y - (button_rect.height * (scale - 1)) / 2,
+        button_rect.width * scale,
+        button_rect.height * scale
+    };
+    Vector2 text_size = MeasureTextEx(mx_get_custom_font(), "FUNNY CHEF", 140, 3);
     Vector2 text_pos = {
         (GetScreenWidth() - text_size.x) / 2 - 180,
         (GetScreenHeight() - text_size.y) / 2 - 130
     };
     DrawTextEx(mx_get_custom_font(), "FUNNY CHEF", text_pos, 200, 3, WHITE);
-    draw_centered_button("PLAY", game_config.font_size_header2 + 100,
-                       custom_colors.button_background_color, WHITE, button_rect);
-    return button_rect;
+    draw_centered_button("PLAY", (game_config.font_size_header2 + 100) * scale,
+                         custom_colors.button_background_color, WHITE, scaled_button_rect);
+
+    return scaled_button_rect;
 }
 
 void mx_render_main_menu(t_game_textures *textures, bool *is_exit_popup_open) {
