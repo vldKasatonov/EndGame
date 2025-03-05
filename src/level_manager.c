@@ -23,11 +23,6 @@ void mx_initialize_level(t_level_data* level_data, t_level* level) {
     }
 }
 
-void loadLevel(t_level_data* level_data, t_level* level) {
-    mx_clear_level(level);
-    mx_initialize_level(level_data, level);
-}
-
 void mx_clear_level(t_level* level) {
     if (level->all_guests) {
         free(level->all_guests);

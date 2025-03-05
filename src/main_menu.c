@@ -1,6 +1,6 @@
 #include "../inc/header.h"
 
-void DrawCenteredButton(const char* text, int font_size, Color button_background, Color font_color, Rectangle button_rect) {
+static void draw_centered_button(const char* text, int font_size, Color button_background, Color font_color, Rectangle button_rect) {
     DrawRectangleRounded(button_rect, 0.5f, 10, button_background);
 
     Vector2 text_size = MeasureTextEx(mx_get_custom_font(), text, font_size, 2);
@@ -11,7 +11,7 @@ void DrawCenteredButton(const char* text, int font_size, Color button_background
     DrawTextEx(mx_get_custom_font(), text, text_pos, font_size, 2, font_color);
 }
 
-static void DrawExitConfirmation(bool *is_exit_popup_open, bool *cursor_changed) {
+static void draw_exit_confirmation(bool *is_exit_popup_open, bool *cursor_changed) {
     DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Fade(BLACK, 0.4f));
     int popup_width = 900;
     int popup_height = 400;
@@ -128,7 +128,7 @@ static Rectangle draw_play_button(void) {
         (GetScreenHeight() - text_size.y) / 2 - 130
     };
     DrawTextEx(mx_get_custom_font(), "FUNNY CHEF", text_pos, 200, 3, WHITE);
-    DrawCenteredButton("PLAY", game_config.font_size_header2 + 100,
+    draw_centered_button("PLAY", game_config.font_size_header2 + 100,
                        custom_colors.button_background_color, WHITE, button_rect);
     return button_rect;
 }
@@ -165,7 +165,7 @@ void mx_render_main_menu(t_game_textures *textures, bool *is_exit_popup_open) {
         }
     }
     if (*is_exit_popup_open) {
-        DrawExitConfirmation(is_exit_popup_open, &cursor_changed);
+        draw_exit_confirmation(is_exit_popup_open, &cursor_changed);
     }
     if (!cursor_changed) {
         SetMouseCursor(MOUSE_CURSOR_DEFAULT);

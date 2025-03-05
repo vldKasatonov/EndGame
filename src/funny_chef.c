@@ -27,8 +27,7 @@ static void draw_customer_count(t_game_textures *textures, int served_counter, i
     DrawTextEx(mx_get_custom_font(), counter_text, served_counter_pos, 50, 2, WHITE);
 }
 
-int main(void)
-{
+int main(void) {
 	InitWindow(game_config.screen_width, game_config.screen_height, "Funny Chef");
 	SetTargetFPS(60);
 	mx_init_game_audio();
