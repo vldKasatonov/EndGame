@@ -14,8 +14,8 @@ void check_collision(Vector2 mouse, bool *cursor_changed, Rectangle button, t_ga
 
 static Vector2 get_text_pos(void) {
     Vector2 text_page_size = {
-        MeasureText("PAGE 2", game_config.font_size_paragraph + 70),
-        MeasureText("PAGE 2", game_config.font_size_paragraph + 5)
+        MeasureText("PAGE 2", 90),
+        MeasureText("PAGE 2", 25)
     };
     Vector2 text_pos_page = {
         game_config.screen_width - text_page_size.x,
@@ -32,7 +32,7 @@ void mx_render_guide_page1(t_game_textures *textures) {
     bool cursor_changed = false;
 
     DrawTextEx(mx_get_custom_font(), "PAGE 1", text_pos_page,
-               game_config.font_size_paragraph + 50, 3, WHITE);
+               70, 3, WHITE);
     mx_draw_arrow(textures->right_arrow, right_arrow_rec);
     DrawTexturePro(textures->guide_juice, (Rectangle) { 0, 0,
                    textures->guide_juice.width,
@@ -54,7 +54,7 @@ void mx_render_guide_page2(t_game_textures *textures) {
     bool cursor_changed = false;
 
     DrawTextEx(mx_get_custom_font(), "PAGE 2", text_pos_page,
-               game_config.font_size_paragraph + 50, 3, WHITE);
+               70, 3, WHITE);
     mx_draw_arrow(textures->right_arrow, right_arrow_rec);
     mx_draw_arrow(textures->left_arrow, left_arrow_rec);
     DrawTexturePro(textures->guide_potato, (Rectangle) { 0, 0,
@@ -77,7 +77,7 @@ void mx_render_guide_page3(t_game_textures *textures) {
     bool cursor_changed = false;
 
     DrawTextEx(mx_get_custom_font(), "PAGE 3", text_pos_page,
-               game_config.font_size_paragraph + 50, 3, WHITE);
+               70, 3, WHITE);
     mx_draw_arrow(textures->left_arrow, left_arrow_rec);
     DrawTexturePro(textures->guide_salad, (Rectangle) { 0, 0,
                    textures->guide_salad.width,

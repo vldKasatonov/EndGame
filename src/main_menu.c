@@ -73,7 +73,7 @@ static void draw_exit_confirmation(bool *is_exit_popup_open, bool *cursor_change
 }
 
 static Rectangle draw_exit_button(Texture2D icon) {
-    int text_width = MeasureText("EXIT", game_config.font_size_paragraph + 50);
+    int text_width = MeasureText("EXIT", 70);
     int button_height = 80;
     int icon_width = icon.width - 10;
     int icon_height = icon.height - 10;
@@ -87,7 +87,7 @@ static Rectangle draw_exit_button(Texture2D icon) {
                    exit_rect, (Vector2){0, 0}, 0.0f, WHITE);
     Vector2 text_pos = {exit_text_rect.x, exit_text_rect.y - 10};
     DrawTextEx(mx_get_custom_font(), "EXIT", text_pos,
-               game_config.font_size_paragraph + 70, 3, WHITE);
+               90, 3, WHITE);
     return exit_button;
 }
 
@@ -96,10 +96,10 @@ static Rectangle draw_dev_button(void) {
                                      "DEVELOPERS", 70, 3);
     Vector2 text_pos_dev = {
         30,
-        game_config.screen_height - 30 - text_dev.y - 10
+        game_config.screen_height - 40 - text_dev.y
     };
     DrawTextEx(mx_get_custom_font(), "DEVELOPERS", text_pos_dev,
-               game_config.font_size_paragraph + 50, 3, WHITE);
+               70, 3, WHITE);
     Rectangle dev_button = { text_pos_dev.x, text_pos_dev.y,
                             text_dev.x, text_dev.y };
     return dev_button;

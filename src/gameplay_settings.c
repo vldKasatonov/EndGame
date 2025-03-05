@@ -120,26 +120,26 @@ void mx_render_gameplay_settings(t_game_textures *textures, float *volume_music,
         DrawTexturePro(textures->volume_on, (Rectangle){0, 0, textures->volume_on.width, textures->volume_on.height}, icon_effects_rect, (Vector2){0, 0}, 0.0f, WHITE);
     }
 
-    float text_width_music = MeasureText("Music Volume", game_config.font_size_paragraph + 20);
-    float text_width_effects = MeasureText("Effects Volume", game_config.font_size_paragraph + 20);
+    float text_width_music = MeasureText("Music Volume", 40);
+    float text_width_effects = MeasureText("Effects Volume", 40);
     Vector2 text_pos_music = {(GetScreenWidth() - text_width_music) / 2, slider_bar_music.y - 70};
-    DrawTextEx(mx_get_custom_font(), "Music Volume", text_pos_music, game_config.font_size_paragraph + 20, 3, WHITE);
+    DrawTextEx(mx_get_custom_font(), "Music Volume", text_pos_music, 40, 3, WHITE);
     Vector2 text_pos_effects = {(GetScreenWidth() - text_width_effects) / 2, slider_bar_effects.y - 70};
-    DrawTextEx(mx_get_custom_font(), "Effects Volume", text_pos_effects, game_config.font_size_paragraph + 20, 3, WHITE);
+    DrawTextEx(mx_get_custom_font(), "Effects Volume", text_pos_effects, 40, 3, WHITE);
 
     const char* button_text = "GUIDE";
     icon_size += 40;
-    int button_x1 = (GetScreenWidth() - (MeasureText(button_text, game_config.font_size_paragraph + 100) + icon_size )) / 2 - 20;
+    int button_x1 = (GetScreenWidth() - (MeasureText(button_text, 120) + icon_size )) / 2 - 20;
     int button_y11 = 150;
-    int text_width2 = MeasureText(button_text, game_config.font_size_header2 + 30);
+    int text_width2 = MeasureText(button_text, 65);
     int button_width2 = icon_size + text_width2 + 190;
     int text_offset_x = button_x1 + icon_size + 10;
     Rectangle guide_button = { button_x1, button_y11, button_width2, 90 };
     Rectangle guide_icon_rect = { button_x1, button_y11 + (50 - icon_size) / 2 + 20, icon_size, icon_size };
-    Rectangle guide_text_rect = { text_offset_x, button_y11 + (50 - game_config.font_size_header2 + 30) / 2 - 5, text_width2, 50 };
+    Rectangle guide_text_rect = { text_offset_x, 167, text_width2, 50 };
     DrawTexturePro(textures->guide, (Rectangle){0, 0, textures->guide.width, textures->guide.height}, guide_icon_rect, (Vector2){0, 0}, 0.0f, WHITE);
     Vector2 text_pos2 = { guide_text_rect.x, guide_text_rect.y - 40 };
-    DrawTextEx(mx_get_custom_font(), button_text, text_pos2, game_config.font_size_paragraph + 100, 3, WHITE);
+    DrawTextEx(mx_get_custom_font(), button_text, text_pos2, 120, 3, WHITE);
 
     int button_width3 = 220;
     int button_height3 = 70;
@@ -152,7 +152,7 @@ void mx_render_gameplay_settings(t_game_textures *textures, float *volume_music,
     float corner_radius1 = 0.5f;
     DrawRectangleRounded(resume_button, corner_radius1, segments, custom_colors.music_color);
     DrawRectangleRounded(quit_button, corner_radius1, segments, custom_colors.music_color);
-    int font_size1 = game_config.font_size_paragraph + 20;
+    int font_size1 = 40;
     Vector2 text_pos_resume = {
         resume_button.x + (resume_button.width - MeasureText("RESUME", font_size1)) / 2 - 10,
         resume_button.y + (resume_button.height - font_size1) / 2

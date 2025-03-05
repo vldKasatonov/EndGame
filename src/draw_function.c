@@ -55,15 +55,14 @@ void mx_draw_text_score(int space, Rectangle level_rec, Vector2 circle,
     };	       
     DrawTextEx(mx_get_custom_font(), level, (Vector2)
     	       { text_level_pos.x + space, text_level_pos.y },
-    	       game_config.font_size_paragraph + 20, 3, WHITE); 
+    	       40, 3, WHITE);
     	       
-    DrawTextEx(mx_get_custom_font(), "The best score", (Vector2)
-    	       { text_pos.x + space, text_pos.y },
-    	       game_config.font_size_paragraph + 20, 2, WHITE);
+    DrawTextEx(mx_get_custom_font(), "The best score",
+    			(Vector2) {text_pos.x + space, text_pos.y},
+    	       40, 2, WHITE);
     	       
-    DrawTextEx(mx_get_custom_font(), time, (Vector2)
-    	       { text_time_pos.x + space, text_time_pos.y },
-    	       game_config.font_size_paragraph + 20, 3, WHITE);
+    DrawTextEx(mx_get_custom_font(), time,
+    			(Vector2){text_time_pos.x + space, text_time_pos.y}, 40, 3, WHITE);
 }
 
 void mx_draw_level(int space, int star, t_game_textures *textures,
@@ -117,7 +116,7 @@ void mx_toned_rect(int space) {
 }
 
 Rectangle mx_draw_back_button(t_game_textures *textures) {
-	int text_width = MeasureText("BACK", game_config.font_size_paragraph + 50);
+	int text_width = MeasureText("BACK", 70);
 	int button_height = 80;
 	int icon_width = textures->exit.width ;
 	int icon_height = textures->exit.height ;
@@ -134,7 +133,7 @@ Rectangle mx_draw_back_button(t_game_textures *textures) {
 			   0.0f, WHITE);
 
 	Vector2 text_pos = { back_text_rect.x, back_text_rect.y - 10};
-	DrawTextEx(mx_get_custom_font(), "BACK", text_pos, game_config.font_size_paragraph + 70, 3, WHITE);
+	DrawTextEx(mx_get_custom_font(), "BACK", text_pos, 90, 3, WHITE);
     return back_button;
 }
 
