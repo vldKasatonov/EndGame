@@ -1,6 +1,9 @@
 CC = clang
 CFLAGS = -std=c11 -Wall -Wextra -Werror -Wpedantic -I$(RAYLIB_DIR)
+#for Linux
 LDFLAGS = $(RAYLIB_DIR)/libraylib.a -lm
+#for MacOS
+#LDFLAGS = $(RAYLIB_DIR)/libraylib.a -framework Cocoa -framework IOKit
 
 RAYLIB_DIR = resource/raylib/src
 SRC_DIR = src
