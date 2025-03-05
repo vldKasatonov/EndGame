@@ -1,7 +1,7 @@
 #ifndef HEADER_H
 #define HEADER_H
 
-#include "../resource/raylib/src/raylib.h"
+#include "raylib.h"
 #include <stdio.h>
 #include <float.h>
 #include <stdbool.h>
