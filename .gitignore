@@ -1,3 +1,5 @@
+.idea
+
 obj/
 endgame
-.idea
+resource/raylib/src/libraylib.a
