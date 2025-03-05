@@ -35,18 +35,22 @@ static void draw_delete_confirmation(bool *is_delete_popup_open, bool *cursor_ch
     DrawTextEx(mx_get_custom_font(), "   Are you sure you want \nto delete your progress?", text_pos, 50, 3, WHITE);
 
     const char *warning_text =
-    "! This action will delete your best times\n"
+    "This action will delete your best times\n"
     "and block access to levels\n"
-    "that you have already completed !";
+    "that you have already completed!";
     int line_height = 40;
     Vector2 warning_text_size = MeasureTextEx(mx_get_custom_font(), warning_text, 30, 3);
     Vector2 warning_text_pos = {
         popup_rect.x + (popup_rect.width - warning_text_size.x) / 2,
         popup_rect.y + 190
     };
-    char *sub_text_copy = strdup(warning_text);
+    int len = strlen(warning_text) + 1;
+    char *sub_text_copy = (char*)malloc(len);
+    memcpy(sub_text_copy, warning_text, len);
+
     char *line = strtok(sub_text_copy, "\n");
     int y_offset = 0;
+
     while (line != NULL) {
         Vector2 line_size = MeasureTextEx(mx_get_custom_font(), line, 30, 3);
         Vector2 line_pos = {
@@ -57,6 +61,7 @@ static void draw_delete_confirmation(bool *is_delete_popup_open, bool *cursor_ch
         y_offset += line_height;
         line = strtok(NULL, "\n");
     }
+    free(sub_text_copy);
 
     Rectangle yes_button = { popup_rect.x + 150, popup_rect.y + popup_height - 100, 150, 60 };
     Rectangle no_button = { popup_rect.x + popup_width - 300, popup_rect.y + popup_height - 100, 150, 60 };
