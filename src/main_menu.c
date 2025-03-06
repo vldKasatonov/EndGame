@@ -96,7 +96,7 @@ static Rectangle draw_dev_button(void) {
                                      "DEVELOPERS", 70, 3);
     Vector2 text_pos_dev = {
         30,
-        game_config.screen_height - 40 - text_dev.y
+        GetScreenHeight() - 40 - text_dev.y
     };
     DrawTextEx(mx_get_custom_font(), "DEVELOPERS", text_pos_dev,
                70, 3, WHITE);
@@ -108,8 +108,8 @@ static Rectangle draw_dev_button(void) {
 static void draw_chef(Texture2D image) {
     Rectangle src_image_chef = { 0, 0, image.width, image.height };
     Vector2 size_image = { 104 * 2, 194 * 2 };
-    Rectangle image_chef = { game_config.screen_width - size_image.x * 2,
-                           game_config.screen_height - size_image.y,
+    Rectangle image_chef = { GetScreenWidth() - size_image.x * 2,
+                           GetScreenHeight() - size_image.y,
                            size_image.x, size_image.y };
     DrawTexturePro(image, src_image_chef, image_chef,
                    (Vector2){0, 0}, 0.0f, WHITE);
@@ -117,7 +117,7 @@ static void draw_chef(Texture2D image) {
 
 static Rectangle draw_play_button(void) {
     Vector2 button = {
-        (GetScreenWidth() - game_config.button_width) / 2 - 75,
+        (GetScreenWidth() - 300) / 2 - 75,
         (int)(GetScreenHeight() * 0.55)
     };
     Rectangle button_rect = { button.x, button.y, 450, 150 };
@@ -136,7 +136,7 @@ static Rectangle draw_play_button(void) {
         (GetScreenHeight() - text_size.y) / 2 - 130
     };
     DrawTextEx(mx_get_custom_font(), "FUNNY CHEF", text_pos, 200, 3, WHITE);
-    draw_centered_button("PLAY", (game_config.font_size_header2 + 100) * scale,
+    draw_centered_button("PLAY", 135 * scale,
                          custom_colors.button_background_color, WHITE, scaled_button_rect);
 
     return scaled_button_rect;

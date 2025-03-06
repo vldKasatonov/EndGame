@@ -4,13 +4,13 @@ static void move_background(t_game_textures* textures, float speed_scrolling, Ve
 	position->x += speed_scrolling;
 	position->y += speed_scrolling;
 
-	if (position->x >= game_config.screen_width) position->x = -textures->background.width;
-	if (position->y >= game_config.screen_height) position->y = -textures->background.height;
+	if (position->x >= GetScreenWidth()) position->x = -textures->background.width;
+	if (position->y >= GetScreenHeight()) position->y = -textures->background.height;
 }
 
 static void draw_moving_background(t_game_textures* textures, Vector2 pos_background) {
-	for (float x = pos_background.x; x < game_config.screen_width; x += textures->background.width) {
-		for (float y = pos_background.y; y < game_config.screen_height; y += textures->background.height) {
+	for (float x = pos_background.x; x < GetScreenWidth(); x += textures->background.width) {
+		for (float y = pos_background.y; y < GetScreenHeight(); y += textures->background.height) {
 			DrawTexture(textures->background, (int)x, (int)y, WHITE);
 		}
 	}
@@ -18,7 +18,7 @@ static void draw_moving_background(t_game_textures* textures, Vector2 pos_backgr
 
 static void draw_customer_count(t_game_textures *textures, int served_counter, int max_served) {
     Rectangle src_icon = { 0, 0, textures->served_icon.width, textures->served_icon.height };
-    Vector2 served_counter_pos = { game_config.screen_width / 5 - 290, 20 };
+    Vector2 served_counter_pos = { GetScreenWidth() / 5 - 290, 20 };
     Vector2 text_size = MeasureTextEx(mx_get_custom_font(), "0/5", 50, 2);
     DrawTexturePro(textures->served_icon, src_icon, (Rectangle){ served_counter_pos.x - text_size.x / 2 + 45,
                    served_counter_pos.y - 45, 50, 50 }, (Vector2){0, 0}, 0.0f, BLANK);
@@ -28,7 +28,7 @@ static void draw_customer_count(t_game_textures *textures, int served_counter, i
 }
 
 int main(void) {
-	InitWindow(game_config.screen_width, game_config.screen_height, "Funny Chef");
+	InitWindow(1600, 900, "Funny Chef");
 	SetTargetFPS(60);
 	mx_init_game_audio();
 	mx_init_sound_effects();

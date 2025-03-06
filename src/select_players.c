@@ -18,13 +18,13 @@ static void draw_select_icon(Vector2 pos_circle, int space, int radius,
 }
 
 static void toned_circle(Vector2 circle, int radius) {
-    DrawCircle(game_config.screen_width - circle.x, circle.y, radius,
+    DrawCircle(GetScreenWidth() - circle.x, circle.y, radius,
                custom_colors.nonactive_level_color);
 }
 
 void mx_render_select_player(t_game_textures *textures) {
     Vector2 circle = {
-        game_config.screen_width / 3, game_config.screen_height / 2
+        GetScreenWidth() / 3, GetScreenHeight() / 2
     };
     int radius = 200;
     Rectangle gear_rect = mx_draw_settings_icon(textures);
@@ -35,7 +35,7 @@ void mx_render_select_player(t_game_textures *textures) {
     draw_select_icon(circle, 2 * circle.x, radius,
                      custom_colors.button_background_color,
                      textures->one_player, "1 PLAYER");
-    draw_select_icon(circle, game_config.screen_width, radius,
+    draw_select_icon(circle, GetScreenWidth(), radius,
                      custom_colors.button_background_color,
                      textures->two_players, "2 PLAYERS");
     toned_circle(circle, radius);

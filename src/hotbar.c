@@ -188,7 +188,7 @@ void mx_render_hotbar(t_game_textures *textures) {
     int hotbar_cell_width = hotbar_config.cell_width;
     int hotbar_cell_height = hotbar_config.cell_height;
     int margin = hotbar_config.margin;
-    int start_position_x = (game_config.screen_width - (hotbar_cell_width * MX_INVENTORY_SIZE + margin * (MX_INVENTORY_SIZE - 1))) / 2;
+    int start_position_x = (GetScreenWidth() - (hotbar_cell_width * MX_INVENTORY_SIZE + margin * (MX_INVENTORY_SIZE - 1))) / 2;
 
     update_hotbar();
     

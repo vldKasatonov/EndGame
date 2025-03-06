@@ -139,7 +139,7 @@ Rectangle mx_draw_back_button(t_game_textures *textures) {
 
 Rectangle mx_draw_settings_icon(t_game_textures *textures) {
 	int gear_size = 115;
-	Rectangle gear_rect = { game_config.screen_width - gear_size - 30,
+	Rectangle gear_rect = { GetScreenWidth() - gear_size - 30,
                            20, gear_size, gear_size };
 	DrawTexturePro(textures->settings, (Rectangle){ 0, 0,
 			   textures->settings.width, textures->settings.height },

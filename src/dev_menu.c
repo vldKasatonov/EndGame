@@ -18,8 +18,8 @@ void mx_render_developers(t_game_textures *textures) {
     Vector2 text_size_header = MeasureTextEx(mx_get_custom_font(),
                                              "OUR TEAM:", 100, 3);
     Vector2 text_pos_header = {
-        (game_config.screen_width - text_size_header.x) / 2,
-        (game_config.screen_height - text_size_header.y) / 6
+        (GetScreenWidth() - text_size_header.x) / 2,
+        (GetScreenHeight() - text_size_header.y) / 6
     };
 
     DrawTextEx(mx_get_custom_font(), "OUR TEAM:", text_pos_header,

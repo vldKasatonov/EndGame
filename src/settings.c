@@ -100,8 +100,8 @@ void mx_render_settings(t_game_textures *textures, float *volume_music, float *v
     int slider_width = 500;
     int slider_height = 30;
     int circle_size = 30;
-    int center_x = game_config.screen_width / 2;
-    int center_y = game_config.screen_height / 2;
+    int center_x = GetScreenWidth() / 2;
+    int center_y = GetScreenHeight() / 2;
     Rectangle slider_bar_music = { center_x - slider_width / 2, center_y - 100 - 50, slider_width, slider_height };
     Rectangle slider_bar_effects = { center_x - slider_width / 2, center_y + 40 - 30, slider_width, slider_height };
     Rectangle slider_knob_music = { slider_bar_music.x + (*volume_music) * slider_width - circle_size / 2,
@@ -173,41 +173,41 @@ void mx_render_settings(t_game_textures *textures, float *volume_music, float *v
         DrawTexturePro(textures->volume_on, (Rectangle){0, 0, textures->volume_on.width, textures->volume_on.height}, icon_effects_rect, (Vector2){0, 0}, 0.0f, WHITE);
     }
 
-    float text_width_music = MeasureText("Music Volume", game_config.font_size_paragraph + 20);
-    float text_width_effects = MeasureText("Effects Volume", game_config.font_size_paragraph + 20);
+    float text_width_music = MeasureText("Music Volume", 40);
+    float text_width_effects = MeasureText("Effects Volume", 40);
     Vector2 text_pos_music = {(GetScreenWidth() - text_width_music) / 2 - 80, slider_bar_music.y - 80};
-    DrawTextEx(mx_get_custom_font(), "Music Volume", text_pos_music, game_config.font_size_paragraph + 40, 3, WHITE);
+    DrawTextEx(mx_get_custom_font(), "Music Volume", text_pos_music, 60, 3, WHITE);
     Vector2 text_pos_effects = {(GetScreenWidth() - text_width_effects) / 2 - 80, slider_bar_effects.y - 80};
-    DrawTextEx(mx_get_custom_font(), "Effects Volume", text_pos_effects, game_config.font_size_paragraph + 40, 3, WHITE);
+    DrawTextEx(mx_get_custom_font(), "Effects Volume", text_pos_effects, 60, 3, WHITE);
 
     Rectangle back_button = mx_draw_back_button(textures);
 
-    int button_x2 = (1600 - (MeasureText("DELETE PROGRESS", game_config.font_size_paragraph + 20) + icon_size + 10)) / 2 - 90;
+    int button_x2 = (1600 - (MeasureText("DELETE PROGRESS", 40) + icon_size + 10)) / 2 - 90;
     int button_y12 = slider_bar_effects.y + 150;
     int text_offset_x2 = button_x2 + icon_size + 10;
-    Rectangle delete_button = { button_x2, button_y12, MeasureText("DELETE PROGRESS", game_config.font_size_paragraph + 31) + icon_size + 10, 50 };
+    Rectangle delete_button = { button_x2, button_y12, MeasureText("DELETE PROGRESS", 51) + icon_size + 10, 50 };
     Rectangle delete_icon_rect = { button_x2, button_y12 + (50 - icon_size) / 2 + 10, icon_size, icon_size };
-    Rectangle delete_text_rect = { text_offset_x2, button_y12 + (50 - game_config.font_size_paragraph + 15) / 2 - 5, MeasureText("DELETE PROGRESS", game_config.font_size_paragraph + 20), 50 };
+    Rectangle delete_text_rect = { text_offset_x2, button_y12 + 45 / 2 - 5, MeasureText("DELETE PROGRESS", 40), 50 };
     DrawTexturePro(textures->del_texture, (Rectangle){0, 0, textures->del_texture.width, textures->del_texture.height}, delete_icon_rect, (Vector2){0, 0}, 0.0f, WHITE);
     Vector2 text_pos3 = {
         delete_text_rect.x,
         delete_text_rect.y - 10
     };
-    DrawTextEx(mx_get_custom_font(), "DELETE PROGRESS", text_pos3, game_config.font_size_paragraph + 30, 3, custom_colors.red_color);
+    DrawTextEx(mx_get_custom_font(), "DELETE PROGRESS", text_pos3, 50, 3, custom_colors.red_color);
 
     int button_x1 = 1200;
     int button_y11 = 780;
     icon_size += 20;
     const char* button_text = "GUIDE";
-    int text_width2 = MeasureText(button_text, game_config.font_size_header2 + 30) + 45;
+    int text_width2 = MeasureText(button_text, 65) + 45;
     int button_width2 = icon_size + text_width2 + 55;
     int text_offset_x = button_x1 + icon_size + 10;
     Rectangle guide_button = { button_x1, button_y11, button_width2, 50 };
     Rectangle guide_icon_rect = { button_x1, button_y11 + (50 - icon_size) / 2 + 20, icon_size, icon_size };
-    Rectangle guide_text_rect = { text_offset_x, button_y11 + (50 - game_config.font_size_header2 + 30) / 2 - 5, text_width2, 50 };
+    Rectangle guide_text_rect = { text_offset_x, button_y11 + 45 / 2 - 5, text_width2, 50 };
     DrawTexturePro(textures->guide, (Rectangle){0, 0, textures->guide.width, textures->guide.height}, guide_icon_rect, (Vector2){0, 0}, 0.0f, WHITE);
     Vector2 text_pos2 = { guide_text_rect.x, guide_text_rect.y - 20 };
-    DrawTextEx(mx_get_custom_font(), button_text, text_pos2, game_config.font_size_paragraph + 70, 3, WHITE);
+    DrawTextEx(mx_get_custom_font(), button_text, text_pos2, 90, 3, WHITE);
 
     if (!(*is_delete_popup_open)) {
         check_collision(mouse, &cursor_changed, back_button, previous_state);

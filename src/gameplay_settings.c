@@ -70,8 +70,8 @@ void mx_render_gameplay_settings(t_game_textures *textures, float *volume_music,
     int slider_height = 30;
     int circle_size = 30;
 
-    int center_x = game_config.screen_width / 2;
-    int center_y = game_config.screen_height / 2;
+    int center_x = GetScreenWidth() / 2;
+    int center_y = GetScreenHeight() / 2;
 
     Rectangle slider_bar_music = { center_x - slider_width / 2, center_y - 50, slider_width, slider_height };
     Rectangle slider_bar_effects = { center_x - slider_width / 2, center_y  + 90 , slider_width, slider_height };

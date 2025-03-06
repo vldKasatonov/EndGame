@@ -1,15 +1,15 @@
 #include "../inc/header.h"
 
-t_game_config game_config = {
-	1600, // screen_width
-	900, // screen_height
-	300, // button_width
-	60,  // button_height
-	80,  // font_size_header1
-	35,  // font_size_header2
-	25,	 // font_size_header3
-	20,  // font_size_paragraph
-};
+//t_game_config game_config = {
+//	1600, // screen_width
+//	900, // screen_height
+//	300, // button_width
+//	60,  // button_height
+//	80,  // font_size_header1
+//	35,  // font_size_header2
+//	25,	 // font_size_header3
+//	20,  // font_size_paragraph
+//};
 
 t_custom_colors custom_colors = {
     { 241, 129, 59, 255 }, // button_background_color

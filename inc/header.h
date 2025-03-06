@@ -35,16 +35,16 @@ typedef struct s_level_stars {
     int level_stars[MX_NUM_LEVELS];
 } t_level_stars;
 
-typedef struct s_game_config {
-    double screen_width;
-    double screen_height;
-    double button_width;
-    double button_height;
-    double font_size_header1;
-    double font_size_header2;
-    double font_size_header3;
-    double font_size_paragraph;
-} t_game_config;
+//typedef struct s_game_config {
+//    double screen_width;
+//    double screen_height;
+//    double button_width;
+//    double button_height;
+//    double font_size_header1;
+//    double font_size_header2;
+//    double font_size_header3;
+//    double font_size_paragraph;
+//} t_game_config;
 
 typedef struct s_custom_colors {
     Color button_background_color;
@@ -321,7 +321,7 @@ extern t_queue queue;
 extern t_level level;
 extern t_surface surfaces[];
 extern int surface_count;
-extern t_game_config game_config;
+//extern t_game_config game_config;
 extern t_custom_colors custom_colors;
 extern t_queue_config queue_config;
 extern t_hotbar_config hotbar_config;

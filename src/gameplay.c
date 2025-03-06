@@ -79,7 +79,7 @@ void mx_render_gameplay(t_player* player_data, t_game_textures* textures, bool* 
     }
 
     int pause_size = 100;
-    Rectangle gear_rect = { game_config.screen_width - pause_size - 30, 30, pause_size, pause_size };
+    Rectangle gear_rect = { GetScreenWidth() - pause_size - 30, 30, pause_size, pause_size };
     DrawTexturePro(textures->pause, (Rectangle){ 0, 0, textures->pause.width, textures->pause.height }, gear_rect, (Vector2){0, 0}, 0.0f, WHITE);
     Vector2 mouse = GetMousePosition();
     bool cursor_changed = false;

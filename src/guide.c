@@ -18,8 +18,8 @@ static Vector2 get_text_pos(void) {
         MeasureText("PAGE 2", 25)
     };
     Vector2 text_pos_page = {
-        game_config.screen_width - text_page_size.x,
-        game_config.screen_height - text_page_size.y
+        GetScreenWidth() - text_page_size.x,
+        GetScreenHeight() - text_page_size.y
     };
     return text_pos_page;
 }
