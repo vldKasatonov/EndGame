@@ -32,6 +32,7 @@ void mx_render_level_menu(t_game_textures* textures, t_level_stars *game_state, 
             current_level = i;
             int stars_earned = mx_calculate_stars_for_level();
             mx_update_level_stars(game_state, i, stars_earned);
+            completed_levels = i + 1;
         }
     }
     int level_1_stars = game_state->level_stars[0];
@@ -81,7 +82,6 @@ void mx_render_level_menu(t_game_textures* textures, t_level_stars *game_state, 
             mx_initialize_queue(&queue);                 // gameplay initializers
             mx_initialize_level(&level_data[0], &level);  //
             level_number = 1;
-            completed_levels = 1;
 
             SetMouseCursor(MOUSE_CURSOR_DEFAULT);
         }
@@ -102,7 +102,6 @@ void mx_render_level_menu(t_game_textures* textures, t_level_stars *game_state, 
             mx_initialize_queue(&queue);                 // gameplay initializers
             mx_initialize_level(&level_data[1], &level);  //
             level_number = 2;
-            completed_levels = 2;
 
             SetMouseCursor(MOUSE_CURSOR_DEFAULT);
         }
@@ -126,7 +125,6 @@ void mx_render_level_menu(t_game_textures* textures, t_level_stars *game_state, 
             mx_initialize_queue(&queue);                 // gameplay initializers
             mx_initialize_level(&level_data[2], &level);  //
             level_number = 3;
-            completed_levels = 3;
 
             SetMouseCursor(MOUSE_CURSOR_DEFAULT);
         }
@@ -138,7 +136,6 @@ void mx_render_level_menu(t_game_textures* textures, t_level_stars *game_state, 
     if (!cursor_changed) {
         SetMouseCursor(MOUSE_CURSOR_DEFAULT);
     }
-
 }
 
 void mx_render_level_menu2(t_game_textures *textures) {
