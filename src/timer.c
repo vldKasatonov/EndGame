@@ -1,7 +1,7 @@
 #include "../inc/header.h"
 
 #define MX_MAX_LEVELS 10  
-#define MX_BEST_TIME_FORMAT "resource/best_time_level_%d.txt"  
+#define MX_BEST_TIME_FORMAT "resource/data/best_time_level_%d.txt"
 
 static double start_time = 0.0;
 static double paused_time = 0.0;
