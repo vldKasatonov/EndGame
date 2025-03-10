@@ -4,7 +4,7 @@ static void reset_game_progress(t_level_stars *game_state) {
     char filename[50];
     for (int i = 0; i < 3; i++) {
         snprintf(filename, sizeof(filename),
-                 "resource/best_time_level_%d.txt", i);
+                 "resource/data/best_time_level_%d.txt", i);
         remove(filename);
     }
     printf("INFO: All best time files deleted\n");
