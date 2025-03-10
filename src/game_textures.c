@@ -51,6 +51,7 @@ void mx_load_textures(t_game_textures *textures) {
     textures->map2 = LoadTexture("resource/images/map2.png");
     textures->cloud = LoadTexture("resource/images/cloud.png");
     textures->f_button = LoadTexture("resource/images/fButton.png");
+    textures->controls = LoadTexture("resource/images/controls.png");
 }
 
 void mx_unload_textures(t_game_textures *textures) {
@@ -104,4 +105,5 @@ void mx_unload_textures(t_game_textures *textures) {
     UnloadTexture(textures->map2);
     UnloadTexture(textures->cloud);
     UnloadTexture(textures->f_button);
+    UnloadTexture(textures->controls);
 }

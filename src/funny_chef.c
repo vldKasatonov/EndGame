@@ -86,6 +86,9 @@ int main(void) {
 		case GUIDE_PAGE3:
 			move_background(&textures, speed_scrolling, &pos_background);
 			break;
+        case CONTROLS:
+			move_background(&textures, speed_scrolling, &pos_background);
+			break;
 		case GAMEPLAY_SETTINGS:
 			move_background(&textures, speed_scrolling, &pos_background);
 			mx_pause_game_timer();
@@ -139,6 +142,10 @@ int main(void) {
 		case GUIDE_PAGE3:
 			draw_moving_background(&textures, pos_background);
 			mx_render_guide_page3(&textures);
+			break;
+        case CONTROLS:
+			draw_moving_background(&textures, pos_background);
+			mx_render_controls(&textures);
 			break;
 		case GAMEPLAY:
 			mx_render_gameplay(&player_data, &textures, &is_popup_open, &served_counter, max_served);

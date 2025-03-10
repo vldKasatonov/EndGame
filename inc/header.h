@@ -28,23 +28,13 @@ typedef enum e_game_screen {
     LEVEL_MENU2,
     GAMEPLAY,
     GAMEPLAY_SETTINGS,
-    DEVELOPERS
+    DEVELOPERS,
+	CONTROLS
 } t_game_screen;
 
 typedef struct s_level_stars {
     int level_stars[MX_NUM_LEVELS];
 } t_level_stars;
-
-//typedef struct s_game_config {
-//    double screen_width;
-//    double screen_height;
-//    double button_width;
-//    double button_height;
-//    double font_size_header1;
-//    double font_size_header2;
-//    double font_size_header3;
-//    double font_size_paragraph;
-//} t_game_config;
 
 typedef struct s_custom_colors {
     Color button_background_color;
@@ -113,6 +103,7 @@ typedef struct s_game_textures {
     Texture2D map2;
     Texture2D cloud;
     Texture2D f_button;
+    Texture2D controls;
 } t_game_textures;
 
 void mx_load_textures(t_game_textures *textures);
@@ -275,9 +266,10 @@ Rectangle mx_draw_settings_icon(t_game_textures*);
 void mx_draw_arrow(Texture2D, Rectangle);
 void mx_render_main_menu(t_game_textures*, bool*);
 void mx_render_gameplay_settings(t_game_textures*, float*, float*, bool*, int*);
-void mx_render_guide_page1(t_game_textures *textures);
-void mx_render_guide_page2(t_game_textures *textures);
-void mx_render_guide_page3(t_game_textures *textures);
+void mx_render_guide_page1(t_game_textures*);
+void mx_render_guide_page2(t_game_textures*);
+void mx_render_guide_page3(t_game_textures*);
+void mx_render_controls(t_game_textures*);
 void mx_render_select_player(t_game_textures*);
 void mx_render_settings(t_game_textures*, float*, float*, t_level_stars*, bool*);
 void mx_render_hotbar(t_game_textures*);
