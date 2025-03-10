@@ -2,12 +2,10 @@
 
 static void draw_text_dev(char *text, int space) {
     Vector2 text_size = MeasureTextEx(mx_get_custom_font(), text, 70, 3);
-    Vector2 text_pos = {
-        (GetScreenWidth() - text_size.x) / 2,
-        (GetScreenHeight() - text_size.y) / 3
-    };
-    DrawTextEx(mx_get_custom_font(), text, (Vector2){text_pos.x,
-               text_pos.y + space}, 70, 3, WHITE);
+    Vector2 text_pos = {(GetScreenWidth() - text_size.x) / 2,
+                        (GetScreenHeight() - text_size.y) / 3};
+    DrawTextEx(mx_get_custom_font(), text,
+               (Vector2){text_pos.x, text_pos.y + space}, 70, 3, WHITE);
 }
 
 void mx_render_developers(t_game_textures *textures) {
@@ -17,10 +15,8 @@ void mx_render_developers(t_game_textures *textures) {
     int space = 90;
     Vector2 text_size_header = MeasureTextEx(mx_get_custom_font(),
                                              "OUR TEAM:", 100, 3);
-    Vector2 text_pos_header = {
-        (GetScreenWidth() - text_size_header.x) / 2,
-        (GetScreenHeight() - text_size_header.y) / 6
-    };
+    Vector2 text_pos_header = {(GetScreenWidth() - text_size_header.x) / 2,
+            				   (GetScreenHeight() - text_size_header.y) / 6};
 
     DrawTextEx(mx_get_custom_font(), "OUR TEAM:", text_pos_header,
                100, 3, WHITE);
