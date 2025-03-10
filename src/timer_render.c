@@ -12,9 +12,7 @@ void mx_render_timer(void) {
     int minutes = (int)elapsed_time / 60;
     int seconds = (int)elapsed_time % 60;
 
-    int screen_width = GetScreenWidth();
-    int text_size = 50; 
-
+    int text_size = 50;
     char timeText[10]; 
     snprintf(timeText, sizeof(timeText), "%02d:%02d", minutes, seconds);
 

@@ -92,7 +92,7 @@ void mx_interact_with_object(t_inventory* inventory, t_interactable_type type) {
             mx_delete_item(&item);
         }
         break;
-    case PLATE:
+    case PLATE: {
       	bool have_sliced_cucumber = false;
         int index_sliced_cucumber = 0;
         bool have_sliced_tomato = false;
@@ -125,6 +125,7 @@ void mx_interact_with_object(t_inventory* inventory, t_interactable_type type) {
             mx_add_item(inventory, mx_get_salad());
         }
         break;
+    }
     default:
         break;
     }
