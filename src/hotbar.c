@@ -4,9 +4,9 @@ t_hotbar_config hotbar_config = {
     75, // cell_width
     75, // cellheight
     15, // margin
-    (Color) { 255, 255, 255, 200 }, // cell_color
-    (Color) { 169, 169, 169, 200 }, // cell_border_color
-    (Color) { 255, 0, 0, 200 }      // cell_border_color_active
+    (Color) {255, 255, 255, 200}, // cell_color
+    (Color) {169, 169, 169, 200}, // cell_border_color
+    (Color) {255, 0, 0, 200}      // cell_border_color_active
 };
 
 static void update_hotbar(void) {
@@ -76,108 +76,125 @@ static void drawIngredient(Rectangle rect, t_item* item, t_game_textures *textur
     switch (item->type) {
         case POTATO:
             if (item->state == DIRTY) {
-                DrawTexturePro(textures->dirty_potato, (Rectangle) { 0, 0, textures->dirty_potato.width, textures->dirty_potato.height },
-                    (Rectangle) {
-                    rect.x + 2.5, rect.y + 2.5, 70, 70
-                }, (Vector2) { 0, 0 }, 0.0f, WHITE);
+                DrawTexturePro(textures->dirty_potato,
+                               (Rectangle){0, 0, textures->dirty_potato.width,
+                                           textures->dirty_potato.height},
+                               (Rectangle){rect.x + 2.5, rect.y + 2.5, 70, 70},
+                               (Vector2){0, 0}, 0.0f, WHITE);
             }
             else if (item->state == CLEAN) {
-               DrawTexturePro(textures->washed_potato, (Rectangle) { 0, 0, textures->washed_potato.width, textures->washed_potato.height },
-                   (Rectangle) {
-                   rect.x + 2.5, rect.y + 2.5, 70, 70
-               }, (Vector2) { 0, 0 }, 0.0f, WHITE);
-               
+                DrawTexturePro(textures->washed_potato,
+                                (Rectangle){0, 0, textures->washed_potato.width,
+                                            textures->washed_potato.height},
+                                (Rectangle){rect.x + 2.5, rect.y + 2.5, 70, 70},
+                                (Vector2){0, 0}, 0.0f, WHITE);
             }
             else if (item->state == PEELED) {
-                DrawTexturePro(textures->peeled_potato, (Rectangle) { 0, 0, textures->peeled_potato.width, textures->peeled_potato.height },
-                    (Rectangle) {
-                    rect.x + 2.5, rect.y + 5, 70, 70
-                }, (Vector2) { 0, 0 }, 0.0f, WHITE);
+                DrawTexturePro(textures->peeled_potato,
+                                (Rectangle){0, 0, textures->peeled_potato.width,
+                                            textures->peeled_potato.height},
+                                (Rectangle){rect.x + 2.5, rect.y + 2.5, 70, 70},
+                                (Vector2){0, 0}, 0.0f, WHITE);
             }
             else if (item->state == SLICED) {
-                DrawTexturePro(textures->sliced_potato, (Rectangle) { 0, 0, textures->sliced_potato.width, textures->sliced_potato.height },
-                    (Rectangle) {
-                    rect.x + 5, rect.y + 10, 65, 65
-                }, (Vector2) { 0, 0 }, 0.0f, WHITE);
+                DrawTexturePro(textures->sliced_potato,
+                               (Rectangle){0, 0, textures->sliced_potato.width,
+                                           textures->sliced_potato.height},
+                               (Rectangle){rect.x + 5, rect.y + 10, 65, 65},
+                               (Vector2){0, 0}, 0.0f, WHITE);
             }
-            else {
-                DrawTexturePro(textures->fried_potato, (Rectangle) { 0, 0, textures->fried_potato.width, textures->fried_potato.height },
-                    (Rectangle) {
-                    rect.x, rect.y, 75, 85
-                }, (Vector2) { 0, 0 }, 0.0f, WHITE);
+            else if (item->state == FRIED) {
+                DrawTexturePro(textures->fried_potato,
+                               (Rectangle){0, 0, textures->fried_potato.width,
+                                           textures->fried_potato.height},
+                               (Rectangle){rect.x, rect.y, 75, 85},
+                               (Vector2){0, 0}, 0.0f, WHITE);
             }
             break;
 
         case TOMATO:
             if (item->state == DIRTY) {
-                DrawTexturePro(textures->dirty_tomato, (Rectangle) { 0, 0, textures->dirty_tomato.width, textures->dirty_tomato.height },
-                    (Rectangle) {
-                    rect.x, rect.y, 75, 75
-                }, (Vector2) { 0, 0 }, 0.0f, WHITE);
+                DrawTexturePro(textures->dirty_tomato,
+                               (Rectangle){0, 0, textures->dirty_tomato.width,
+                                           textures->dirty_tomato.height},
+                               (Rectangle){rect.x, rect.y, 75, 75},
+                               (Vector2){0, 0}, 0.0f, WHITE);
             }
             else if (item->state == CLEAN) {
-                DrawTexturePro(textures->washed_tomato, (Rectangle) { 0, 0, textures->washed_tomato.width, textures->washed_tomato.height },
-                    (Rectangle) {
-                    rect.x, rect.y, 75, 75
-                }, (Vector2) { 0, 0 }, 0.0f, WHITE);
+                DrawTexturePro(textures->washed_tomato,
+                               (Rectangle){0, 0, textures->washed_tomato.width,
+                                           textures->washed_tomato.height},
+                               (Rectangle){rect.x, rect.y, 75, 75},
+                               (Vector2){0, 0}, 0.0f, WHITE);
             }
-            else {
-                DrawTexturePro(textures->sliced_tomato, (Rectangle) { 0, 0, textures->sliced_tomato.width, textures->sliced_tomato.height },
-                    (Rectangle) {
-                    rect.x + 5, rect.y + 5, 70, 70
-                }, (Vector2) { 0, 0 }, 0.0f, WHITE);
+            else if (item->state == SLICED) {
+                DrawTexturePro(textures->sliced_tomato,
+                               (Rectangle){0, 0, textures->sliced_tomato.width,
+                                           textures->sliced_tomato.height},
+                               (Rectangle){rect.x + 5, rect.y + 5, 70, 70},
+                               (Vector2){0, 0}, 0.0f, WHITE);
             }
             break;
         case CUCUMBER:
             if (item->state == DIRTY) {
-                DrawTexturePro(textures->dirty_cucumber, (Rectangle) { 0, 0, textures->dirty_cucumber.width, textures->dirty_cucumber.height },
-                    (Rectangle) {
-                    rect.x, rect.y, 75, 75
-                }, (Vector2) { 0, 0 }, 0.0f, WHITE);
+                DrawTexturePro(textures->dirty_cucumber,
+                               (Rectangle){0, 0, textures->dirty_cucumber.width,
+                                           textures->dirty_cucumber.height},
+                               (Rectangle){rect.x, rect.y, 75, 75},
+                               (Vector2){0, 0}, 0.0f, WHITE);
             }
             else if (item->state == CLEAN) {
-                DrawTexturePro(textures->washed_cucumber, (Rectangle) { 0, 0, textures->washed_cucumber.width, textures->washed_cucumber.height },
-                    (Rectangle) {
-                    rect.x, rect.y, 75, 75
-                }, (Vector2) { 0, 0 }, 0.0f, WHITE);
+                DrawTexturePro(textures->washed_cucumber,
+                               (Rectangle){0, 0, textures->washed_cucumber.width,
+                                           textures->washed_cucumber.height},
+                               (Rectangle){rect.x, rect.y, 75, 75},
+                               (Vector2){0, 0}, 0.0f, WHITE);
             }
-            else {
-                DrawTexturePro(textures->sliced_cucumber, (Rectangle) { 0, 0, textures->sliced_cucumber.width, textures->sliced_cucumber.height },
-                    (Rectangle) {
-                    rect.x + 3, rect.y + 5, 65, 65
-                }, (Vector2) { 0, 0 }, 0.0f, WHITE);
+            else if (item->state == SLICED) {
+                DrawTexturePro(textures->sliced_cucumber,
+                               (Rectangle){0, 0, textures->sliced_cucumber.width,
+                                           textures->sliced_cucumber.height},
+                               (Rectangle){rect.x + 3, rect.y + 5, 65, 65},
+                               (Vector2){0, 0}, 0.0f, WHITE);
             }
             break;
         case SALAD:
             if (item->state == MIXED) {
-                DrawTexturePro(textures->salad, (Rectangle) { 0, 0, textures->salad.width, textures->salad.height },
-                    (Rectangle) {
-                    rect.x, rect.y, 75, 75
-                }, (Vector2) { 0, 0 }, 0.0f, WHITE);
+                DrawTexturePro(textures->salad,
+                               (Rectangle){0, 0, textures->salad.width,
+                                           textures->salad.height},
+                               (Rectangle){rect.x, rect.y, 75, 75},
+                               (Vector2){0, 0}, 0.0f, WHITE);
             }
             break;
         case APPLE:
             if (item->state == DIRTY) {
-                DrawTexturePro(textures->dirty_apple, (Rectangle) { 0, 0, textures->dirty_apple.width, textures->dirty_apple.height },
-                    (Rectangle) { rect.x, rect.y, 75, 75 }, (Vector2) { 0, 0 }, 0.0f, WHITE);
+                DrawTexturePro(textures->dirty_apple,
+                               (Rectangle){0, 0, textures->dirty_apple.width,
+                                           textures->dirty_apple.height},
+                               (Rectangle){rect.x, rect.y, 75, 75},
+                               (Vector2){0, 0}, 0.0f, WHITE);
             }
             else if (item->state == CLEAN) {
-                DrawTexturePro(textures->washed_apple, (Rectangle) { 0, 0, textures->washed_apple.width, textures->washed_apple.height },
-                    (Rectangle) {
-                    rect.x, rect.y, 75, 75
-                }, (Vector2) { 0, 0 }, 0.0f, WHITE);
+                DrawTexturePro(textures->washed_apple,
+                               (Rectangle){0, 0, textures->washed_apple.width,
+                                           textures->washed_apple.height},
+                               (Rectangle){rect.x, rect.y, 75, 75},
+                               (Vector2){0, 0}, 0.0f, WHITE);
             }
             else if (item->state == SLICED) {
-                DrawTexturePro(textures->sliced_apple, (Rectangle) { 0, 0, textures->sliced_apple.width, textures->sliced_apple.height },
-                    (Rectangle) {
-                    rect.x, rect.y, 75, 75
-                }, (Vector2) { 0, 0 }, 0.0f, WHITE);
+                DrawTexturePro(textures->sliced_apple,
+                               (Rectangle){0, 0, textures->sliced_apple.width,
+                                           textures->sliced_apple.height},
+                               (Rectangle){rect.x, rect.y, 75, 75},
+                               (Vector2){0, 0}, 0.0f, WHITE);
             }
-            else {
-                DrawTexturePro(textures->juice, (Rectangle) { 0, 0, textures->juice.width, textures->juice.height },
-                    (Rectangle) {
-                    rect.x + 5, rect.y + 5, 65, 65
-                }, (Vector2) { 0, 0 }, 0.0f, WHITE);
+            else if (item->state == JUICED) {
+                DrawTexturePro(textures->juice,
+                               (Rectangle){0, 0, textures->juice.width,
+                                           textures->juice.height},
+                               (Rectangle){rect.x + 5, rect.y + 5, 65, 65},
+                               (Vector2){0, 0}, 0.0f, WHITE);
             }
         default:
             break;
@@ -188,7 +205,8 @@ void mx_render_hotbar(t_game_textures *textures) {
     int hotbar_cell_width = hotbar_config.cell_width;
     int hotbar_cell_height = hotbar_config.cell_height;
     int margin = hotbar_config.margin;
-    int start_position_x = (GetScreenWidth() - (hotbar_cell_width * MX_INVENTORY_SIZE + margin * (MX_INVENTORY_SIZE - 1))) / 2;
+    int start_position_x = (GetScreenWidth() - (hotbar_cell_width * MX_INVENTORY_SIZE
+                           + margin * (MX_INVENTORY_SIZE - 1))) / 2;
 
     update_hotbar();
     
@@ -200,7 +218,7 @@ void mx_render_hotbar(t_game_textures *textures) {
     
     // draw hotbar cells
     for (int i = 0; i < MX_INVENTORY_SIZE; i++) {
-        Rectangle rect = { start_position_x, 780, hotbar_cell_width, hotbar_cell_height };
+        Rectangle rect = {start_position_x, 780, hotbar_cell_width, hotbar_cell_height};
 
         // draw a cell
         DrawRectangleRec(rect, hotbar_config.cell_color);

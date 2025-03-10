@@ -33,7 +33,8 @@ void mx_clear_level(t_level* level) {
     level->guest_count = 0;
 }
 
-void mx_try_add_guest_to_register(t_level* level, t_queue* queue, int current_time) {
+void mx_try_add_guest_to_register(t_level* level, t_queue* queue,
+                                  int current_time) {
     if (queue->at_register != NULL || !mx_has_queue_space(queue)) {
         return;
     }

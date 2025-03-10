@@ -1,8 +1,8 @@
 #include "../inc/header.h"
 
 void mx_draw_stars_gameplay(int space, double elapsed_time, t_game_textures *textures, Vector2 circle) {
-    Rectangle star_rec = { 225, 390, 75, 75 };
-    Rectangle src_star = { 0, 0, textures->star.width, textures->star.height };
+    Rectangle star_rec = {225, 390, 75, 75};
+    Rectangle src_star = {0, 0, textures->star.width, textures->star.height};
     Color star_colors[3] = {
         custom_colors.nonactive_star_color,
         custom_colors.nonactive_star_color,
@@ -25,21 +25,23 @@ void mx_draw_stars_gameplay(int space, double elapsed_time, t_game_textures *tex
     }
     for (int i = 0; i < 3; ++i) {
         float offset_x = circle.x + (i * (star_rec.width + space));
-        DrawTexturePro(textures->star, src_star, (Rectangle){ offset_x, circle.y, star_rec.width, star_rec.height },
-                       (Vector2){ 0, 0 }, 0.0f, star_colors[i]);
+        DrawTexturePro(textures->star, src_star,
+                       (Rectangle){offset_x, circle.y,
+                                   star_rec.width, star_rec.height},
+                       (Vector2){0, 0}, 0.0f, star_colors[i]);
     }
 }
 
 void mx_disable_gameplay_input(bool is_popup_open) {
     if (current_state == GAMEPLAY && is_popup_open) {
-        if (IsKeyPressed(KEY_SPACE) ||
-            IsKeyPressed(KEY_W) ||
-            IsKeyPressed(KEY_A) ||
-            IsKeyPressed(KEY_S) ||
-            IsKeyPressed(KEY_D) ||
-            IsKeyPressed(KEY_F) ||
-            IsKeyPressed(KEY_E) ||
-            IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+        if (IsKeyPressed(KEY_SPACE)
+            || IsKeyPressed(KEY_W)
+            || IsKeyPressed(KEY_A)
+            || IsKeyPressed(KEY_S)
+            || IsKeyPressed(KEY_D)
+            || IsKeyPressed(KEY_F)
+            || IsKeyPressed(KEY_E)
+            || IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             return;
         }
     }
@@ -55,10 +57,12 @@ void mx_draw_level_sucsses(bool *is_exit_popup_open, t_game_textures *textures,
         popup_width,
         popup_height
     };
-    DrawRectangleRounded(popup_rect, 0.5f, 10, custom_colors.button_background_color);
+    DrawRectangleRounded(popup_rect, 0.5f, 10,
+                         custom_colors.button_background_color);
     DrawRectangleRoundedLinesEx(popup_rect, 0.5f, 10, 5, WHITE);
 
-    Vector2 text_size = MeasureTextEx(mx_get_custom_font(), "Congratulations!", 70, 3);
+    Vector2 text_size = MeasureTextEx(mx_get_custom_font(),
+                                      "Congratulations!", 70, 3);
     Vector2 text_pos = {
         popup_rect.x + (popup_rect.width - text_size.x) / 2,
         popup_rect.y + 60
@@ -66,7 +70,8 @@ void mx_draw_level_sucsses(bool *is_exit_popup_open, t_game_textures *textures,
     DrawTextEx(mx_get_custom_font(), "Congratulations!", text_pos, 70, 3, WHITE);
 
     double elapsed_time = mx_get_elapsed_time();
-    Vector2 popup_center = { popup_rect.x + popup_width / 2 - 130 , popup_rect.y + popup_height / 2 - 90};
+    Vector2 popup_center = {popup_rect.x + popup_width / 2 - 130,
+                            popup_rect.y + popup_height / 2 - 90};
     int space = 10;
     mx_draw_stars_gameplay(space, elapsed_time, textures, popup_center);
 
@@ -87,7 +92,8 @@ void mx_draw_level_sucsses(bool *is_exit_popup_open, t_game_textures *textures,
     };
     DrawTextEx(mx_get_custom_font(), your_time, your_time_pos, 50, 3, WHITE);
 
-    Rectangle okey_button = { popup_rect.x + (popup_rect.width - 150) / 2, popup_rect.y + popup_height - 100, 150, 60 };
+    Rectangle okey_button = {popup_rect.x + (popup_rect.width - 150) / 2,
+                             popup_rect.y + popup_height - 100, 150, 60};
     DrawRectangleRounded(okey_button, 0.5f, 10, GREEN);
     Vector2 okeytext_size = MeasureTextEx(mx_get_custom_font(), "OK", 40, 3);
     Vector2 okeytext_pos = {

@@ -1,26 +1,35 @@
 #include "../inc/header.h"
 
 static void draw_order_image(int x, int y, t_item* item, t_game_textures* textures) {
-    DrawTexturePro(textures->cloud, (Rectangle) { 0, 0, textures->cloud.width, textures->cloud.height },
-        (Rectangle) {x + 70, y - 30, 90, 90}, (Vector2) { 0, 0 }, 0.0f, WHITE);
+    DrawTexturePro(textures->cloud,
+                   (Rectangle){0, 0, textures->cloud.width, textures->cloud.height},
+        		   (Rectangle){x + 70, y - 30, 90, 90},
+                   (Vector2){0, 0}, 0.0f, WHITE);
     if (item->state == JUICED && item->type == APPLE) {
-        DrawTexturePro(textures->juice, (Rectangle) { 0, 0, textures->juice.width, textures->juice.height },
-        	(Rectangle) {x + 92, y - 8, 45, 45}, (Vector2) { 0, 0 }, 0.0f, WHITE);
+        DrawTexturePro(textures->juice,
+                       (Rectangle){0, 0, textures->juice.width, textures->juice.height},
+        			   (Rectangle){x + 92, y - 8, 45, 45},
+                       (Vector2){0, 0}, 0.0f, WHITE);
     }
     if (item->state == FRIED && item->type == POTATO) {
-        DrawTexturePro(textures->fried_potato, (Rectangle) { 0, 0, textures->fried_potato.width, textures->fried_potato.height },
-        	(Rectangle) {x + 92, y - 8, 45, 55}, (Vector2) { 0, 0 }, 0.0f, WHITE);
+        DrawTexturePro(textures->fried_potato,
+                       (Rectangle){0, 0, textures->fried_potato.width, textures->fried_potato.height},
+        			   (Rectangle){x + 92, y - 8, 45, 55},
+                       (Vector2){0, 0}, 0.0f, WHITE);
     }
     if (item->state == MIXED && item->type == SALAD) {
-        DrawTexturePro(textures->salad, (Rectangle) { 0, 0, textures->salad.width, textures->salad.height },
-        	(Rectangle) {x + 92, y - 8, 45, 45}, (Vector2) { 0, 0 }, 0.0f, WHITE);
+        DrawTexturePro(textures->salad,
+                       (Rectangle){0, 0, textures->salad.width, textures->salad.height},
+        			   (Rectangle){x + 92, y - 8, 45, 45},
+                       (Vector2){0, 0}, 0.0f, WHITE);
     }
 }
 
 static bool active_item_is_order(t_inventory* hotbar, t_item* order) {
     if (!order) return false;
     t_item* active_item = hotbar->items[hotbar->active_item];
-    return active_item && active_item->state == order->state && active_item->type == order->type;
+    return active_item && active_item->state == order->state
+                       && active_item->type == order->type;
 }
 
 void update_guest_position(t_guest* guest, float delta_time) {
@@ -43,7 +52,8 @@ void update_guest_position(t_guest* guest, float delta_time) {
     }
 }
 
-void mx_render_queue(Rectangle player, bool* is_popup_open, int* served_counter, t_game_textures *textures) {
+void mx_render_queue(Rectangle player, bool* is_popup_open,
+                     int* served_counter, t_game_textures *textures) {
   	double current_time = mx_get_elapsed_time();
   	float delta_time = GetFrameTime();
 
@@ -51,7 +61,7 @@ void mx_render_queue(Rectangle player, bool* is_popup_open, int* served_counter,
 
   	// guest is waiting near cash register
   	if (queue.at_register != NULL) {
-    	Rectangle client = { queue.at_register->x, queue.at_register->y, 100, 100 };
+    	Rectangle client = {queue.at_register->x, queue.at_register->y, 100, 100};
     	if (!(*is_popup_open)) {
       		update_guest_position(queue.at_register, delta_time);
     	}
@@ -76,10 +86,14 @@ void mx_render_queue(Rectangle player, bool* is_popup_open, int* served_counter,
         		update_guest_position(queue.queue[i], delta_time);
       		}
       		DrawTexture(textures->guest, client.x, client.y, WHITE);
-      		draw_order_image(queue.queue[i]->x - 20, queue.queue[i]->y - 20, queue.queue[i]->order, textures);
+      		draw_order_image(queue.queue[i]->x - 20, queue.queue[i]->y - 20,
+                             queue.queue[i]->order, textures);
       		int index = mx_get_nearby_interactable(client, surfaces, surface_count);
-      		if (index != -1 && !(*is_popup_open) && CheckCollisionRecs(client, surfaces[index].rect) && CheckCollisionRecs(player, surfaces[index].rect)) {
-        		if (IsKeyPressed(KEY_F) && active_item_is_order(&hotbar, queue.queue[i]->order)) {
+      		if (index != -1 && !(*is_popup_open)
+                && CheckCollisionRecs(client, surfaces[index].rect)
+                && CheckCollisionRecs(player, surfaces[index].rect)) {
+        		if (IsKeyPressed(KEY_F)
+                    && active_item_is_order(&hotbar, queue.queue[i]->order)) {
           			mx_interact_with_guest(&hotbar, &queue, i, surfaces[index].type);
           			if (surfaces[index].type == PICK_UP) {
               			(*served_counter)++;

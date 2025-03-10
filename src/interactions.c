@@ -11,15 +11,14 @@ int mx_get_nearby_interactable(Rectangle player, t_surface* surfaces, int surfac
 
 static void update_active_item_state(t_inventory* inventory, t_ingredient_state state) {
     t_item* item = mx_remove_active_item(inventory);
-
     if (item) {
         mx_update_item(item, state);
     }
-
     mx_add_item(inventory, item);
 }
 
-void mx_interact_with_guest(t_inventory* inventory, t_queue* queue, int index, t_interactable_type type) {
+void mx_interact_with_guest(t_inventory* inventory, t_queue* queue,
+                            int index, t_interactable_type type) {
     switch (type) {
     case PICK_UP:
         mx_serve_guest_at_index(queue, index);
@@ -93,18 +92,20 @@ void mx_interact_with_object(t_inventory* inventory, t_interactable_type type) {
             mx_delete_item(&item);
         }
         break;
-    case PLATE: {
+    case PLATE:
       	bool have_sliced_cucumber = false;
         int index_sliced_cucumber = 0;
         bool have_sliced_tomato = false;
         int index_sliced_tomato = 0;
         for (int i = 0; i < MX_INVENTORY_SIZE; i++) {
     		if (inventory->items[i]) {
-      			if (inventory->items[i]->state == SLICED && inventory->items[i]->type == CUCUMBER) {
+      			if (inventory->items[i]->state == SLICED
+                    && inventory->items[i]->type == CUCUMBER) {
                 	have_sliced_cucumber = true;
                 	index_sliced_cucumber = i;
             	}
-            	if (inventory->items[i]->state == SLICED && inventory->items[i]->type == TOMATO) {
+            	if (inventory->items[i]->state == SLICED
+                    && inventory->items[i]->type == TOMATO) {
                 	have_sliced_tomato = true;
                 	index_sliced_tomato = i;
             	}
@@ -113,17 +114,17 @@ void mx_interact_with_object(t_inventory* inventory, t_interactable_type type) {
         if (have_sliced_cucumber && have_sliced_tomato) {
             mx_set_active_item(inventory, index_sliced_cucumber);
             t_item* item = mx_remove_active_item(inventory);
-            if (item != NULL) {
+            if (item) {
                 mx_delete_item(&item);
             }
             mx_set_active_item(inventory, index_sliced_tomato);
             t_item* item2 = mx_remove_active_item(inventory);
-            if (item2 != NULL) {
+            if (item2) {
                 mx_delete_item(&item2);
             }
             mx_add_item(inventory, mx_get_salad());
         }
-        break;}
+        break;
     default:
         break;
     }

@@ -23,7 +23,6 @@ int mx_add_item(t_inventory* inventory, t_item* item) {
 		inventory->active_item = free_cell;
 		return free_cell;
 	}
-	
 	return -1;
 }
 
