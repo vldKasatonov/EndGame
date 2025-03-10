@@ -43,12 +43,18 @@ void mx_draw_text_score(int space, Rectangle level_rec, Vector2 circle,
 	Vector2 text_level = MeasureTextEx(mx_get_custom_font(), level, 40, 3);
 	Vector2 text_size = MeasureTextEx(mx_get_custom_font(), "The best score", 40, 2);
 	Vector2 text_time = MeasureTextEx(mx_get_custom_font(), time, 40, 3);
-    Vector2 text_level_pos = {circle.x - text_level.x / 2,
-        					  level_rec.y + level_rec.height * 0.62};
-    Vector2 text_pos = {circle.x - text_size.x / 2,
-						level_rec.y + level_rec.height * 0.75};
-    Vector2 text_time_pos = {circle.x - text_time.x / 2,
-							 level_rec.y + level_rec.height * 0.83};
+    Vector2 text_level_pos = {
+        circle.x - text_level.x / 2,
+        level_rec.y + level_rec.height * 0.62
+    };
+    Vector2 text_pos = {
+        circle.x - text_size.x / 2,
+		level_rec.y + level_rec.height * 0.75
+    };
+    Vector2 text_time_pos = {
+        circle.x - text_time.x / 2,
+		level_rec.y + level_rec.height * 0.83
+    };
     DrawTextEx(mx_get_custom_font(), level,
                (Vector2){text_level_pos.x + space, text_level_pos.y},
     	       40, 3, WHITE);

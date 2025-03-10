@@ -14,8 +14,10 @@ static void draw_exit_confirmation(bool *is_exit_popup_open, int *counter, bool 
     DrawRectangleRoundedLinesEx(popup_rect, 0.5f, 10, 5, WHITE);
 
     Vector2 text_size = MeasureTextEx(mx_get_custom_font(), "Are you sure you want to exit?", 50, 3);
-    Vector2 text_pos = {popup_rect.x + (popup_rect.width - text_size.x) / 2,
-                        popup_rect.y + 100};
+    Vector2 text_pos = {
+        popup_rect.x + (popup_rect.width - text_size.x) / 2,
+        popup_rect.y + 100
+    };
     DrawTextEx(mx_get_custom_font(), "Are you sure you want to quit?", text_pos, 50, 3, WHITE);
 
     Rectangle yes_button = {popup_rect.x + 150, popup_rect.y + popup_height - 150, 150, 60};
@@ -25,13 +27,17 @@ static void draw_exit_confirmation(bool *is_exit_popup_open, int *counter, bool 
     DrawRectangleRounded(no_button, 0.5f, 10, RED);
 
     Vector2 yes_text_size = MeasureTextEx(mx_get_custom_font(), "YES", 40, 3);
-    Vector2 yes_text_pos = {yes_button.x + (yes_button.width - yes_text_size.x) / 2,
-                            yes_button.y + (yes_button.height - yes_text_size.y) / 2};
+    Vector2 yes_text_pos = {
+        yes_button.x + (yes_button.width - yes_text_size.x) / 2,
+        yes_button.y + (yes_button.height - yes_text_size.y) / 2
+    };
     DrawTextEx(mx_get_custom_font(), "YES", yes_text_pos, 40, 3, WHITE);
 
     Vector2 no_text_size = MeasureTextEx(mx_get_custom_font(), "NO", 40, 3);
-    Vector2 no_text_pos = {no_button.x + (no_button.width - no_text_size.x) / 2,
-                           no_button.y + (no_button.height - no_text_size.y) / 2};
+    Vector2 no_text_pos = {
+        no_button.x + (no_button.width - no_text_size.x) / 2,
+        no_button.y + (no_button.height - no_text_size.y) / 2
+    };
     DrawTextEx(mx_get_custom_font(), "NO", no_text_pos, 40, 3, WHITE);
 
     if (CheckCollisionPointRec(mouse, yes_button)) {
@@ -145,11 +151,15 @@ void mx_render_gameplay_settings(t_game_textures *textures, float *volume_music,
 
     float text_width_music = MeasureText("Music Volume", 40);
     float text_width_effects = MeasureText("Effects Volume", 40);
-    Vector2 text_pos_music = {(GetScreenWidth() - text_width_music) / 2,
-                              slider_bar_music.y - 70};
+    Vector2 text_pos_music = {
+        (GetScreenWidth() - text_width_music) / 2,
+        slider_bar_music.y - 70
+    };
     DrawTextEx(mx_get_custom_font(), "Music Volume", text_pos_music, 40, 3, WHITE);
-    Vector2 text_pos_effects = {(GetScreenWidth() - text_width_effects) / 2,
-                                slider_bar_effects.y - 70};
+    Vector2 text_pos_effects = {
+        (GetScreenWidth() - text_width_effects) / 2,
+        slider_bar_effects.y - 70
+    };
     DrawTextEx(mx_get_custom_font(), "Effects Volume", text_pos_effects, 40, 3, WHITE);
 
     const char* button_text = "GUIDE";

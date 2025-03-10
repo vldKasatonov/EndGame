@@ -18,10 +18,7 @@ void mx_render_timer(void) {
     char timeText[10]; 
     snprintf(timeText, sizeof(timeText), "%02d:%02d", minutes, seconds);
 
-    int posX = screen_width / 8 + 80;
-    int posY = 20;
-
-    Vector2 time_pos = { posX, posY };
+    Vector2 time_pos = {280, 20};
 
     DrawTextEx(mx_get_custom_font(), timeText, time_pos, text_size, 2, WHITE);
 }

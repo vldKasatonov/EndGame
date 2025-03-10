@@ -2,12 +2,13 @@
 
 static void draw_select_icon(Vector2 pos_circle, int space, int radius,
                              Color color, Texture2D icon, char *text) {
-    Vector2 circle = { space - pos_circle.x, pos_circle.y };
+    Vector2 circle = {space - pos_circle.x, pos_circle.y};
     int icon_size = 270;
     DrawCircleV(circle, radius, color);
-    Rectangle icon_rect = { circle.x - icon_size / 2, circle.y
-                           - icon_size / 2, icon_size, icon_size };
-    DrawTexturePro(icon, (Rectangle){ 0, 0, icon.width, icon.height },
+    Rectangle icon_rect = {circle.x - icon_size / 2,
+                           circle.y - icon_size / 2,
+                           icon_size, icon_size };
+    DrawTexturePro(icon, (Rectangle){0, 0, icon.width, icon.height},
                    icon_rect, (Vector2){0, 0}, 0.0f, WHITE);
     Vector2 text_size = MeasureTextEx(mx_get_custom_font(), text, 60, 3);
     Vector2 text_pos = {
@@ -23,9 +24,7 @@ static void toned_circle(Vector2 circle, int radius) {
 }
 
 void mx_render_select_player(t_game_textures *textures) {
-    Vector2 circle = {
-        GetScreenWidth() / 3, GetScreenHeight() / 2
-    };
+    Vector2 circle = {GetScreenWidth() / 3, GetScreenHeight() / 2};
     int radius = 200;
     Rectangle gear_rect = mx_draw_settings_icon(textures);
     Rectangle back_button = mx_draw_back_button(textures);

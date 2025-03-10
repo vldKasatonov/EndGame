@@ -17,23 +17,25 @@ void mx_init_game_audio(void) {
 
 void mx_updat_game_audio(void) {
     if (music_loaded) {
-        if (music_playing) UpdateMusicStream(menu_music);
-        if (gameplay_music_playing) UpdateMusicStream(gameplay_music);
+        if (music_playing)
+            UpdateMusicStream(menu_music);
+        if (gameplay_music_playing)
+            UpdateMusicStream(gameplay_music);
     }
 }
 
 void mx_update_menu_music(void) {
     if (!music_loaded) return;
 
-    if (current_state == MAIN_MENU ||
-        current_state == DEVELOPERS ||
-        current_state == LEVEL_MENU ||
-        current_state == LEVEL_MENU2 ||
-        current_state == SETTINGS || 
-        current_state == GUIDE_PAGE1 ||
-        current_state == GUIDE_PAGE2 ||
-        current_state == GUIDE_PAGE3 || 
-        current_state == SELECT_PLAYER) {
+    if (current_state == MAIN_MENU
+        || current_state == DEVELOPERS
+        || current_state == LEVEL_MENU
+        || current_state == LEVEL_MENU2
+        || current_state == SETTINGS
+        || current_state == GUIDE_PAGE1
+        || current_state == GUIDE_PAGE2
+        || current_state == GUIDE_PAGE3
+        || current_state == SELECT_PLAYER) {
 
         if (!music_playing) {
             StopMusicStream(gameplay_music);
@@ -42,11 +44,10 @@ void mx_update_menu_music(void) {
             PlayMusicStream(menu_music);
             music_playing = true;
         }
-    } else {
-        if (music_playing) {
-            StopMusicStream(menu_music);
-            music_playing = false;
-        }
+    }
+    else if (music_playing) {
+        StopMusicStream(menu_music);
+        music_playing = false;
     }
 }
 
@@ -61,11 +62,10 @@ void mx_update_gameplay_music(void) {
             PlayMusicStream(gameplay_music);
             gameplay_music_playing = true;
         }
-    } else {
-        if (gameplay_music_playing) {
-            StopMusicStream(gameplay_music);
-            gameplay_music_playing = false;
-        }
+    }
+    else if (gameplay_music_playing) {
+        StopMusicStream(gameplay_music);
+        gameplay_music_playing = false;
     }
 }
 

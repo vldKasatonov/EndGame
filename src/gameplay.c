@@ -78,7 +78,7 @@ void mx_render_gameplay(t_player* player_data, t_game_textures* textures,
                                            textures->f_button.height},
                                (Rectangle){surfaces[i].rect.x + surfaces[i].rect.width - 100,
                                            surfaces[i].rect.y - 50, 150, 150},
-                               (Vector2) { 0, 0 }, 0.0f, WHITE);
+                               (Vector2) {0, 0}, 0.0f, WHITE);
             break;
         }
     }

@@ -35,7 +35,8 @@ bool mx_accept_order(t_queue* queue) {
 }
 
 void mx_serve_guest_at_index(t_queue* queue, int index) {
-    if (index < 0 || index >= queue->queue_size || !queue->queue[index] || !queue->queue[index]->order) {
+    if (index < 0 || index >= queue->queue_size
+        || !queue->queue[index] || !queue->queue[index]->order) {
         return;
     }
 
