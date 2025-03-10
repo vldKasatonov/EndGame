@@ -31,4 +31,8 @@ uninstall: clean
 	rm -rf $(OBJ_DIR)
 	rm -f $(TARGET)
 
+	mv resource/data/black_door.txt resource/
+	rm -f resource/data/*
+	mv resource/black_door.txt resource/data/
+
 reinstall: uninstall all
