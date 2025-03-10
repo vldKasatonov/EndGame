@@ -32,6 +32,7 @@ void mx_update_menu_music(void) {
         || current_state == LEVEL_MENU
         || current_state == LEVEL_MENU2
         || current_state == SETTINGS
+        || current_state == CONTROLS
         || current_state == GUIDE_PAGE1
         || current_state == GUIDE_PAGE2
         || current_state == GUIDE_PAGE3
