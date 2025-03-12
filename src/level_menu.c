@@ -35,7 +35,9 @@ void mx_render_level_menu(t_game_textures* textures,
             current_level = i;
             int stars_earned = mx_calculate_stars_for_level();
             mx_update_level_stars(game_state, i, stars_earned);
-            completed_levels = i + 1;
+            if (stars_earned != 0) {
+                completed_levels = i + 1;
+            }
         }
     }
     int level_1_stars = game_state->level_stars[0];
