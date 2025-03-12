@@ -2,3 +2,5 @@
 
 obj/
 endgame
+resource/data/
+!resource/data/black_door.txt
