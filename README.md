@@ -22,19 +22,19 @@
     <td align="left">🖼 <b>Graphics Library</b></td>
     <td align="center"><b>Raylib</b></td>
   </tr>
-</table>
+</table> 
 
 ### Team members:
 1. [Vladyslav Kasatonov](https://github.com/vldKasatonov)
 2. [Albina Milshyna](https://github.com/milshyna-albina)
 3. [Viktoriia Shaforostova](https://github.com/shenyaaw)
-4. [Daniil Burlachenko]()
+4. [Daniil Burlachenko](https://github.com/kamawui)
 5. [Mariia Kashuashvili](https://github.com/kashuashvili)
-6. [Mariia Mykhalchenko]()
+6. [Mariia Mykhalchenko](https://github.com/mikhalchenko-m)
 
-# 🍽️ Game Overview  
+# 🍽️ Game Overview
 
-> **"Funny Chef"** is a fast-paced **restaurant simulator** where every second counts!  
+> **Funny Chef** is a fast-paced **restaurant simulator** where every second counts!  
 
 ### 🎯 Your Goal:  
 ✔️ Serve all visitors by preparing the correct dishes.  
@@ -99,7 +99,7 @@ Follow the simple steps below to get started.
 2. **Navigate to the project folder**.
 > The Makefile contains commands for Linux and MacOS.
 3. If you're using **Linux**, you can go the step 5.
-4. For **MacOS** uncomment the MacOS line and comment out the Linux line to ensure successful compilation.
+4. If you're using **MacOS**, uncomment the MacOS line and comment out the Linux line to ensure successful compilation.
 5. Open **Terminal** and type the following command to compile the game:
     ```bash
     make
@@ -110,3 +110,15 @@ Follow the simple steps below to get started.
     ```
 
 🚀 Now you're ready to play **Funny Chef**!
+
+# 🎥 Video Tutorial 
+
+<p align="center">
+  <a href="https://youtu.be/ucXP-eQB8OY?si=U2QzBfSf7OKh9TKp">
+    <img src="resource/readme/preview.png" alt="The tutorial" width="500">
+  </a>
+</p>
+
+<p align="center">
+  📺 <a href="https://youtu.be/ucXP-eQB8OY?si=U2QzBfSf7OKh9TKp">Watch on YouTube</a>
+</p>
