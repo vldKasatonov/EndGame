@@ -94,7 +94,7 @@ If you're not sure how to prepare a dish, no worries! Just check the **Guide** f
 
 - **7-Slot Inventory** 🛠️ — Keep your ingredients stored and ready for action. You can use this to multitask and manage cooking multiple dishes simultaneously!
 - **Unique Recipes** 🥗 — Each recipe requires specific tools and methods of preparation. Just like a real kitchen, different devices and techniques are required for different dishes.
-- **Need a break?** ⏸️ You can pause or exit at any time, but keep in mind: **Your progress won’t be saved if you quit from a level**. So make sure you finish your level before calling it a day!
+- **Need a break?** ⏸️ — You can pause or exit at any time, but keep in mind: **Your progress won’t be saved if you quit from a level**. So make sure you finish your level before calling it a day!
 
 💡 **Tip:** Always follow the right cooking method! If you mix things up — for example, blending fries or frying an apple 🍏 — nothing will happen! Failure to follow the recipe will result in zero progress. 
 
@@ -124,7 +124,7 @@ Follow the simple steps below to get started.
 
 # ⚙️Versions
 
-- **v1.0.0** — Presented at the end of the Innovation Campus Marathon 💪
+- [**v1.0.0**](https://github.com/vldKasatonov/EndGame/commit/aa8be6b)  — Presented at the end of the Innovation Campus Marathon 💪
 - **v1.1.0** — Added updates and fixed issues 🛠
 
 # ⚡ToDo 
