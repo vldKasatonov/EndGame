@@ -1,7 +1,8 @@
 # EndGame  
-<h3 align="center">Funny Chef | Innovation Campus Marathon | based on C and Raylib</h3>
 
-<table align="center">
+<h3>Funny Chef | Innovation Campus Marathon | The project is based on C and Raylib</h3>
+
+<table>
   <tr>
     <td align="left">🕹 <b>Game</b></td>
     <td align="center"><b>Funny Chef</b></td>
@@ -34,7 +35,7 @@
 
 # 🍽️ Game Overview
 
-> **Funny Chef** is a fast-paced **restaurant simulator** where every second counts!  
+ **Funny Chef** is a fast-paced **restaurant simulator** where every second counts! 🍟
 
 ### 🎯 Your Goal:  
 ✔️ Serve all visitors by preparing the correct dishes.  
@@ -45,14 +46,14 @@
 
 # 🎮 Game Features
 
-**Ready to cook?** Then jump in and get started with **Funny Chef** where every dish is a new adventure! 🍴👨‍🍳
+**Ready to cook?** Then jump in and get started with **Funny Chef** where every dish is a new adventure! 🍴
 
 ### 📜 **Menu**
 Navigating through the game is as easy as flipping a pancake! 🥞  
 The main menu is designed for smooth gameplay with everything you need at your fingertips:  
 
 - **Play** 🟢 *(Start your culinary adventure here!)*  
-- **Developers Info** 📜  
+- **Developers Info** 💻 
 - **Exit** 🚪 *(Time to wrap it up?)*  
 - **Settings** ⚙️ *(Customize your gameplay)*
 
@@ -60,7 +61,7 @@ The main menu is designed for smooth gameplay with everything you need at your f
 
 Two modes are available:
 - **Single-player** 🧑‍🍳
-- **Two-player** *(Currently in development — stay tuned! 👀)*
+- **Two-player** 👥 *(Currently in development — stay tuned! 👀)*
 
 Once you choose your mode, you’ll enter the **Level Menu**. Initially, only the first level is unlocked, but as you progress, more levels open up, allowing you to unlock new recipes and challenges!
 
@@ -92,12 +93,12 @@ The gameplay evolves as you progress through the levels, each unlocking a new re
 If you're not sure how to prepare a dish, no worries! Just check the **Guide** for instructions on the cooking process. 📚
 
 - **7-Slot Inventory** 🛠️ — Keep your ingredients stored and ready for action. You can use this to multitask and manage cooking multiple dishes simultaneously!
-- **Unique Recipes** 🍔 — Each recipe requires specific tools and methods of preparation. Just like a real kitchen, different devices and techniques are required for different dishes.
+- **Unique Recipes** 🥗 — Each recipe requires specific tools and methods of preparation. Just like a real kitchen, different devices and techniques are required for different dishes.
 - **Need a break?** ⏸️ You can pause or exit at any time, but keep in mind: **Your progress won’t be saved if you quit from a level**. So make sure you finish your level before calling it a day!
 
 💡 **Tip:** Always follow the right cooking method! If you mix things up — for example, blending fries or frying an apple 🍏 — nothing will happen! Failure to follow the recipe will result in zero progress. 
 
-Customers are picky! 😤 If you serve the wrong dish, they’ll refuse it and continue waiting for their correct order. Keep your eyes on the prize and stay focused!
+Customers are picky! 😤 If you serve the wrong dish, they’ll refuse it and continue waiting for their correct order. Keep your eyes on the dishes and stay focused!
 
 <img src="resource/readme/gameplay.png" alt="Gameplay" width="500">
 
@@ -121,14 +122,40 @@ Follow the simple steps below to get started.
 
 🚀 Now you're ready to play **Funny Chef**!
 
+# ⚙️Versions
+
+- **v1.0.0** — Presented at the end of the Innovation Campus Marathon 💪
+- **v1.1.0** — Added updates and fixed issues 🛠
+
+# ⚡ToDo 
+  
+### 👨‍💻 Post-Project Enhancements (v1.1.0)
+- **Fix Bugs**:
+  - Resolve the issue with the aborted stream on the audio device ✅
+  - Fix incorrect star display in certain situations ✅
+  - Corect some item names ✅
+  - Fix the incorrect timer behavior upon successful level completion ✅
+- **Optimize the Project Size** by adding a pre-compiled static library ✅
+- **Add Support** for running the project on **macOS** ✅
+- **Implement Progressive Level Unlocking** ✅
+- **Add a "Controls" Page** to the guide ✅
+- **Add a Confirmation Window** for progress deletion ✅
+- **Code Refactoring & Optimization** (in progress) ⚙️
+
+### 🌎 Future Plans
+- **New Levels & Recipes** 🍳
+- **Additional Maps** 🗺️
+- **Second Player** 👾
+- **A NPC farmer** 🧑‍🌾
+  
 # 🎥 Video Tutorial 
 
-<p align="center">
+<p>
   <a href="https://youtu.be/ucXP-eQB8OY?si=U2QzBfSf7OKh9TKp">
     <img src="resource/readme/preview.png" alt="The tutorial" width="500">
   </a>
 </p>
 
-<p align="center">
+<p align="left">
   📺 <a href="https://youtu.be/ucXP-eQB8OY?si=U2QzBfSf7OKh9TKp">Watch on YouTube</a>
 </p>
