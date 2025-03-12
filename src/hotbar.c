@@ -50,7 +50,7 @@ static const char* get_active_ingredient_name(t_item* item) {
     case POTATO:   type_str = "potato"; break;
     case CUCUMBER: type_str = "cucumber"; break;
     case TOMATO:   type_str = "tomato"; break;
-    case SALAD:    type_str = "salad"; break;
+    case SALAD:    type_str = "Salad"; break;
     default:       type_str = "unknown"; break;
     }
 
