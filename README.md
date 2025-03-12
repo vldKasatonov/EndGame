@@ -98,7 +98,7 @@ If you're not sure how to prepare a dish, no worries! Just check the **Guide** f
 
 💡 **Tip:** Always follow the right cooking method! If you mix things up — for example, blending fries or frying an apple 🍏 — nothing will happen! Failure to follow the recipe will result in zero progress. 
 
-Customers are picky! 😤 If you serve the wrong dish, they’ll refuse it and continue waiting for their correct order. Keep your eyes on the prize and stay focused!
+Customers are picky! 😤 If you serve the wrong dish, they’ll refuse it and continue waiting for their correct order. Keep your eyes on the dishes and stay focused!
 
 <img src="resource/readme/gameplay.png" alt="Gameplay" width="500">
 
