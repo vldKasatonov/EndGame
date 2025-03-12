@@ -48,13 +48,15 @@
 **Ready to cook?** Then jump in and get started with **Funny Chef** where every dish is a new adventure! 🍴👨‍🍳
 
 ### 📜 **Menu**
+Navigating through the game is as easy as flipping a pancake! 🥞  
+The main menu is designed for smooth gameplay with everything you need at your fingertips:  
 
-Navigating through the game is as easy as flipping a pancake! 🥞 The main menu is designed for smooth gameplay with everything you need at your fingertips:
-
-- **Play** 🟢 *(Start your culinary adventure here!)*
-- **Developers Info** 📜
-- **Exit** 🚪 *(Time to wrap it up?)*
+- **Play** 🟢 *(Start your culinary adventure here!)*  
+- **Developers Info** 📜  
+- **Exit** 🚪 *(Time to wrap it up?)*  
 - **Settings** ⚙️ *(Customize your gameplay)*
+
+<img src="resource/readme/main_menu.png" alt="Main Menu" width="500">
 
 Two modes are available:
 - **Single-player** 🧑‍🍳
@@ -67,6 +69,8 @@ To add a little extra challenge, your performance is rewarded with stars based o
 - **Stars** 🌟 — Each level is timed and the number of stars you earn depends on how fast you complete it.
 - The **best score** for each level is saved in the **Level Menu**, allowing you to track your progress and compete against yourself!
 
+<img src="resource/readme/level_menu.png" alt="Level Menu" width="500">
+
 You can access the **Settings** from anywhere during the game. It includes:
 
 - **Volume Control** 🔊 *(Adjust music and sound effects to your liking)*
@@ -75,7 +79,11 @@ You can access the **Settings** from anywhere during the game. It includes:
 
 Once you exit the settings, you'll return to where you left off in the game.
 
+<img src="resource/readme/settings.png" alt="Settings" width="500">
+
 🛑 When you want to exit the game, quit by pausing a level or delete progress, a pop-up confirmation window will appear, ensuring that you don’t make accidental mistakes.
+
+<img src="resource/readme/pop_up.png" alt="Pop-up window" width="500">
 
 ### 🍳 **Gameplay:**
 
@@ -90,6 +98,8 @@ If you're not sure how to prepare a dish, no worries! Just check the **Guide** f
 💡 **Tip:** Always follow the right cooking method! If you mix things up — for example, blending fries or frying an apple 🍏 — nothing will happen! Failure to follow the recipe will result in zero progress. 
 
 Customers are picky! 😤 If you serve the wrong dish, they’ll refuse it and continue waiting for their correct order. Keep your eyes on the prize and stay focused!
+
+<img src="resource/readme/gameplay.png" alt="Gameplay" width="500">
 
 # 📝 How to Run the Game
 
